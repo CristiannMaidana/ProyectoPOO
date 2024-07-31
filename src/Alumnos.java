@@ -8,9 +8,11 @@ public class Alumnos {
         this.nombre = nombre;
         this.legajo = legajo;
     }
+
     public void setCarrera(Carreras carreraElegida) {
         this.carreraDeAlumno = carreraElegida;
     }
+
     public boolean incribirAMaterias(String materiaElelgida){
         boolean puedeCursar=true;
         if(carreraDeAlumno.getPlanDeEstudio().aproboCorrelativas(carreraDeAlumno.getMateriasPorNombre(materiaElelgida))){
@@ -21,6 +23,7 @@ public class Alumnos {
         }
         return puedeCursar;
     }
+
     public void almacenoMateriasActivas(Materias materias){
         for (int pos=0; pos<6;pos++){
             if (materiasCursando[pos] == null) {
@@ -32,6 +35,7 @@ public class Alumnos {
             }
         }
     }
+
     public void setNotasParcial(double nota, String nombreMateria){
         for (byte i=0; i<3;i++){
             if (materiasCursando[i]!=null && nombreMateria.equals( materiasCursando[i].getNombreDeMateria()) && !materiasCursando[i].parcial){
@@ -42,13 +46,13 @@ public class Alumnos {
         carreraDeAlumno.buscoActualizoCorrelativa(materiasCursando);
         carreraDeAlumno.actualizoMaterias(materiasCursando);//aca actualiza las materias de carrera.
         for (byte i=0; i<3;i++) {
-            //if (materiasCursando[i]!=null && materiasCursando[i].cursada) {
             if (materiasCursando[i]!=null) {
                 materiasCursando[i]=null;
                 break;
             }
         }//vacia la materia aprobada
     }
+
     public void setNotasExamen(double nota, String nombreMateria){
         for (byte i=0; i<3;i++){
             if (materiasCursando[i]!=null && nombreMateria.equals( materiasCursando[i].getNombreDeMateria()) && !materiasCursando[i].examenFinal)
@@ -62,21 +66,27 @@ public class Alumnos {
             }
         }//vacia la materia aprobada
     }
+
     public Carreras getCarrera(){
         return carreraDeAlumno;
     }
+
     public String toString(){
         return nombre+", legajo: "+legajo;
     }
+
     public boolean materiasLlenas (){
         return materiasCursando[2] != null;
     }
+
     public Materias getMateriasAlmacenadas (byte i){
         return materiasCursando[i];
     }
+
     public Materias getMateriasDeCarrera(int annio, int materiaCuatri){
         return carreraDeAlumno.getMateriasPorAnnioYMateria(annio,materiaCuatri);
     }
+
     public boolean getAnioAprobado (int annio){
         boolean annioAprobado=true;
         for (byte i=0; i<6; i++){

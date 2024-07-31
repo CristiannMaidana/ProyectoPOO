@@ -16,7 +16,8 @@ public class Materias {
         obligatoria=random.nextBoolean();
         optativa=random.nextBoolean();
     }
-    //BOORAR
+
+    //BOORAR porque solo lo uso en pruebas, deberia ir correctamente la cantidad en cada carrera
     public void setOptativa (boolean valor){
         optativa = valor;
     }
@@ -24,6 +25,7 @@ public class Materias {
         obligatoria = valor;
     }
     //BOORAR
+
     public void setNotaParcial(double nota){
         if (nota >= 8) {
             parcial = true;
@@ -44,29 +46,29 @@ public class Materias {
             examenFinal = false;
         }
     }
+
     public void setExamenFinal(double nota){
         examenFinal= nota >= 4;
         cursadaAprobada = nota >= 4;
     }
+
     public void setCorrelativa(Materias correlativa){
         this.correlativa=correlativa;
         tieneCorrelativa=true;
     }
+
     public boolean getNotaExamenFinal(){
         return examenFinal;
     }
+
     public boolean getCursadaAprobada(){
         return cursadaAprobada;
     }
+
     public String getNombreDeMateria(){
         return nombre;
     }
-    public String getNombreCorrelativa(){
-        return correlativa.getNombreDeMateria();
-    }
-    public boolean getNotaCorrelativa(){
-        return correlativa.getNotaExamenFinal();
-    }
+
     public Materias getCorrelativa(){
         return correlativa;
     }

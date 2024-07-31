@@ -37,7 +37,7 @@ public class Vlogeo extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                crearUsuario =true;
+                crearUsuario = true;
                 setVisible(false);
                 dispose();
             }
@@ -67,15 +67,19 @@ public class Vlogeo extends JFrame{
             }
         });
     }
+
     public String getNombreUsuario(){
         return nombreUsuario;
     }
+
     public String getContrasennaUsuario(){
         return contrasennaUsuario;
     }
+
     public boolean getCrearUsuario(){
         return crearUsuario;
     }
+
     public boolean getBotones(){
         return boton;
     }

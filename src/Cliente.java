@@ -3,18 +3,14 @@ import javax.swing.*;
 public class Cliente {
     static Alumnos alumno1;
     static Carreras carreras;
-    static boolean existeUsuario= false, creoUsuario=false;
+    static boolean existeUsuario= false;
 
     public static void main (String[]args) {
-        Vlogeo panelLogearse = new Vlogeo();
-        panelLogearse.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-        panelLogearse.setVisible(true);
-        hiloEspero(panelLogearse);
+        Vlogeo panelLogearse = ejecutoPanelLogearse();
+
         if (panelLogearse.getCrearUsuario()) {
-            VInscripcion panelInscripcion = new VInscripcion();
-            panelInscripcion.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-            panelInscripcion.setVisible(true);
-            hiloEspero(panelInscripcion);
+            VInscripcion panelInscripcion = ejecutoPanelInscripcion();
+
             alumno1 = new Alumnos(panelInscripcion.getNombre() + " " + panelInscripcion.getApellido(), panelInscripcion.getDni());
             switch (panelInscripcion.getCarrera()) {
                 case "Licenciatura en sistemas.": {
@@ -53,88 +49,34 @@ public class Cliente {
                     break;
                 }
             }//fin switch Incripcion Plan de Estudio
-            VInscripcionMaterias panelCargoMaterias = new VInscripcionMaterias(alumno1);
-            panelCargoMaterias.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-            panelCargoMaterias.setVisible(true);
-            hiloEspero(panelCargoMaterias);
 
-            VCargoNotas panelCargoNotas = new VCargoNotas(alumno1);
-            panelCargoNotas.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-            panelCargoNotas.setVisible(true);
-            hiloEspero(panelCargoNotas);
-            while (panelCargoNotas.repitoCargaMaterias()) {
-                panelCargoNotas = null;
-                panelCargoMaterias = null;//borro para que no se llene la memoria
-                panelCargoMaterias = new VInscripcionMaterias(alumno1);
-                panelCargoMaterias.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-                panelCargoMaterias.setVisible(true);
-                hiloEspero(panelCargoMaterias);
-                panelCargoNotas = new VCargoNotas(alumno1);
-                panelCargoNotas.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-                panelCargoNotas.setVisible(true);
-                hiloEspero(panelCargoNotas);
+            //Se habilita la inscripcion a materias
+            VInscripcionMaterias panelCargoMaterias = ejecutoPanelInscripcionMaterias();
+
+            //Se habilita la carga de notas
+            VCargoNotas panelCargoNotas = ejecutoPanelCargoNotas();
+
+            boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+            while (repito){
+                repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
             }
-
-            VperfilUsuario panelUsuario = new VperfilUsuario(alumno1);
-            panelUsuario.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-            panelUsuario.setVisible(true);
-
         }else if (panelLogearse.getBotones()) {
             buscoUsuario(panelLogearse.getNombreUsuario(), panelLogearse.getContrasennaUsuario());}
-//        } else if (creoUsuario) {
-//            VInscripcionMaterias panelCargoMaterias = new VInscripcionMaterias(alumno1);
-//            panelCargoMaterias.setVisible(true);
-//            hiloEspero(panelCargoMaterias);
-//
-//            VCargoNotas panelCargoNotas = new VCargoNotas(alumno1);
-//            panelCargoNotas.setVisible(true);
-//            hiloEspero(panelCargoNotas);
-//
-//            while (panelCargoNotas.repitoCargaMaterias()) {
-//                panelCargoNotas = null;
-//                panelCargoMaterias = null;//borro para que no se llene la memoria
-//                panelCargoMaterias = new VInscripcionMaterias(alumno1);
-//                panelCargoMaterias.setVisible(true);
-//                hiloEspero(panelCargoMaterias);
-//                panelCargoNotas = new VCargoNotas(alumno1);
-//                panelCargoNotas.setVisible(true);
-//                hiloEspero(panelCargoNotas);
-//            }
-//
-//            VperfilUsuario panelUsuario = new VperfilUsuario(alumno1);
-//            panelUsuario.setVisible(true);
-//        }
+
         if (existeUsuario){
             alumno1 = creoAlumnoSofia();
-            VperfilUsuario panelUsuario = new VperfilUsuario(alumno1);
-            panelUsuario.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-            panelUsuario.setVisible(true);
-            hiloEspero(panelUsuario);
+
+            VperfilUsuario panelUsuario = ejecutoPanelUsuario();
+
             if(panelUsuario.getCargoMasMaterias()){
-                VInscripcionMaterias  panelCargoMaterias = new VInscripcionMaterias(alumno1);
-                panelCargoMaterias.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-                panelCargoMaterias.setVisible(true);
-                hiloEspero(panelCargoMaterias);
-                VCargoNotas  panelCargoNotas = new VCargoNotas(alumno1);
-                panelCargoNotas.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-                panelCargoNotas.setVisible(true);
-                hiloEspero(panelCargoNotas);
+                VInscripcionMaterias  panelCargoMaterias = ejecutoPanelInscripcionMaterias();
 
-                while (panelCargoNotas.repitoCargaMaterias()) {
-                    System.out.println("hola");
-                    panelCargoNotas = null;
-                    panelCargoMaterias = null;//borro para que no se llene la memoria
-                    panelCargoMaterias = new VInscripcionMaterias(alumno1);
-                    panelCargoMaterias.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-                    panelCargoMaterias.setVisible(true);
-                    hiloEspero(panelCargoMaterias);
-                    panelCargoNotas = new VCargoNotas(alumno1);
-                    panelCargoNotas.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-                    panelCargoNotas.setVisible(true);
-                    hiloEspero(panelCargoNotas);
+                VCargoNotas  panelCargoNotas = ejecutoPanelCargoNotas();
+
+                boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+                while (repito){
+                    repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
                 }
-
-                panelUsuario.setVisible(true);
             }
         }
     }
@@ -146,6 +88,7 @@ public class Cliente {
             }
         }
     }
+
     static Alumnos creoAlumnoSofia (){
         Alumnos alumno2 = new Alumnos("Sofia Martinez", 43248234);
         alumno2.setCarrera(new CarreraPruebas(4,6));
@@ -153,6 +96,7 @@ public class Cliente {
         materiasAlumnos(alumno2);
         return alumno2;
     }
+
     static void materiasAlumnos(Alumnos alumno1){
         alumno1.incribirAMaterias("materia1");
         alumno1.incribirAMaterias("materia2");
@@ -197,6 +141,7 @@ public class Cliente {
         alumno1.setNotasParcial(9,"materia35");
         alumno1.setNotasParcial(9,"materia36");*/
     }
+
     static void hiloEspero(JFrame panelLogearse){
         while (panelLogearse.isVisible()) {
             try {
@@ -205,5 +150,59 @@ public class Cliente {
                 e.printStackTrace();
             }
         }
+    }
+
+    static boolean cargoMateriasNotasMuestroHistorial(VCargoNotas panelCargoNotas, VInscripcionMaterias panelCargoMaterias){
+        while (panelCargoNotas.repitoCargaMaterias() && !panelCargoMaterias.getBotonCancelar()) {
+            panelCargoMaterias = ejecutoPanelInscripcionMaterias();
+
+            if (!panelCargoMaterias.getBotonCancelar()) {
+                panelCargoNotas = ejecutoPanelCargoNotas();
+            }
+        }
+
+        VperfilUsuario panelUsuario = ejecutoPanelUsuario();
+
+        return panelUsuario.getCargoMasMaterias();
+    }
+
+    static Vlogeo ejecutoPanelLogearse(){
+        Vlogeo panelLogearse = new Vlogeo();
+        panelLogearse.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
+        panelLogearse.setVisible(true);
+        hiloEspero(panelLogearse);
+        return panelLogearse;
+    }
+
+    static VInscripcion ejecutoPanelInscripcion(){
+        VInscripcion panelInscripcion = new VInscripcion();
+        panelInscripcion.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
+        panelInscripcion.setVisible(true);
+        hiloEspero(panelInscripcion);
+        return panelInscripcion;
+    }
+
+    static VInscripcionMaterias ejecutoPanelInscripcionMaterias(){
+        VInscripcionMaterias panelCargoMaterias = new VInscripcionMaterias(alumno1);
+        panelCargoMaterias.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
+        panelCargoMaterias.setVisible(true);
+        hiloEspero(panelCargoMaterias);
+        return panelCargoMaterias;
+    }
+
+    static VCargoNotas ejecutoPanelCargoNotas(){
+        VCargoNotas panelCargoNotas = new VCargoNotas(alumno1);
+        panelCargoNotas.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
+        panelCargoNotas.setVisible(true);
+        hiloEspero(panelCargoNotas);
+        return panelCargoNotas;
+    }
+
+    static VperfilUsuario ejecutoPanelUsuario(){
+        VperfilUsuario panelUsuario = new VperfilUsuario(alumno1);
+        panelUsuario.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
+        panelUsuario.setVisible(true);
+        hiloEspero(panelUsuario);
+        return panelUsuario;
     }
 }

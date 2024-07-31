@@ -7,12 +7,13 @@ public abstract class   Carreras {
         this.annio=annio;
         carrera = new Materias[annio][cuatri];
     }
+
     public Materias getMateriasPorNombre(String nombreMateriaBuscar){
         Materias materia=null;
         for (byte annio=0; annio<5;annio ++){
             for (byte cuatri=0;cuatri<6;cuatri++){
                 if (carrera[annio][cuatri].getNombreDeMateria().equals(nombreMateriaBuscar)) {
-                    materia= carrera[annio][cuatri];
+                    materia=carrera[annio][cuatri];
                     break;
                 }
             }
@@ -21,11 +22,14 @@ public abstract class   Carreras {
         }
         return materia;
     }
+
     public final void setPlanDeEstudio(PlanDeEstudio planDeEstudioElegido) {
         this.planDeEstudioElegido= planDeEstudioElegido;
     }
+
     public void actualizoMaterias(Materias[] materiasConNotas){
-        for (byte annio=0;annio<getAnniosCarrera();annio++){
+        int annioDeCarrera=getAnniosCarrera();
+        for (byte annio=0;annio<annioDeCarrera;annio++){
             for (byte cuatri=0;cuatri<6;cuatri++) {
                 for (byte cantMaterias=0;cantMaterias<3;cantMaterias++){
                     if(materiasConNotas[cantMaterias] !=null)
@@ -37,8 +41,10 @@ public abstract class   Carreras {
             }
         }
     }
+
     public void buscoActualizoCorrelativa(Materias[] materiasConNotas){
-        for (byte annio=0;annio<getAnniosCarrera();annio++){
+        int annioDeCarrera=getAnniosCarrera();
+        for (byte annio=0;annio<annioDeCarrera;annio++){
             for (byte cuatri=0;cuatri<6;cuatri++) {
                 if (carrera[annio][cuatri].tieneCorrelativa) {
                     for (byte cantMaterias=0;cantMaterias<3;cantMaterias++){
@@ -53,6 +59,7 @@ public abstract class   Carreras {
             }
         }
     }//si quiero hacer correlativas con mas de 1 materia dejar como antes
+
     public boolean getAlumnoGraduado(){
         byte cantMateriaOptativaAprobadas = 0;
         boolean aprobado=true;
@@ -74,15 +81,19 @@ public abstract class   Carreras {
         }
         return aprobado;
     }
+
     public Materias getMateriasPorAnnioYMateria(int annio, int materia){
         return carrera[annio][materia];
     }
+
     public int getAnniosCarrera(){
         return annio;
     }
+
     public PlanDeEstudio getPlanDeEstudio(){
         return planDeEstudioElegido;
     }
+
     public byte getCuatrimestreDeLaMateria (Materias materias) {
         byte cuatri=0, annio=0;
         for (byte i=0; i<getAnniosCarrera();i++){
@@ -129,5 +140,6 @@ public abstract class   Carreras {
         }
         return cuatri;
     }
+
     public abstract float getCantMateriasOptativas ();
 }

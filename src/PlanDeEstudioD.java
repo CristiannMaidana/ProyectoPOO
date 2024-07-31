@@ -1,10 +1,12 @@
 public class PlanDeEstudioD extends PlanDeEstudio {
     private byte cuatrimestreDeMateriaACursar =0, cantidadCuatrimestresRecorridos=0;;
     private Alumnos alumnos;
+
     public PlanDeEstudioD(Carreras carrera, Alumnos alumnos) {
         super(carrera);
         this.alumnos=alumnos;
     }
+
     @Override
     public boolean aproboCorrelativas(Materias materias) {
         boolean aprobo1 = true, aprobo2 = true;
@@ -14,10 +16,12 @@ public class PlanDeEstudioD extends PlanDeEstudio {
         }
         return (aprobo1 && aprobo2);
     }
+
     @Override
     public String toString() {
         return "Plan de estudio ¨D¨";
     }
+
     public boolean aproboLaCursadaDeLasCorrelativas (Materias materias, boolean aprobo1){
         if (materias.tieneCorrelativa) {
             if (!materias.getCorrelativa().cursadaAprobada) {
@@ -26,6 +30,7 @@ public class PlanDeEstudioD extends PlanDeEstudio {
         }
         return aprobo1;
     }
+
     public boolean buscoMateria (Materias materias, boolean aprobo2){
         cantidadCuatrimestresRecorridos = 0;
         for (byte i = 0; i < alumnos.getCarrera().getAnniosCarrera(); i++) {

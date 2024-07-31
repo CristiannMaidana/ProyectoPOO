@@ -41,7 +41,9 @@
         <constraints>
           <grid row="6" column="3" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-394241"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="90aa4" class="javax.swing.JButton" binding="aceptarButton" default-binding="true">

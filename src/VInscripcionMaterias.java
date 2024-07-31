@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class VInscripcionMaterias extends JFrame {
@@ -17,7 +16,7 @@ public class VInscripcionMaterias extends JFrame {
     private JPanel panelMateriasCursadas;
     private int annioElegido=0, cuatriElegido=0;
     private final Alumnos alumno;
-    private boolean situacionB, faltaCursar;
+    private boolean situacionB, faltaCursar, cancelar;
 
 
     public VInscripcionMaterias(Alumnos alumno) {
@@ -94,6 +93,7 @@ public class VInscripcionMaterias extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 setVisible(false);
+                cancelar = true;
                 dispose();
             }
         });
@@ -106,6 +106,7 @@ public class VInscripcionMaterias extends JFrame {
             }
         });
     }
+
     private void cargoAnniosEnPantalla(int annios){
         for (int i=0; i<annios; i++) {
             switch (i){
@@ -154,6 +155,7 @@ public class VInscripcionMaterias extends JFrame {
             }
         }
     }
+
     private void cargoMateriasEnPantalla( int annio, int cuatri){
         DefaultListModel<String> model = new DefaultListModel<>();
         if (cuatri == 1){
@@ -170,6 +172,7 @@ public class VInscripcionMaterias extends JFrame {
         }
         listMateriasNuevas.setModel(model);
     }
+
     private void cargoMateriasEnPantallaFaltaExamen( int annio, int cuatri){
         DefaultListModel<String> model = new DefaultListModel<>();
         if (cuatri == 1){
@@ -188,6 +191,7 @@ public class VInscripcionMaterias extends JFrame {
         }
         listMateriasNuevas.setModel(model);
     }
+
     private void cargoMateriasAlAlumno(String nombre, Alumnos alumno){
         boolean noHyaMateriaRepetidas = true;
         if (!alumno.materiasLlenas()) {//si esta llena no deja ingresar
@@ -225,6 +229,7 @@ public class VInscripcionMaterias extends JFrame {
             }
         }
     }
+
     private void cargoMateriasAprobadasAnterioresYNotas(){
         DefaultListModel<String> modelCursada = new DefaultListModel<>();
         DefaultListModel<String> modelNotas = new DefaultListModel<>();
@@ -241,5 +246,9 @@ public class VInscripcionMaterias extends JFrame {
         }
         listMateriasCursadas.setModel(modelCursada);
         listMateriasNotas.setModel(modelNotas);
+    }
+
+    public boolean getBotonCancelar(){
+        return cancelar;
     }
 }

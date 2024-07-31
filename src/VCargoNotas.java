@@ -93,7 +93,6 @@ public class VCargoNotas extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-               // DefaultListModel<String> model = new DefaultListModel();
                 DefaultListModel<String> model = (DefaultListModel<String>) listMateriasParaSeleccionar.getModel();
                 if (model.isEmpty()) {
                     masMaterias = true;
@@ -118,6 +117,7 @@ public class VCargoNotas extends JFrame{
                 }
             });
     }
+
     private void cargoMateriasAprobadasAnteriores(DefaultListModel<String> model){
         for (int i = 0; i <alumno.getCarrera().getAnniosCarrera(); i++){
             for (int j = 0; j <6; j++){
@@ -127,6 +127,7 @@ public class VCargoNotas extends JFrame{
         }
         listMateriasAprobadas.setModel(model);
     }
+
     public void cargoMateriasEnCurso(Alumnos alumnos){
         DefaultListModel <String> model = new DefaultListModel<>();
         for (byte i=0;i<3;i++){
@@ -135,21 +136,26 @@ public class VCargoNotas extends JFrame{
         }
         listMateriasParaSeleccionar.setModel(model);
     }
+
     public void cargoMateriasAprobadas (String materiaAprobada,  DefaultListModel<String> model ){
         model.addElement(materiaAprobada);
         listMateriasAprobadas.setModel(model);
     }
+
     public void cargoMateriasDesaprobadas(String materiaAprobada,  DefaultListModel<String> model ){
         model.addElement(materiaAprobada);
         listMateriasDesaprobadas.setModel(model);
     }
+
     public void cargoMateriasExamen (String materiaExamen, DefaultListModel<String> model ){
         model.addElement(materiaExamen);
         listMateriasFaltaExamen.setModel(model);
     }
+
     public boolean repitoCargaMaterias(){
         return masMaterias;
     }
+
     public void opcionesNotaParcial(boolean opciones){
         if (opciones){
             if (nMateria != null && notaParcial != 0){
@@ -192,6 +198,7 @@ public class VCargoNotas extends JFrame{
             opciones=false;
         }
     }
+
     public void opcionesNotaExamen(boolean opciones){
         if (opciones){
             if (nMateria != null && notaExamen != 0){

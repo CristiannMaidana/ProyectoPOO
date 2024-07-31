@@ -41,6 +41,7 @@ public class VperfilUsuario extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 botonOpciones=true;
+                masMaterias=false;
                 dispose();
             }
         });
@@ -61,6 +62,7 @@ public class VperfilUsuario extends JFrame{
             }
         });
     }
+
     public void buscoMateriasAprobadasDesaprobadas(Alumnos alumno){
         for (byte annio=0;annio<alumno.getCarrera().getAnniosCarrera();annio++){
             for (byte cuatri=0;cuatri <6; cuatri++) {
@@ -73,6 +75,7 @@ public class VperfilUsuario extends JFrame{
             }
         }
     }
+
     public void cargoMateriasAprobadas(Materias materias, DefaultListModel<String> model){
         switch (model.size()){
             case 0 : {
@@ -118,6 +121,7 @@ public class VperfilUsuario extends JFrame{
         model.addElement(materias.getNombreDeMateria());
         listMateriasAprobadas.setModel(model);
     }
+
     public void cargoMateriasDesaprobadas(String nombreMateria, DefaultListModel<String> model){
         switch (model.size()){
             case 0 : {
@@ -179,6 +183,7 @@ public class VperfilUsuario extends JFrame{
         model.addElement(nombreMateria);
         listMateriasPendientes.setModel(model);
     }
+
     public boolean getCargoMasMaterias(){
         return masMaterias;
     }
