@@ -46,8 +46,15 @@ public class VInscripcion extends JFrame{
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (!textFieldNombre.getText().isEmpty())
-                    nombre = textFieldNombre.getText();
+                if (!textFieldNombre.getText().isEmpty()) {
+                    String nombreIngresado = textFieldNombre.getText();
+                    if (nombreIngresado.matches("[a-zA-Z\\s]+")) {
+                        nombre = nombreIngresado;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El nombre ingresado es inválido.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
                 super.focusLost(e);
             }
         });
