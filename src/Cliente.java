@@ -7,77 +7,43 @@ public class Cliente {
     static AlumnosRegistrados cargoAlumnoNuevo;
 
     public static void main (String[]args) {
-        cargoAlumnosRegistrados();
+        cargoAlumnosRegistrados();//Cargo los alumnos en la clase "AlumnosRegistrados"
 
         Vlogeo panelLogearse = ejecutoPanelLogearse();
+        while (panelLogearse.getBotones() || panelLogearse.getCrearUsuario()) {
+            if (panelLogearse.getCrearUsuario()) {
+                VInscripcion panelInscripcion = ejecutoPanelInscripcion();
 
-        if (panelLogearse.getCrearUsuario()) {
-            VInscripcion panelInscripcion = ejecutoPanelInscripcion();
+                if (panelInscripcion.getBoton())
+                    almacenoNuevoAlumno(panelInscripcion);
 
-            almacenoNuevoAlumno(panelInscripcion);
-
-            ejecutoPanelLogearse();
-
-            //Se habilita la inscripcion a materias
-            VInscripcionMaterias panelCargoMaterias = ejecutoPanelInscripcionMaterias();
-
-            //Se habilita la carga de notas
-            VCargoNotas panelCargoNotas = ejecutoPanelCargoNotas();
-
-            boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
-            while (repito) {
-                repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+                panelLogearse.crearUsuario = false;
+                panelLogearse = ejecutoPanelLogearse();
             }
-        }
 
-//            almacenoNuevoAlumno(panelInscripcion);
-//
-//            //Se habilita la inscripcion a materias
-//            VInscripcionMaterias panelCargoMaterias = ejecutoPanelInscripcionMaterias();
-//
-//            //Se habilita la carga de notas
-//            VCargoNotas panelCargoNotas = ejecutoPanelCargoNotas();
-//
-//            boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
-//            while (repito){
-//                repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
-//            }
+            if (panelLogearse.getBotones()) {
+                alumno1 = cargoAlumnoNuevo.buscoAlumno(panelLogearse.getNombreUsuario(), panelLogearse.getContrasennaUsuario());
 
-        else if (panelLogearse.getBotones()) {
-//            buscoUsuario(panelLogearse.getNombreUsuario(), panelLogearse.getContrasennaUsuario());
+                VperfilUsuario panelUsuario = ejecutoPanelUsuario();
 
+                if (panelUsuario.getCargoMasMaterias()) {
+                    VInscripcionMaterias panelCargoMaterias = ejecutoPanelInscripcionMaterias();
 
-            alumno1 = cargoAlumnoNuevo.buscoAlumno(panelLogearse.getNombreUsuario(), panelLogearse.getContrasennaUsuario());
+                    if (!panelCargoMaterias.getBotonAceptar())
+                        if (!panelCargoMaterias.getBotonCancelar() || panelCargoMaterias.getBotonCargoNotas()) {
+                        VCargoNotas panelCargoNotas = ejecutoPanelCargoNotas();
 
-            VperfilUsuario panelUsuario = ejecutoPanelUsuario();
-
-            if(panelUsuario.getCargoMasMaterias()){
-                VInscripcionMaterias  panelCargoMaterias = ejecutoPanelInscripcionMaterias();
-
-                VCargoNotas  panelCargoNotas = ejecutoPanelCargoNotas();
-
-                boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
-                while (repito){
-                    repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+                        boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+                        while (repito) {
+                            repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+                        }
+                    }
+                }
+                if (panelUsuario.getBoton()) {
+                    panelLogearse = ejecutoPanelLogearse();
                 }
             }
         }
-//        if (existeUsuario){
-//            alumno1 = creoAlumnoSofia();
-//
-//            VperfilUsuario panelUsuario = ejecutoPanelUsuario();
-//
-//            if(panelUsuario.getCargoMasMaterias()){
-//                VInscripcionMaterias  panelCargoMaterias = ejecutoPanelInscripcionMaterias();
-//
-//                VCargoNotas  panelCargoNotas = ejecutoPanelCargoNotas();
-//
-//                boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
-//                while (repito){
-//                    repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
-//                }
-//            }
-//        }
     }
 
     static void cargoAlumnosRegistrados (){
@@ -85,7 +51,8 @@ public class Cliente {
     }
 
     static void almacenoNuevoAlumno (VInscripcion panelInscripcion){
-        alumno1 = new Alumnos(panelInscripcion.getNombre() + " " + panelInscripcion.getApellido(), panelInscripcion.getDni(), panelInscripcion.getContrasenna());
+        alumno1 = new Alumnos(panelInscripcion.getNombre() + " " + panelInscripcion.getApellido(),
+                panelInscripcion.getDni(), panelInscripcion.getContrasenna());
         switch (panelInscripcion.getCarrera()) {
             case "Licenciatura en sistemas.": {
                 alumno1.setCarrera(carreras = new CarreraSistemas(5, 6));
@@ -193,14 +160,11 @@ public class Cliente {
         while (panelCargoNotas.repitoCargaMaterias() && !panelCargoMaterias.getBotonCancelar()) {
             panelCargoMaterias = ejecutoPanelInscripcionMaterias();
 
-            if (!panelCargoMaterias.getBotonCancelar()) {
+            if (panelCargoMaterias.getBotonCargoNotas()) {
                 panelCargoNotas = ejecutoPanelCargoNotas();
             }
         }
-
-        VperfilUsuario panelUsuario = ejecutoPanelUsuario();
-
-        return panelUsuario.getCargoMasMaterias();
+        return panelCargoMaterias.getBotonCargoNotas();
     }
 
     static Vlogeo ejecutoPanelLogearse(){
