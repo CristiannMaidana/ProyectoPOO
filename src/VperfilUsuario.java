@@ -12,8 +12,7 @@ public class VperfilUsuario extends JFrame{
     private JPanel panelPerfilAlumno;
     private JButton aceptarButton;
     private JButton masMateriasButton;
-    private JButton cancelarButton;
-    private boolean activarSituacion=false, botonOpciones, masMaterias;
+    private boolean activarSituacion = false, botonOpciones = false, masMaterias = false;
     private final DefaultListModel<String> modelAprobado = new DefaultListModel<>(), modelDesaprobado = new DefaultListModel<>();
 
 
@@ -42,14 +41,6 @@ public class VperfilUsuario extends JFrame{
                 super.mouseClicked(e);
                 botonOpciones=true;
                 masMaterias=false;
-                dispose();
-            }
-        });
-        cancelarButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                botonOpciones=false;
                 dispose();
             }
         });
@@ -186,5 +177,9 @@ public class VperfilUsuario extends JFrame{
 
     public boolean getCargoMasMaterias(){
         return masMaterias;
+    }
+
+    public boolean getBoton(){
+        return botonOpciones;
     }
 }
