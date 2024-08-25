@@ -9,8 +9,10 @@ public class Vlogeo extends JFrame{
     private JPasswordField passwordFieldContrasenna;
     private String nombreUsuario, contrasennaUsuario;
     private boolean crearUsuario, boton;
+    private AlumnosRegistrados registro;
 
-    public Vlogeo() {
+    public Vlogeo(AlumnosRegistrados registro) {
+        this.registro = registro;
         setContentPane(panelLogearsee);
         setTitle("Inicie sesion.");
         setSize(500,300);
@@ -20,8 +22,20 @@ public class Vlogeo extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 boton=true;
-                setVisible(false);
-                dispose();
+                if (nombreUsuario == null || nombreUsuario.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Debe ingresar un usuario.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (contrasennaUsuario == null || contrasennaUsuario.isEmpty()) {
+                    JOptionPane.showMessageDialog( null, "Debe ingresar una contraseña.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (registro.buscoAlumno(nombreUsuario, contrasennaUsuario) == null) {
+                    JOptionPane.showMessageDialog(null, "El usuario o contraseña es invalido.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    setVisible(false);
+                    dispose();
+                }
             }
         });
         cancelarButton.addMouseListener(new MouseAdapter() {
