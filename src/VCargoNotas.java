@@ -52,8 +52,15 @@ public class VCargoNotas extends JFrame{
                     textFieldNotaParcial.setEnabled(false);
                     textFieldNotaExamen.setEnabled(true);
                     if (textFieldNotaExamen.isEnabled()) {
-                        if (textFieldNotaExamen.isEnabled() && !textFieldNotaExamen.getText().isEmpty())
-                            notaExamen = Integer.parseInt(textFieldNotaExamen.getText());
+                        if (textFieldNotaExamen.isEnabled() && !textFieldNotaExamen.getText().isEmpty()) {
+                            String notaExamenIngresada = textFieldNotaExamen.getText();
+                            if (notaExamenIngresada.matches("\\d+")) {
+                                notaExamen = Integer.parseInt(textFieldNotaExamen.getText());
+                            } else{
+                                JOptionPane.showMessageDialog(null, "Ingrese una nota numerica " +
+                                        "valida.", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
                     }
                 }
                 if (textFieldNotaParcial.isEnabled()) {
@@ -62,7 +69,13 @@ public class VCargoNotas extends JFrame{
                         public void focusLost(FocusEvent e) {
                             super.focusLost(e);
                             if (textFieldNotaParcial.isEnabled() && !textFieldNotaParcial.getText().isEmpty()) {
-                                notaParcial = Integer.parseInt(textFieldNotaParcial.getText());
+                                String notaIngresada = textFieldNotaParcial.getText();
+                                if (notaIngresada.matches("\\d+")){
+                                    notaParcial = Integer.parseInt(textFieldNotaParcial.getText());
+                                } else{
+                                    JOptionPane.showMessageDialog(null, "Ingrese una nota" +
+                                            " numerica valida.", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
                             }
                         }
                     });
