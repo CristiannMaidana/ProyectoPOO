@@ -4,51 +4,19 @@ public class Cliente {
     static Alumnos alumno1;
     static Carreras carreras;
     static boolean existeUsuario= false;
+    static AlumnosRegistrados cargoAlumnoNuevo;
 
     public static void main (String[]args) {
+        cargoAlumnosRegistrados();
+
         Vlogeo panelLogearse = ejecutoPanelLogearse();
 
         if (panelLogearse.getCrearUsuario()) {
             VInscripcion panelInscripcion = ejecutoPanelInscripcion();
 
-            alumno1 = new Alumnos(panelInscripcion.getNombre() + " " + panelInscripcion.getApellido(), panelInscripcion.getDni());
-            switch (panelInscripcion.getCarrera()) {
-                case "Licenciatura en sistemas.": {
-                    alumno1.setCarrera(carreras = new CarreraSistemas(5, 6));
-                    break;
-                }
-                case "Ingenieria Industrial.": {
-                    alumno1.setCarrera(carreras = new CarreraSistemas(6, 6));
-                    break;
-                }
-                case "Turismo.": {
-                    alumno1.setCarrera(carreras = new CarreraPruebas(4, 6));
-                    break;
-                }
-                default: break;
-            }//fin switch Inscripcion Carrera
-            switch (panelInscripcion.getPlanElegido()){
-                case "Plan de estudio A": {
-                    alumno1.getCarrera().setPlanDeEstudio(new PlanDeEstudioA(alumno1.getCarrera()));
-                    break;
-                }
-                case "Plan de estudio B": {
-                    alumno1.getCarrera().setPlanDeEstudio(new PlanDeEstudioB(alumno1.getCarrera()));
-                    break;
-                }
-                case "Plan de estudio C": {
-                    alumno1.getCarrera().setPlanDeEstudio(new PlanDeEstudioC(alumno1.getCarrera(),alumno1));
-                    break;
-                }
-                case "Plan de estudio D": {
-                    alumno1.getCarrera().setPlanDeEstudio(new PlanDeEstudioD(alumno1.getCarrera(), alumno1));
-                    break;
-                }
-                case "Plan de estudio E": {
-                    alumno1.getCarrera().setPlanDeEstudio(new PlanDeEstudioE(alumno1.getCarrera(), alumno1));
-                    break;
-                }
-            }//fin switch Incripcion Plan de Estudio
+            almacenoNuevoAlumno(panelInscripcion);
+
+            ejecutoPanelLogearse();
 
             //Se habilita la inscripcion a materias
             VInscripcionMaterias panelCargoMaterias = ejecutoPanelInscripcionMaterias();
@@ -57,14 +25,29 @@ public class Cliente {
             VCargoNotas panelCargoNotas = ejecutoPanelCargoNotas();
 
             boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
-            while (repito){
+            while (repito) {
                 repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
             }
-        }else if (panelLogearse.getBotones()) {
-            buscoUsuario(panelLogearse.getNombreUsuario(), panelLogearse.getContrasennaUsuario());}
+        }
 
-        if (existeUsuario){
-            alumno1 = creoAlumnoSofia();
+//            almacenoNuevoAlumno(panelInscripcion);
+//
+//            //Se habilita la inscripcion a materias
+//            VInscripcionMaterias panelCargoMaterias = ejecutoPanelInscripcionMaterias();
+//
+//            //Se habilita la carga de notas
+//            VCargoNotas panelCargoNotas = ejecutoPanelCargoNotas();
+//
+//            boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+//            while (repito){
+//                repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+//            }
+
+        else if (panelLogearse.getBotones()) {
+//            buscoUsuario(panelLogearse.getNombreUsuario(), panelLogearse.getContrasennaUsuario());
+
+
+            alumno1 = cargoAlumnoNuevo.buscoAlumno(panelLogearse.getNombreUsuario(), panelLogearse.getContrasennaUsuario());
 
             VperfilUsuario panelUsuario = ejecutoPanelUsuario();
 
@@ -79,18 +62,72 @@ public class Cliente {
                 }
             }
         }
+//        if (existeUsuario){
+//            alumno1 = creoAlumnoSofia();
+//
+//            VperfilUsuario panelUsuario = ejecutoPanelUsuario();
+//
+//            if(panelUsuario.getCargoMasMaterias()){
+//                VInscripcionMaterias  panelCargoMaterias = ejecutoPanelInscripcionMaterias();
+//
+//                VCargoNotas  panelCargoNotas = ejecutoPanelCargoNotas();
+//
+//                boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+//                while (repito){
+//                    repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+//                }
+//            }
+//        }
     }
 
-    static void buscoUsuario (String nombreUsuario, String contrasenna){
-        switch (nombreUsuario){
-            case "Sofia Martinez" : {if (contrasenna.equals("123456"))
-                existeUsuario= true;
+    static void cargoAlumnosRegistrados (){
+        cargoAlumnoNuevo = new AlumnosRegistrados(creoAlumnoSofia());
+    }
+
+    static void almacenoNuevoAlumno (VInscripcion panelInscripcion){
+        alumno1 = new Alumnos(panelInscripcion.getNombre() + " " + panelInscripcion.getApellido(), panelInscripcion.getDni(), panelInscripcion.getContrasenna());
+        switch (panelInscripcion.getCarrera()) {
+            case "Licenciatura en sistemas.": {
+                alumno1.setCarrera(carreras = new CarreraSistemas(5, 6));
+                break;
             }
-        }
+            case "Ingenieria Industrial.": {
+                alumno1.setCarrera(carreras = new CarreraSistemas(6, 6));
+                break;
+            }
+            case "Turismo.": {
+                alumno1.setCarrera(carreras = new CarreraPruebas(4, 6));
+                break;
+            }
+            default: break;
+        }//fin switch Inscripcion Carrera al alumno
+        switch (panelInscripcion.getPlanElegido()){
+            case "Plan de estudio A": {
+                alumno1.getCarrera().setPlanDeEstudio(new PlanDeEstudioA(alumno1.getCarrera()));
+                break;
+            }
+            case "Plan de estudio B": {
+                alumno1.getCarrera().setPlanDeEstudio(new PlanDeEstudioB(alumno1.getCarrera()));
+                break;
+            }
+            case "Plan de estudio C": {
+                alumno1.getCarrera().setPlanDeEstudio(new PlanDeEstudioC(alumno1.getCarrera(),alumno1));
+                break;
+            }
+            case "Plan de estudio D": {
+                alumno1.getCarrera().setPlanDeEstudio(new PlanDeEstudioD(alumno1.getCarrera(), alumno1));
+                break;
+            }
+            case "Plan de estudio E": {
+                alumno1.getCarrera().setPlanDeEstudio(new PlanDeEstudioE(alumno1.getCarrera(), alumno1));
+                break;
+            }
+        }//fin switch Incripcion Plan de Estudio al alumno
+        cargoAlumnoNuevo.add(alumno1);
     }
 
     static Alumnos creoAlumnoSofia (){
-        Alumnos alumno2 = new Alumnos("Sofia Martinez", 43248234);
+        Alumnos alumno2 = new Alumnos("Sofia Martinez", 43248234, "123456");
         alumno2.setCarrera(new CarreraPruebas(4,6));
         alumno2.getCarrera().setPlanDeEstudio(new PlanDeEstudioB(alumno2.getCarrera()));
         materiasAlumnos(alumno2);
@@ -167,7 +204,7 @@ public class Cliente {
     }
 
     static Vlogeo ejecutoPanelLogearse(){
-        Vlogeo panelLogearse = new Vlogeo();
+        Vlogeo panelLogearse = new Vlogeo(cargoAlumnoNuevo);
         panelLogearse.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
         panelLogearse.setVisible(true);
         hiloEspero(panelLogearse);
