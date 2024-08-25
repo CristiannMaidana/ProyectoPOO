@@ -12,8 +12,9 @@ public class VInscripcion extends JFrame{
     private JComboBox comboBoxPlanEstudio;
     private JPasswordField passwordFieldContrasenna;
     private String planElegido;
-    String nombre, apellido, carrera, contrasenna;
-    int dni;
+    private String nombre, apellido, carrera, contrasenna;
+    private int dni;
+    private boolean boton = false;
 
     public VInscripcion() {
         setContentPane(panelInscripcion);
@@ -35,6 +36,7 @@ public class VInscripcion extends JFrame{
                     JOptionPane.showMessageDialog(null, "Debe elegir un plan de estudio valido.",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 } else{
+                    boton = true;
                     setVisible(false);
                     dispose();
                 }
@@ -44,6 +46,7 @@ public class VInscripcion extends JFrame{
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boton = false;
                 setVisible(false);
                 dispose();
             }
@@ -182,5 +185,9 @@ public class VInscripcion extends JFrame{
 
     public String getPlanElegido(){
         return planElegido;
+    }
+
+    public boolean getBoton(){
+        return boton;
     }
 }
