@@ -16,7 +16,7 @@ public class VInscripcionMaterias extends JFrame {
     private JPanel panelMateriasCursadas;
     private int annioElegido=0, cuatriElegido=0;
     private final Alumnos alumno;
-    private boolean situacionB, faltaCursar, cancelar;
+    private boolean situacionB = false, faltaCursar = false, cancelar = false, cargoNotas = false, aceptar = false;
 
 
     public VInscripcionMaterias(Alumnos alumno) {
@@ -84,6 +84,7 @@ public class VInscripcionMaterias extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                aceptar = true;
                 setVisible(false);
                 dispose();
             }
@@ -101,8 +102,16 @@ public class VInscripcionMaterias extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                setVisible(false);
-                dispose();
+                if (!alumno.materiasLlenas()){
+                    JOptionPane.showMessageDialog(null, "Debe cargar 3 materias para poder " +
+                            "cargar las notas.", "Error", JOptionPane.ERROR_MESSAGE);
+                    cargoNotas = false;
+                }
+                else {
+                    cargoNotas = true;
+                    setVisible(false);
+                    dispose();
+                }
             }
         });
     }
@@ -250,5 +259,13 @@ public class VInscripcionMaterias extends JFrame {
 
     public boolean getBotonCancelar(){
         return cancelar;
+    }
+
+    public boolean getBotonAceptar(){
+        return aceptar;
+    }
+
+    public boolean getBotonCargoNotas(){
+        return cargoNotas;
     }
 }
