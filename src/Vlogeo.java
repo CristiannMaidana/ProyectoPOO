@@ -8,7 +8,8 @@ public class Vlogeo extends JFrame{
     private JPanel panelLogearsee;
     private JPasswordField passwordFieldContrasenna;
     private String nombreUsuario, contrasennaUsuario;
-    private boolean crearUsuario, boton;
+    public boolean crearUsuario = false;
+    private boolean  boton = false;
     private AlumnosRegistrados registro;
 
     public Vlogeo(AlumnosRegistrados registro) {
@@ -21,7 +22,6 @@ public class Vlogeo extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                boton=true;
                 if (nombreUsuario == null || nombreUsuario.isEmpty()){
                     JOptionPane.showMessageDialog(null, "Debe ingresar un usuario.",
                             "Error", JOptionPane.ERROR_MESSAGE);
@@ -33,6 +33,7 @@ public class Vlogeo extends JFrame{
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
+                    boton=true;
                     setVisible(false);
                     dispose();
                 }
