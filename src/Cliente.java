@@ -3,7 +3,6 @@ import javax.swing.*;
 public class Cliente {
     static Alumnos alumno1;
     static Carreras carreras;
-    static boolean existeUsuario= false;
     static AlumnosRegistrados cargoAlumnoNuevo;
 
     public static void main (String[]args) {
