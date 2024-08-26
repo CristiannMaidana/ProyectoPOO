@@ -1,17 +1,23 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class   Carreras {
-    private final int annio;
+    private final int annio, cuatri;
+    private final String nombre;
     private PlanDeEstudio planDeEstudioElegido;
     public Materias[][] carrera;
 
-    public Carreras(int annio, int cuatri) {
+    public Carreras(String nombre, int annio, int cuatri) {
+        this.nombre = nombre;
         this.annio=annio;
+        this.cuatri=cuatri;
         carrera = new Materias[annio][cuatri];
     }
 
     public Materias getMateriasPorNombre(String nombreMateriaBuscar){
         Materias materia=null;
-        for (byte annio=0; annio<5;annio ++){
-            for (byte cuatri=0;cuatri<6;cuatri++){
+        for (byte annio=0; annio<getAnniosCarrera();annio ++){
+            for (byte cuatri=0;cuatri<getCuatriCarrera();cuatri++){
                 if (carrera[annio][cuatri].getNombreDeMateria().equals(nombreMateriaBuscar)) {
                     materia=carrera[annio][cuatri];
                     break;
@@ -30,7 +36,7 @@ public abstract class   Carreras {
     public void actualizoMaterias(Materias[] materiasConNotas){
         int annioDeCarrera=getAnniosCarrera();
         for (byte annio=0;annio<annioDeCarrera;annio++){
-            for (byte cuatri=0;cuatri<6;cuatri++) {
+            for (byte cuatri=0;cuatri<getCuatriCarrera();cuatri++) {
                 for (byte cantMaterias=0;cantMaterias<3;cantMaterias++){
                     if(materiasConNotas[cantMaterias] !=null)
                         if(materiasConNotas[cantMaterias].getNombreDeMateria().equals(carrera[annio][cuatri].getNombreDeMateria())){
@@ -45,7 +51,7 @@ public abstract class   Carreras {
     public void buscoActualizoCorrelativa(Materias[] materiasConNotas){
         int annioDeCarrera=getAnniosCarrera();
         for (byte annio=0;annio<annioDeCarrera;annio++){
-            for (byte cuatri=0;cuatri<6;cuatri++) {
+            for (byte cuatri=0;cuatri<getCuatriCarrera();cuatri++) {
                 if (carrera[annio][cuatri].tieneCorrelativa) {
                     for (byte cantMaterias=0;cantMaterias<3;cantMaterias++){
                         if (materiasConNotas[cantMaterias] == carrera[annio][cuatri]){
@@ -65,11 +71,11 @@ public abstract class   Carreras {
         boolean aprobado=true;
         for (Materias[] fila : carrera) {
             for (Materias materia : fila) {
-                if (materia.obligatoria) if (!materia.examenFinal) {
+                if (materia.obligatoria) if (!materia.cursadaAprobada) {
                     aprobado = false;
                     break;
                 }
-                if (materia.optativa) if (materia.examenFinal) {
+                if (materia.optativa) if (materia.cursadaAprobada) {
                     cantMateriaOptativaAprobadas++;
                 }
             }
@@ -90,6 +96,10 @@ public abstract class   Carreras {
         return annio;
     }
 
+    public int getCuatriCarrera(){
+        return cuatri;
+    }
+
     public PlanDeEstudio getPlanDeEstudio(){
         return planDeEstudioElegido;
     }
@@ -98,7 +108,7 @@ public abstract class   Carreras {
         byte cuatri=0, annio=0;
         for (byte i=0; i<getAnniosCarrera();i++){
             annio=i;
-            for (byte j=0; j<6;j++){
+            for (byte j=0; j<getCuatriCarrera();j++){
                 if (carrera[i][j].getNombreDeMateria().equals(materias.getNombreDeMateria())) {
                     cuatri = j;
                     break;
@@ -142,4 +152,55 @@ public abstract class   Carreras {
     }
 
     public abstract float getCantMateriasOptativas ();
+
+    public void generoMaterias (){
+        int annio = getAnniosCarrera();
+        int cuatri = getCuatriCarrera();
+        for (byte annios = 0; annios<annio; annios++){
+            for (byte cuatris = 0; cuatris<cuatri; cuatris++){
+                if (annios>0){
+                    String nombre = "materia" + annios + cuatris;
+                    Materias materia = new Materias(nombre);
+                    carrera[annios][cuatris] = materia;
+                    carrera[annios][cuatris].setCorrelativa(carrera[annios-1][cuatris]);
+                }else{
+                    String nombre = "materia" + annios + cuatris;
+                    Materias materia = new Materias(nombre);
+                    carrera[annios][cuatris] = materia;
+                }
+            }
+        }
+    }
+
+    public String getNombre(){
+        return nombre;
+    }
+
+    public List<Materias> getMateriasObligatorias(){
+        List<Materias> materiasObligatorias = new ArrayList<Materias>();
+        int annio = getAnniosCarrera();
+        int cuatri = getCuatriCarrera();
+        for (byte annios = 0; annios<annio; annios++){
+            for (byte cuatris = 0; cuatris<cuatri; cuatris++){
+                if (carrera[annios][cuatris].obligatoria)
+                    if (!carrera[annios][cuatris].cursadaAprobada)
+                        materiasObligatorias.add(carrera[annios][cuatris]);
+            }
+        }
+        return materiasObligatorias;
+    }
+
+    public List<Materias> getMateriasOptativas(){
+        List<Materias> materiasOptativas = new ArrayList<Materias>();
+        int annio = getAnniosCarrera();
+        int cuatri = getCuatriCarrera();
+        for (byte annios = 0; annios<annio; annios++){
+            for (byte cuatris = 0; cuatris<cuatri; cuatris++){
+                if (carrera[annios][cuatris].optativa)
+                    if (!carrera[annios][cuatris].cursadaAprobada)
+                        materiasOptativas.add(carrera[annios][cuatris]);
+            }
+        }
+        return materiasOptativas;
+    }
 }
