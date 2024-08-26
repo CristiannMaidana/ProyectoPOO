@@ -21,7 +21,9 @@ public class VInscripcionMaterias extends JFrame {
 
     public VInscripcionMaterias(Alumnos alumno) {
         this.alumno=alumno;
-        setContentPane(panelMaterias);
+        JScrollPane scrollPane = new JScrollPane(panelMaterias);
+
+        setContentPane(scrollPane);
         setTitle("Inscripcion de materias");
         setSize(550,350);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -243,7 +245,7 @@ public class VInscripcionMaterias extends JFrame {
         DefaultListModel<String> modelCursada = new DefaultListModel<>();
         DefaultListModel<String> modelNotas = new DefaultListModel<>();
         for (int i = 0; i <alumno.getCarrera().getAnniosCarrera(); i++){
-            for (int j = 0; j <6; j++){
+            for (int j = 0; j <alumno.getCarrera().getCuatriCarrera(); j++){
                 if (alumno.getCarrera().getMateriasPorAnnioYMateria(i, j).getCursadaAprobada() && !alumno.getCarrera().getMateriasPorAnnioYMateria(i, j).getNotaExamenFinal()){
                     modelCursada.addElement(alumno.getCarrera().getMateriasPorAnnioYMateria(i, j).getNombreDeMateria());
                     modelNotas.addElement("Debe examen.");
