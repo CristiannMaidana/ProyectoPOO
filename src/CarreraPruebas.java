@@ -1,6 +1,6 @@
 public class CarreraPruebas extends Carreras{
     public CarreraPruebas(int annio, int cuatri) {
-        super(annio, cuatri);
+        super("Turismo", annio, cuatri);
         carrera[0][0]=new Materias("materia1");
         carrera[0][1]=new Materias("materia2");
         carrera[0][2]=new Materias("materia3");
