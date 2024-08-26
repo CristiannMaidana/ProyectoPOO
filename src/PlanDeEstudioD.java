@@ -18,6 +18,16 @@ public class PlanDeEstudioD extends PlanDeEstudio {
     }
 
     @Override
+    public void setCarrera(Carreras carrera) {
+        this.carrera=carrera;
+    }
+
+    @Override
+    public void setAlumno(Alumnos alumno) {
+        this.alumnos = alumno;
+    }
+
+    @Override
     public String toString() {
         return "Plan de estudio ¨D¨";
     }

@@ -1,7 +1,7 @@
 public class PlanDeEstudioE extends PlanDeEstudio{
     private final byte cuatriPrevios = 3;
     private byte cantidadCuatrimestresRecorridos;
-    private final Alumnos alumnos;
+    private Alumnos alumnos;
 
     public PlanDeEstudioE(Carreras carrera, Alumnos alumnos) {
         super(carrera);
@@ -17,6 +17,16 @@ public class PlanDeEstudioE extends PlanDeEstudio{
         }
         System.out.println(aprobo1 + ", " + aprobo2);
         return (aprobo1 && aprobo2);
+    }
+
+    @Override
+    public void setCarrera(Carreras carrera) {
+        this.carrera=carrera;
+    }
+
+    @Override
+    public void setAlumno(Alumnos alumno) {
+        this.alumnos = alumno;
     }
 
     @Override

@@ -1,7 +1,7 @@
 public class PlanDeEstudioC extends PlanDeEstudio{
 
     private byte cuatrimestreDeMateriaACursar =0,  cantidadCuatrimestresRecorridos=0;
-    private final Alumnos alumnos;
+    private Alumnos alumnos;
 
     public PlanDeEstudioC(Carreras carrera, Alumnos alumnos) {
         super(carrera);
@@ -16,6 +16,16 @@ public class PlanDeEstudioC extends PlanDeEstudio{
             aprobo2=buscoMateria(materias,aprobo2);
         }
         return (aprobo1 && aprobo2);
+    }
+
+    @Override
+    public void setCarrera(Carreras carrera) {
+        this.carrera=carrera;
+    }
+
+    @Override
+    public void setAlumno(Alumnos alumno) {
+        this.alumnos = alumno;
     }
 
     @Override

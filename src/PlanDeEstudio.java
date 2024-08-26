@@ -8,5 +8,9 @@ public abstract class PlanDeEstudio {
 
     public abstract boolean aproboCorrelativas(Materias materias);
 
+    public abstract void setCarrera(Carreras carrera);
+
+    public abstract void setAlumno(Alumnos alumno);
+
     public abstract String toString();
 }

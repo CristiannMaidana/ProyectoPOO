@@ -15,6 +15,15 @@ public class PlanDeEstudioB extends PlanDeEstudio{
     }
 
     @Override
+    public void setAlumno(Alumnos alumno) {
+    }
+
+    @Override
+    public void setCarrera(Carreras carrera) {
+        this.carrera=carrera;
+    }
+
+    @Override
     public String toString() {
         return "Plan de estudio ¨B¨";
     }
