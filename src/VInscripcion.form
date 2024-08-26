@@ -96,10 +96,6 @@
           <doubleBuffered value="false"/>
           <model>
             <item value="Seleccione su carrera:"/>
-            <item value="Licenciatura en sistemas."/>
-            <item value="Ingenieria Industrial."/>
-            <item value="Economia."/>
-            <item value="Turismo."/>
           </model>
         </properties>
       </component>
@@ -174,7 +170,7 @@
             <properties>
               <background color="-394241"/>
               <model>
-                <item value="Plan de estudio:"/>
+                <item value="Elija una carrera:"/>
               </model>
             </properties>
           </component>

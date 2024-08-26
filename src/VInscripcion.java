@@ -16,12 +16,12 @@ public class VInscripcion extends JFrame{
     private int dni;
     private boolean boton = false;
 
-    public VInscripcion() {
+    public VInscripcion(AlmacenCarreras opcionesCarreras) {
         setContentPane(panelInscripcion);
         setTitle("Inscripcion.");
         setSize(500,350);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        cargoOpcionesPlanDeEstudio();
+        cargoOpcionesCarrera(opcionesCarreras);
 
         aceptarButton.addActionListener(new ActionListener() {
             @Override
@@ -122,13 +122,14 @@ public class VInscripcion extends JFrame{
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     carrera = (String) comboBoxCarreras.getSelectedItem();
                 }
+                cargoOpcionesPlanDeEstudio(opcionesCarreras, carrera);
             }
         });
 
         comboBoxPlanEstudio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                planElegido = (String) comboBoxPlanEstudio.getSelectedItem();;
+                planElegido = (String) comboBoxPlanEstudio.getSelectedItem();
             }
         });
 
@@ -155,12 +156,19 @@ public class VInscripcion extends JFrame{
         });
     }
 
-    public void cargoOpcionesPlanDeEstudio(){
-        comboBoxPlanEstudio.addItem("Plan de estudio A");
-        comboBoxPlanEstudio.addItem("Plan de estudio B");
-        comboBoxPlanEstudio.addItem("Plan de estudio C");
-        comboBoxPlanEstudio.addItem("Plan de estudio D");
-        comboBoxPlanEstudio.addItem("Plan de estudio E");
+    public void cargoOpcionesCarrera(AlmacenCarreras opcionesCarreras){
+        for (int i=0; i<opcionesCarreras.getCantidadCarreras(); i++){
+            comboBoxCarreras.addItem(opcionesCarreras.getCarrera(i).getNombre());
+        }
+    }
+
+    public void cargoOpcionesPlanDeEstudio(AlmacenCarreras opcionesCarreras, String nombreCarrera){
+        comboBoxPlanEstudio.removeAllItems();
+        for (int i=0; i<opcionesCarreras.getCantidadCarreras(); i++){
+            if (opcionesCarreras.getCarrera(i).getNombre().equals(nombreCarrera)){
+                comboBoxPlanEstudio.addItem(opcionesCarreras.getCarrera(i).getPlanDeEstudio().toString());
+            }
+        }
     }
 
     public String getNombre(){
