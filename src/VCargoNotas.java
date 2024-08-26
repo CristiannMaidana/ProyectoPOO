@@ -23,7 +23,9 @@ public class VCargoNotas extends JFrame{
     public VCargoNotas(Alumnos alumno){
         this.alumno=alumno;
         cargoMateriasAprobadasAnteriores(modelAprobado);
-        setContentPane(panelCargoNotas);
+        JScrollPane scrollPane = new JScrollPane(panelCargoNotas);
+
+        setContentPane(scrollPane);
         setTitle("Ingrese notas de alumno");
         setSize(600,450);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -133,7 +135,7 @@ public class VCargoNotas extends JFrame{
 
     private void cargoMateriasAprobadasAnteriores(DefaultListModel<String> model){
         for (int i = 0; i <alumno.getCarrera().getAnniosCarrera(); i++){
-            for (int j = 0; j <6; j++){
+            for (int j = 0; j <alumno.getCarrera().getCuatriCarrera(); j++){
                 if (alumno.getCarrera().getMateriasPorAnnioYMateria(i, j).getNotaExamenFinal())
                     model.addElement(alumno.getCarrera().getMateriasPorAnnioYMateria(i, j).getNombreDeMateria());
             }
