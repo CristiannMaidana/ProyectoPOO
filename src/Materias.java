@@ -3,7 +3,7 @@ import java.util.Random;
 public class Materias {
     private final String nombre;
     public boolean parcial, cursadaAprobada, examenFinal, promocion, tieneCorrelativa, optativa, obligatoria;
-    public Materias correlativa;
+    private Materias correlativa;
 
     public Materias(String nombre) {
         this.nombre = nombre;
@@ -70,6 +70,6 @@ public class Materias {
     }
 
     public Materias getCorrelativa(){
-        return correlativa;
+        return this.correlativa;
     }
 }
