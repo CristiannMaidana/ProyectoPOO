@@ -5,7 +5,7 @@ public class VCreoCarreras extends JFrame {
     private JTextField textFieldNombre;
     private JComboBox comboBoxAnnios, comboBoxCuatri, comboBoxPlanEstudio;
     private JPanel PanelCreoCarreras;
-    private JButton aceptarButton, cancelarButton;
+    private JButton nuevaCarreraButton, cancelarButton;
     private String nombreCarrera, planEstudioCarrera;
     private int annioCarrera, cuatriCarrera;
     public boolean boton;
@@ -78,8 +78,7 @@ public class VCreoCarreras extends JFrame {
                 }
             }
         });
-
-        aceptarButton.addActionListener(new ActionListener() {
+        nuevaCarreraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (nombreCarrera == null) {
