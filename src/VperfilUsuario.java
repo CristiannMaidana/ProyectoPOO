@@ -6,13 +6,19 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class VperfilUsuario extends JFrame{
-    private JList listMateriasAprobadas, listMateriasPendientes, listMateriasParaGraduarse;
+    private JLabel nombreUsuario;
+    private JList listMateriasAprobadas;
+    private JList listMateriasPendientes;
     private JButton situacionButton;
-    private JLabel nombreUsuario, planDeEstudioAlumno, cargoSituacion, panelPerfilAlumno;
-    private JButton aceptarButton, masMateriasButton;
+    private JLabel planDeEstudioAlumno;
+    private JLabel cargoSituacion;
+    private JPanel panelPerfilAlumno;
+    private JButton cerrarSesionButton;
+    private JButton masMateriasButton;
     private JButton materiasObligatoriasButton;
     private JButton materiasOptativasButton;
-    private boolean botonOpciones = false, masMaterias = false;
+    private JList listMateriasParaGraduarse;
+    private boolean botonOpciones = false, masMaterias= false;
     private final DefaultListModel<String> modelAprobado = new DefaultListModel<>(), modelDesaprobado = new DefaultListModel<>();
 
 
@@ -39,12 +45,11 @@ public class VperfilUsuario extends JFrame{
                     cargoSituacion.setText("Desaprobado");
             }
         });
-        aceptarButton.addMouseListener(new MouseAdapter() {
+        cerrarSesionButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 botonOpciones=true;
-                masMaterias=false;
                 dispose();
             }
         });
