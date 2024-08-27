@@ -42,23 +42,25 @@ public class Cliente {
                 if (panelLogearse.getBotones()) {
                     alumno1 = cargoAlumnoNuevo.buscoAlumno(panelLogearse.getNombreUsuario(), panelLogearse.getContrasennaUsuario());
 
-                    VperfilUsuario panelUsuario = ejecutoPanelUsuario();
+                    if (alumno1.getCarrera() != null) {
+                        VperfilUsuario panelUsuario = ejecutoPanelUsuario();
 
-                    if (panelUsuario.getCargoMasMaterias()) {
-                        VInscripcionMaterias panelCargoMaterias = ejecutoPanelInscripcionMaterias();
+                        if (panelUsuario.getCargoMasMaterias()) {
+                            VInscripcionMaterias panelCargoMaterias = ejecutoPanelInscripcionMaterias();
 
-                        if (!panelCargoMaterias.getBotonAceptar())
-                            if (!panelCargoMaterias.getBotonCancelar() || panelCargoMaterias.getBotonCargoNotas()) {
-                                VCargoNotas panelCargoNotas = ejecutoPanelCargoNotas();
+                            if (!panelCargoMaterias.getBotonAceptar())
+                                if (!panelCargoMaterias.getBotonCancelar() || panelCargoMaterias.getBotonCargoNotas()) {
+                                    VCargoNotas panelCargoNotas = ejecutoPanelCargoNotas();
 
-                                boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
-                                while (repito) {
-                                    repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+                                    boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+                                    while (repito) {
+                                        repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
+                                    }
                                 }
-                            }
-                    }
-                    if (panelUsuario.getBoton()) {
-                        panelLogearse = ejecutoPanelLogearse();
+                        }
+                        if (panelUsuario.getBoton()) {
+                            panelLogearse = ejecutoPanelLogearse();
+                        }
                     }
                 }
             }
