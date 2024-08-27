@@ -9,11 +9,11 @@ public class VCargoNotas extends JFrame{
     private JList listMateriasParaSeleccionar;
     private JList listMateriasAprobadas;
     private JPanel panelCargoNotas;
-    private JButton aceptarButton;
-    private JButton FinalizarButton;
+    private JButton cargoNotasButton;
     private JButton cargarMasMateriasButton;
     private JList listMateriasFaltaExamen;
     private JList listMateriasDesaprobadas;
+    private JButton cancelarButton;
     private double notaParcial, notaExamen;
     private String nMateria;
     private final DefaultListModel<String> modelAprobado = new DefaultListModel<>(), modelExamen = new DefaultListModel<>(),modelDesaprobado = new DefaultListModel<>();
@@ -84,7 +84,7 @@ public class VCargoNotas extends JFrame{
                 }
             }
         });
-        aceptarButton.addMouseListener(new MouseAdapter() {
+        cargoNotasButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -93,15 +93,6 @@ public class VCargoNotas extends JFrame{
                     opcionesNotaParcial(opciones);
                 else  if (notaExamen != 0 && !textFieldNotaParcial.isEnabled())
                     opcionesNotaExamen(opciones);
-            }
-        });
-        FinalizarButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                opciones=false;
-                masMaterias = false;
-                dispose();
             }
         });
         cargarMasMateriasButton.addMouseListener(new MouseAdapter() {
@@ -131,6 +122,14 @@ public class VCargoNotas extends JFrame{
                     }
                 }
             });
+        cancelarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                alumno.vacioMaterias();
+                dispose();
+            }
+        });
     }
 
     private void cargoMateriasAprobadasAnteriores(DefaultListModel<String> model){
