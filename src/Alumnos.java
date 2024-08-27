@@ -107,4 +107,9 @@ public class Alumnos {
         return contrasenna;
     }
 
+    public void vacioMaterias(){
+        for (int i=0; i<3;i++){
+            materiasCursando[i]=null;
+        }
+    }
 }
