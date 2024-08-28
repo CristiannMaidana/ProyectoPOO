@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.concurrent.CountDownLatch;
@@ -11,15 +10,16 @@ public class AltaDeAlumnos extends JFrame {
     private JButton altaDePlanDeButton;
     private JButton altaDeCarrerasButton;
     private JButton buscoAlumnosButton;
-    private JComboBox comboBox1;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
+    private JComboBox comboBoxCarrera;
+    private JTextField textFieldContrasenna;
+    private JTextField textFieldDNI;
+    private JTextField textFieldApellido;
+    private JTextField textFieldNombre;
+    private JTextField textFieldUsuario;
     private JButton crearNuevoAlumnoButton;
     private JButton cancelarButton;
     private JCheckBox checkBox1;
+    private boolean paginaPrincipal=false, modificoCarrera=false, altaPlanDeEstudio=false, altaDeCarreras=false, buscoAlumnos=false, creoNuevoAlumno = false, cancelar=false;
     private CountDownLatch latch;
 
     public AltaDeAlumnos(CountDownLatch latch){
@@ -34,6 +34,48 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 dispose();
+            }
+        });
+        paginaPrincipalButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
+        altaDeCarrerasButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
+        altaDePlanDeButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
+        buscoAlumnosButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
+        modificoCarreraButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
+        crearNuevoAlumnoButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
+        cancelarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
             }
         });
     }
