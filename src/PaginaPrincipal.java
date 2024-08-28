@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,10 +11,12 @@ public class PaginaPrincipal extends JFrame {
     private JButton modificoCarreraButton;
     private JLabel imagenSIULabel;
     private JPanel paginaPrincipal;
+    private JCheckBox cierroPestaña;
     private JLabel tituloPrincipal;
     private boolean altaDeAlumnos = false, altaDeCarreras = false, altaDePlanDeEstudio = false, buscoAlumnos = false, modificoCarrera = false;
 
     public PaginaPrincipal() {
+        setUndecorated(true);
         setContentPane(paginaPrincipal);
         setSize(850,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,6 +57,13 @@ public class PaginaPrincipal extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 modificoCarrera = true;
+                dispose();
+            }
+        });
+        cierroPestaña.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 dispose();
             }
         });
