@@ -19,6 +19,7 @@
         </constraints>
         <properties>
           <font name="Arial" size="18"/>
+          <foreground color="-16777216"/>
           <text value="Alta de carreras"/>
         </properties>
       </component>
@@ -38,6 +39,7 @@
         </constraints>
         <properties>
           <font name="Arial" size="12"/>
+          <foreground color="-16777216"/>
           <text value="Asigne los años de la carrera"/>
         </properties>
       </component>
@@ -47,6 +49,7 @@
         </constraints>
         <properties>
           <font name="Arial" size="12"/>
+          <foreground color="-16777216"/>
           <text value="Asigne los cuatrimestres que tendra la carrera"/>
         </properties>
       </component>
@@ -56,6 +59,7 @@
         </constraints>
         <properties>
           <font name="Arial" size="12"/>
+          <foreground color="-16777216"/>
           <text value="Elija el plan de estudio que tendra la carrera"/>
         </properties>
       </component>
@@ -97,6 +101,7 @@
         </constraints>
         <properties>
           <font name="Arial" size="12"/>
+          <foreground color="-16777216"/>
           <text value="Ingrese el nombre de la carrera"/>
         </properties>
       </component>

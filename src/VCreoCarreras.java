@@ -19,17 +19,11 @@ public class VCreoCarreras extends JFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 String validoNombre = textFieldNombre.getText();
-                if (validoNombre.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Ingrese un nombre para la carrera.",
+                if (!validoNombre.isEmpty() && !validoNombre.matches("[a-zA-Z\\s]+")) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un nombre sin caracteres numéricos.",
                             "Error", JOptionPane.ERROR_MESSAGE);
-                }else if (!validoNombre.matches("[a-zA-Z\\s]+")) {
-                        JOptionPane.showMessageDialog(null, "Ingrese un nombre sin caracteres numéricos.",
-                                "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (validoNombre.length() < 3){
-                    JOptionPane.showMessageDialog(null, "Ingrese un nombre más largo.",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                }else
-                    nombreCarrera = validoNombre;
+                }
+                nombreCarrera = validoNombre;
                 super.focusLost(e);
             }
         });
@@ -81,11 +75,8 @@ public class VCreoCarreras extends JFrame {
         nuevaCarreraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (nombreCarrera == null) {
+                if (nombreCarrera.isEmpty() || planEstudioCarrera.isEmpty() || planEstudioCarrera.equals("Planes de estudio:") || annioCarrera <=0) {
                     JOptionPane.showMessageDialog(null, "Debe completar los datos solicitados.",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (planEstudioCarrera == null || planEstudioCarrera.equals("Planes de estudio:")){
-                    JOptionPane.showMessageDialog(null, "Debe seleccionar un plan de estudio.",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 } else{
                     boton = true;
