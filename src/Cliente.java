@@ -68,10 +68,7 @@ public class Cliente {
     }
 
     static boolean verificoAdmin(Vlogeo panelLogearse) {
-        if (panelLogearse.getNombreUsuario().equals("admin"))
-            return true;
-        else
-            return false;
+        return panelLogearse.getNombreUsuario().equals("admin");
     }
 
     static void creoCarrera(VCreoCarreras panelCarreras) {
