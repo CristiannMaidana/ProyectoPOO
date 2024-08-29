@@ -14,6 +14,7 @@ public class VInscripcionMaterias extends JFrame {
     private JButton cargoNotasButton;
     private JComboBox comboBoxSituacion;
     private JPanel panelMateriasCursadas;
+    private JCheckBox checkBox1;
     private int annioElegido=0, cuatriElegido=0;
     private final Alumnos alumno;
     private boolean situacionB = false, faltaCursar = false, cancelar = false, cargoNotas = false, aceptar = false;
@@ -24,6 +25,7 @@ public class VInscripcionMaterias extends JFrame {
         JScrollPane scrollPane = new JScrollPane(panelMaterias);
 
         setContentPane(scrollPane);
+        setUndecorated(true);
         setTitle("Inscripcion de materias");
         setSize(550,350);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -114,6 +116,13 @@ public class VInscripcionMaterias extends JFrame {
                     setVisible(false);
                     dispose();
                 }
+            }
+        });
+        checkBox1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                dispose();
             }
         });
     }
