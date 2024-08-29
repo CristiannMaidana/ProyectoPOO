@@ -147,4 +147,48 @@ public class AltaDeAlumnos extends JFrame {
         textFieldUsuario.setText("");
         comboBoxCarrera.setSelectedIndex(0);
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getContrasenna() {
+        return contrasenna;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public boolean getPaginaPrincipal() {
+        return paginaPrincipal;
+    }
+
+    public boolean getModificoCarrera() {
+        return modificoCarrera;
+    }
+
+    public boolean getAltaPlanDeEstudio() {
+        return altaPlanDeEstudio;
+    }
+
+    public boolean getAltaDeCarreras() {
+        return altaDeCarreras;
+    }
+
+    public boolean getBuscoAlumnos() {
+        return buscoAlumnos;
+    }
 }
