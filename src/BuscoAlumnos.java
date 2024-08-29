@@ -14,8 +14,9 @@ public class BuscoAlumnos extends JFrame {
     private JButton inscripcionACarrerasButton;
     private JButton inscripcionAMateriasButton;
     private JButton cargoDeNotasButton;
-    private JButton consultarSiEstaGraduadoButton;
+    private JButton historialAcademicoButton;
     private JCheckBox checkBox1;
+    private JButton buscarButton;
     private boolean paginaPrincipal=false, altaDeAlumnos=false, altaDeCarreras=false, modificoCarreras=false,
             altaPlanDeEstudio=false, cargoDeNotas=false, consultarSiEstaGraduado=false, inscripcionAMaterias=false,
             inscripcionACarreras=false;
@@ -101,7 +102,7 @@ public class BuscoAlumnos extends JFrame {
                 cargoNotas.setLocationRelativeTo(null);
             }
         });
-        consultarSiEstaGraduadoButton.addMouseListener(new MouseAdapter() {
+        historialAcademicoButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
