@@ -81,15 +81,20 @@ public class AltaDeAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                creoNuevoAlumno=true;
-                dispose();
+                if (validoTodo()){
+                    creoNuevoAlumno=true;
+                    latch.countDown();
+                } else creoNuevoAlumno=false;
             }
         });
         cancelarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                limpiarTodo();
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea cancelar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    limpiarTodo();
+                }
             }
         });
 
@@ -190,5 +195,27 @@ public class AltaDeAlumnos extends JFrame {
 
     public boolean getBuscoAlumnos() {
         return buscoAlumnos;
+    }
+
+    private boolean validoTodo(){
+        String validoCarrera = (String) comboBoxCarrera.getSelectedItem();
+        if (textFieldUsuario.getText().isEmpty() || textFieldApellido.getText().isEmpty() || textFieldContrasenna.getText().isEmpty() || validoCarrera.equals("Seleccione una carrera:") || textFieldDNI.getText().isEmpty() || textFieldNombre.getText().isEmpty() || textFieldUsuario.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (!textFieldDNI.getText().matches("\\d+")) {
+            JOptionPane.showMessageDialog(null, "El dni debe ser un numero valido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            int respuesta = JOptionPane.showConfirmDialog(null, "Se va a crear al alumno: " + getNombre()+" "+getApellido(), "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(null, "Se creo al usuario: "  + getNombre()+" "+getApellido(), "Exito", JOptionPane.INFORMATION_MESSAGE);
+                //cerrar y volver a abrir la pagina? o solo limpiar?
+                limpiarTodo();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 }
