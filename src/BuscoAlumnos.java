@@ -1,6 +1,9 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.concurrent.CountDownLatch;
 
 public class BuscoAlumnos extends JFrame {
     private JPanel buscoAlumnos;
@@ -22,9 +25,12 @@ public class BuscoAlumnos extends JFrame {
             inscripcionACarreras=false;
     private AlumnosRegistrados registroAlumnos;
     private Alumnos usuario = null;
+    private DefaultListModel<String> modelDatosAlumno = new DefaultListModel<>();
 
     public BuscoAlumnos(AlumnosRegistrados registroAlumnos) {
         this.registroAlumnos = registroAlumnos;
+        listDatosAlumno.setBorder(new LineBorder(Color.BLACK, 1)); // Color y grosor del borde
+
         setUndecorated(true);
         setContentPane(buscoAlumnos);
         setSize(1000,400);
@@ -94,18 +100,42 @@ public class BuscoAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (usuario == null){
+                if (usuario == null) {
                     JOptionPane.showMessageDialog(null, "Busque a un alumno.", "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
                 else {
                     inscripcionAMaterias = true;
-                    VInscripcionMaterias inscripcionMaterias = new VInscripcionMaterias(usuario);
+                    CountDownLatch latch = new CountDownLatch(1);
+
+                    VInscripcionMaterias inscripcionMaterias = new VInscripcionMaterias(usuario, latch);
                     inscripcionMaterias.setVisible(true);
                     inscripcionMaterias.setLocationRelativeTo(null);
+
+                    // Usar SwingWorker para esperar de forma asíncrona
+                    SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                        @Override
+                        protected Void doInBackground() {
+                            try {
+                                latch.await(); // Espera de manera asíncrona
+                            } catch (InterruptedException ex) {
+                                ex.printStackTrace();
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void done() {
+                            cargoDatosAlumnos(); // Actualiza los datos después de que se cierre el frame secundario
+                        }
+                    };
+
+                    worker.execute(); // Iniciar el SwingWorker
                 }
             }
         });
+
+
         cargoDeNotasButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -147,6 +177,7 @@ public class BuscoAlumnos extends JFrame {
                     JOptionPane.showMessageDialog(null, "Alumno encontrado!", "Aviso",
                             JOptionPane.INFORMATION_MESSAGE);
                     usuario = getAlumno();
+                    cargoDatosAlumnos();
                 }else JOptionPane.showMessageDialog(null, "El DNI es incorrecto: No existe alumno.",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -156,5 +187,58 @@ public class BuscoAlumnos extends JFrame {
     private Alumnos getAlumno(){
         int dni = Integer.parseInt(textFieldDNI.getText());
         return registroAlumnos.buscoPorDNI(dni);
+    }
+
+    public boolean getPaginaPrincipa(){
+        return paginaPrincipal;
+    }
+
+    public boolean getAltaDeAlumnos(){
+        return altaDeAlumnos;
+    }
+
+    public boolean getAltaDeCarreras(){
+        return altaDeCarreras;
+    }
+
+    public boolean getModificoCarreras(){
+        return modificoCarreras;
+    }
+
+    public boolean getInscripcionACarreras(){
+        return inscripcionACarreras;
+    }
+
+    public boolean getInscripcionAMaterias(){
+        return inscripcionAMaterias;
+    }
+
+    public boolean getCargoDeNotas(){
+        return cargoDeNotas;
+    }
+
+    public boolean getAltaDePlanDeEstudio(){
+        return altaPlanDeEstudio;
+    }
+
+    public boolean getConsultoSiEstaGraduado(){
+        return consultarSiEstaGraduado;
+    }
+
+    private void cargoDatosAlumnos(){
+        modelDatosAlumno.clear();
+        modelDatosAlumno.addElement("Nombre: "+usuario.getNombre());
+        modelDatosAlumno.addElement("Legajo: "+usuario.getLegajo());
+        modelDatosAlumno.addElement("Carrera: "+usuario.getCarrera().getNombre());
+        modelDatosAlumno.addElement("Materias inscriptas: ");
+        if (usuario.materiasLlenas()){
+            for (byte i=0;i<3;i++){
+                if (usuario.getMateriasAlmacenadas(i) != null)
+                    modelDatosAlumno.addElement("   - "+usuario.getMateriasAlmacenadas(i).getNombreDeMateria());
+            }
+        }else{
+            modelDatosAlumno.addElement("No esta inscripto a ninguna materia.");
+        }
+        listDatosAlumno.setModel(modelDatosAlumno);
     }
 }
