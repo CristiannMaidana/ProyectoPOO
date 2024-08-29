@@ -18,6 +18,7 @@ public class VperfilUsuario extends JFrame{
     private JButton materiasObligatoriasButton;
     private JButton materiasOptativasButton;
     private JList listMateriasParaGraduarse;
+    private JCheckBox checkBox1;
     private boolean botonOpciones = false, masMaterias= false;
     private final DefaultListModel<String> modelAprobado = new DefaultListModel<>(), modelDesaprobado = new DefaultListModel<>();
 
@@ -29,8 +30,8 @@ public class VperfilUsuario extends JFrame{
         // Crear un borde con un color específico
         LineBorder border = new LineBorder(Color.black, 2); // Borde rojo con un grosor de 2 píxeles
         listMateriasParaGraduarse.setBorder(border);
-        setTitle("Usuario.");
-        setSize(500,700);
+        setUndecorated(true);
+        setSize(530,700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         nombreUsuario.setText(alumno.toString());
         buscoMateriasAprobadasDesaprobadas(alumno);
@@ -73,6 +74,13 @@ public class VperfilUsuario extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 cargoMateriasObligatoriasPendientes(alumno);
+            }
+        });
+        checkBox1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                dispose();
             }
         });
     }
