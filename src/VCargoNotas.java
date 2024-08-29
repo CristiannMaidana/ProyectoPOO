@@ -14,6 +14,7 @@ public class VCargoNotas extends JFrame{
     private JList listMateriasFaltaExamen;
     private JList listMateriasDesaprobadas;
     private JButton cancelarButton;
+    private JCheckBox checkBox1;
     private double notaParcial, notaExamen;
     private String nMateria;
     private final DefaultListModel<String> modelAprobado = new DefaultListModel<>(), modelExamen = new DefaultListModel<>(),modelDesaprobado = new DefaultListModel<>();
@@ -26,8 +27,9 @@ public class VCargoNotas extends JFrame{
         JScrollPane scrollPane = new JScrollPane(panelCargoNotas);
 
         setContentPane(scrollPane);
+        setUndecorated(true);
         setTitle("Ingrese notas de alumno");
-        setSize(600,450);
+        setSize(700,450);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         nombreAlumno.setText(alumno.toString());
         cargoMateriasEnCurso(alumno);
@@ -127,6 +129,13 @@ public class VCargoNotas extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 alumno.vacioMaterias();
+                dispose();
+            }
+        });
+        checkBox1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 dispose();
             }
         });
