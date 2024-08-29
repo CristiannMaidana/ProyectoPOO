@@ -16,8 +16,13 @@ public class BuscoAlumnos extends JFrame {
     private JButton cargoDeNotasButton;
     private JButton consultarSiEstaGraduadoButton;
     private JCheckBox checkBox1;
+    private boolean paginaPrincipal=false, altaDeAlumnos=false, altaDeCarreras=false, modificoCarreras=false,
+            altaPlanDeEstudio=false, cargoDeNotas=false, consultarSiEstaGraduado=false, inscripcionAMaterias=false,
+            inscripcionACarreras=false;
+    private AlumnosRegistrados registroAlumnos;
 
-    public BuscoAlumnos() {
+    public BuscoAlumnos(AlumnosRegistrados registroAlumnos) {
+        this.registroAlumnos = registroAlumnos;
         setUndecorated(true);
         setContentPane(buscoAlumnos);
         setSize(1000,400);
@@ -29,5 +34,83 @@ public class BuscoAlumnos extends JFrame {
                 dispose();
             }
         });
+        paginaPrincipalButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                paginaPrincipal=true;
+                dispose();
+            }
+        });
+        altaDeAlumnosButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                altaDeAlumnos=true;
+                dispose();
+            }
+        });
+        altaDeCarrerasButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                altaDeCarreras=true;
+                dispose();
+            }
+        });
+        altaDePlanDeButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                altaPlanDeEstudio=true;
+                dispose();
+            }
+        });
+        modificoCarreraButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                modificoCarreras=true;
+                dispose();
+            }
+        });
+        inscripcionACarrerasButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                inscripcionACarreras=true;
+                //nuevo frame
+            }
+        });
+        inscripcionAMateriasButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                inscripcionAMaterias=true;
+                VInscripcionMaterias inscripcionMaterias = new VInscripcionMaterias(getAlumno());
+                inscripcionMaterias.setVisible(true);
+                inscripcionMaterias.setLocationRelativeTo(null);
+            }
+        });
+        cargoDeNotasButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                VCargoNotas cargoNotas = new VCargoNotas(getAlumno());
+                cargoNotas.setVisible(true);
+                cargoNotas.setLocationRelativeTo(null);
+            }
+        });
+        consultarSiEstaGraduadoButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
+    }
+
+    private Alumnos getAlumno(){
+        int dni = Integer.parseInt(textFieldDNI.getText());
+        return registroAlumnos.buscoPorDNI(dni);
     }
 }
