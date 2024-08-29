@@ -1,8 +1,5 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.concurrent.CountDownLatch;
 
 public class AltaDeAlumnos extends JFrame {
@@ -23,7 +20,8 @@ public class AltaDeAlumnos extends JFrame {
     private JCheckBox checkBox1;
     private boolean paginaPrincipal=false, modificoCarrera=false, altaPlanDeEstudio=false, altaDeCarreras=false, buscoAlumnos=false, creoNuevoAlumno = false, cancelar=false;
     private CountDownLatch latch;
-
+    private String nombre="", apellido="", contrasenna="", usuario="", carrera="";
+    private int dni=0;
 
     public AltaDeAlumnos(CountDownLatch latch){
         this.latch = latch;
@@ -92,6 +90,51 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 limpiarTodo();
+            }
+        });
+
+        textFieldUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                usuario=textFieldUsuario.getText();
+            }
+        });
+        textFieldNombre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nombre=textFieldNombre.getText();
+            }
+        });
+        textFieldApellido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                apellido=textFieldApellido.getText();
+            }
+        });
+        textFieldDNI.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String valido = textFieldDNI.getText();
+                if(!valido.matches("")){
+                    dni=Integer.parseInt(valido);
+                }
+            }
+        });
+        textFieldContrasenna.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                contrasenna=textFieldContrasenna.getText();
+            }
+        });
+        comboBoxCarrera.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String valido =comboBoxCarrera.getSelectedItem().toString();
+                    if(!valido.equals("Seleccione una carrera:")){
+                        carrera=valido;
+                    }
+                }
             }
         });
     }
