@@ -26,4 +26,15 @@ public class AlumnosRegistrados {
     public void add(Alumnos alumno){
         alumnosRegistrados.add(alumno);
     }
+
+    public Alumnos buscoPorDNI(int dni){
+        Alumnos alumnoEncontrado = null, alumnoEnRegistro;
+        for (int i=0; i<alumnosRegistrados.size(); i++){
+            alumnoEnRegistro = alumnosRegistrados.get(i);
+            if (alumnoEnRegistro.getLegajo() == dni){
+                alumnoEncontrado = alumnoEnRegistro;
+            }
+        }
+        return alumnoEncontrado;
+    }
 }
