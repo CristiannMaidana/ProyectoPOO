@@ -34,6 +34,7 @@ public class AltaDeAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                latch.countDown();
                 dispose();
             }
         });
@@ -42,6 +43,7 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 paginaPrincipal=true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -50,6 +52,7 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaDeCarreras=true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -58,6 +61,7 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaPlanDeEstudio=true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -66,6 +70,7 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 buscoAlumnos=true;
+                latch.countDown();
                 dispose();
             }
         });
