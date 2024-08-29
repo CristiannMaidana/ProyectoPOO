@@ -112,4 +112,8 @@ public class Alumnos {
             materiasCursando[i]=null;
         }
     }
+
+    public int getLegajo(){
+        return legajo;
+    }
 }
