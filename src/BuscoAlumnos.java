@@ -21,6 +21,7 @@ public class BuscoAlumnos extends JFrame {
             altaPlanDeEstudio=false, cargoDeNotas=false, consultarSiEstaGraduado=false, inscripcionAMaterias=false,
             inscripcionACarreras=false;
     private AlumnosRegistrados registroAlumnos;
+    private Alumnos usuario = null;
 
     public BuscoAlumnos(AlumnosRegistrados registroAlumnos) {
         this.registroAlumnos = registroAlumnos;
@@ -79,7 +80,13 @@ public class BuscoAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                inscripcionACarreras=true;
+                if (usuario == null){
+                    JOptionPane.showMessageDialog(null, "Busque a un alumno.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    inscripcionACarreras = true;
+                }
                 //nuevo frame
             }
         });
@@ -87,25 +94,61 @@ public class BuscoAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                inscripcionAMaterias=true;
-                VInscripcionMaterias inscripcionMaterias = new VInscripcionMaterias(getAlumno());
-                inscripcionMaterias.setVisible(true);
-                inscripcionMaterias.setLocationRelativeTo(null);
+                if (usuario == null){
+                    JOptionPane.showMessageDialog(null, "Busque a un alumno.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    inscripcionAMaterias = true;
+                    VInscripcionMaterias inscripcionMaterias = new VInscripcionMaterias(usuario);
+                    inscripcionMaterias.setVisible(true);
+                    inscripcionMaterias.setLocationRelativeTo(null);
+                }
             }
         });
         cargoDeNotasButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                VCargoNotas cargoNotas = new VCargoNotas(getAlumno());
-                cargoNotas.setVisible(true);
-                cargoNotas.setLocationRelativeTo(null);
+                if (usuario == null){
+                    JOptionPane.showMessageDialog(null, "Busque a un alumno.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    VCargoNotas cargoNotas = new VCargoNotas(usuario);
+                    cargoNotas.setVisible(true);
+                    cargoNotas.setLocationRelativeTo(null);
+                }
             }
         });
         historialAcademicoButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (usuario == null){
+                    JOptionPane.showMessageDialog(null, "Busque a un alumno.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    VperfilUsuario perfilUsuario = new VperfilUsuario(usuario);
+                    perfilUsuario.setVisible(true);
+                    perfilUsuario.setLocationRelativeTo(null);
+                }
+            }
+        });
+        buscarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (textFieldDNI.getText().isEmpty() || !textFieldDNI.getText().matches("\\d+")) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un DNI.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }else if (getAlumno() != null){
+                    JOptionPane.showMessageDialog(null, "Alumno encontrado!", "Aviso",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    usuario = getAlumno();
+                }else JOptionPane.showMessageDialog(null, "El DNI es incorrecto: No existe alumno.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
