@@ -136,17 +136,6 @@ public class AltaDeAlumnos extends JFrame {
                 contrasenna=textFieldContrasenna.getText();
             }
         });
-        comboBoxCarrera.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    String valido =comboBoxCarrera.getSelectedItem().toString();
-                    if(!valido.equals("Seleccione una carrera:")){
-                        carrera=valido;
-                    }
-                }
-            }
-        });
     }
 
     private void limpiarTodo() {
@@ -203,8 +192,7 @@ public class AltaDeAlumnos extends JFrame {
     }
 
     private boolean validoTodo(){
-        String validoCarrera = (String) comboBoxCarrera.getSelectedItem();
-        if (textFieldUsuario.getText().isEmpty() || textFieldApellido.getText().isEmpty() || textFieldContrasenna.getText().isEmpty() || validoCarrera.equals("Seleccione una carrera:") || textFieldDNI.getText().isEmpty() || textFieldNombre.getText().isEmpty() || textFieldUsuario.getText().isEmpty()) {
+        if (textFieldUsuario.getText().isEmpty() || textFieldApellido.getText().isEmpty() || textFieldContrasenna.getText().isEmpty() || textFieldDNI.getText().isEmpty() || textFieldNombre.getText().isEmpty() || textFieldUsuario.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (!textFieldDNI.getText().matches("\\d+")) {
