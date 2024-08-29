@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.concurrent.CountDownLatch;
 
 public class VInscripcionMaterias extends JFrame {
     private JList listMateriasCursadas;
@@ -18,10 +19,11 @@ public class VInscripcionMaterias extends JFrame {
     private int annioElegido=0, cuatriElegido=0;
     private final Alumnos alumno;
     private boolean situacionB = false, faltaCursar = false, cancelar = false, cargoNotas = false, aceptar = false;
+    private CountDownLatch latch;
 
-
-    public VInscripcionMaterias(Alumnos alumno) {
+    public VInscripcionMaterias(Alumnos alumno, CountDownLatch latch) {
         this.alumno=alumno;
+        this.latch=latch;
         JScrollPane scrollPane = new JScrollPane(panelMaterias);
 
         setContentPane(scrollPane);
@@ -122,6 +124,7 @@ public class VInscripcionMaterias extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                latch.countDown();
                 dispose();
             }
         });
