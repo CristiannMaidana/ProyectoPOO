@@ -25,7 +25,7 @@ public class AltaDePlanDeEstudio extends JFrame {
         setContentPane(altaDePlanDeEstudio);
         setUndecorated(true);
         setLocationRelativeTo(null);
-        setSize(1000,500);
+        setSize(900,350);
 
         checkBox1.addMouseListener(new MouseAdapter() {
             @Override
