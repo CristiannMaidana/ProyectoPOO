@@ -26,9 +26,11 @@ public class BuscoAlumnos extends JFrame {
     private AlumnosRegistrados registroAlumnos;
     private Alumnos usuario = null;
     private DefaultListModel<String> modelDatosAlumno = new DefaultListModel<>();
+    private AlmacenCarreras almacenCarreras = null;
 
-    public BuscoAlumnos(AlumnosRegistrados registroAlumnos) {
+    public BuscoAlumnos(AlumnosRegistrados registroAlumnos, AlmacenCarreras almacenCarreras) {
         this.registroAlumnos = registroAlumnos;
+        this.almacenCarreras = almacenCarreras;
         listDatosAlumno.setBorder(new LineBorder(Color.BLACK, 1)); // Color y grosor del borde
 
         setUndecorated(true);
@@ -96,8 +98,32 @@ public class BuscoAlumnos extends JFrame {
                 }
                 else {
                     inscripcionACarreras = true;
+                    CountDownLatch latch = new CountDownLatch(1);
+                    InscripcionCarreras inscripcionCarreras = new InscripcionCarreras(almacenCarreras, latch);
+                    inscripcionCarreras.setVisible(true);
+                    inscripcionCarreras.setLocationRelativeTo(null);
+
+                    // Usar SwingWorker para esperar de forma asíncrona
+                    SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                        @Override
+                        protected Void doInBackground() {
+                            try {
+                                latch.await(); // Espera de manera asíncrona
+                            } catch (InterruptedException ex) {
+                                ex.printStackTrace();
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void done() {
+                            usuario.setCarrera(almacenCarreras.getCarreraPorNombre(inscripcionCarreras.getCarreraElegida()));
+                            cargoDatosAlumnos(); // Actualiza los datos después de que se cierre el frame secundario
+                        }
+                    };
+
+                    worker.execute(); // Iniciar el SwingWorker
                 }
-                //nuevo frame
             }
         });
         inscripcionAMateriasButton.addMouseListener(new MouseAdapter() {
