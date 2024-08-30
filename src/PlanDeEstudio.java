@@ -13,4 +13,6 @@ public abstract class PlanDeEstudio {
     public abstract void setAlumno(Alumnos alumno);
 
     public abstract String toString();
+
+    public abstract String getDescripion();
 }
