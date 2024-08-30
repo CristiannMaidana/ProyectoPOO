@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.concurrent.CountDownLatch;
 
 public class PaginaPrincipal extends JFrame {
     private JLabel imagenUNTDFLabel;
@@ -14,8 +15,10 @@ public class PaginaPrincipal extends JFrame {
     private JCheckBox cierroPestaña;
     private JLabel tituloPrincipal;
     private boolean altaDeAlumnos = false, altaDeCarreras = false, altaDePlanDeEstudio = false, buscoAlumnos = false, modificoCarrera = false;
+    private CountDownLatch latch;
 
-    public PaginaPrincipal() {
+    public PaginaPrincipal(CountDownLatch latch) {
+        this.latch = latch;
         setUndecorated(true);
         setContentPane(paginaPrincipal);
         setSize(850,400);
@@ -25,6 +28,7 @@ public class PaginaPrincipal extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaDeAlumnos = true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -33,6 +37,7 @@ public class PaginaPrincipal extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaDeCarreras = true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -41,6 +46,7 @@ public class PaginaPrincipal extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaDePlanDeEstudio = true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -49,6 +55,7 @@ public class PaginaPrincipal extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 buscoAlumnos = true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -57,6 +64,7 @@ public class PaginaPrincipal extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 modificoCarrera = true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -64,6 +72,7 @@ public class PaginaPrincipal extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                latch.countDown();
                 dispose();
             }
         });
