@@ -47,7 +47,7 @@ public class AltaDePlanDeEstudio extends JFrame {
                 planDeEstudio = (String) comboBoxPlanDeEstudio.getSelectedItem();
                 if (!planDeEstudio.equals("Plan de Estudio") && !planDeEstudio.isEmpty()) {
                     cargoCarreras();
-                    descripcionPlanDeEstudio.setText("El plan de estudio es: "+descripcionPlan());
+                    cargoDescripcionPlanDeEstudio();
                 }
             }
         });
@@ -57,7 +57,7 @@ public class AltaDePlanDeEstudio extends JFrame {
                 super.mouseClicked(e);
                 int index = listDeCarreras.getSelectedIndex();
                 String nMateria = (String) listDeCarreras.getModel().getElementAt(index);
-                nombreDeCarreraElegida.setText(nMateria);
+                nombreDeCarreraElegida.setText("La carrera para asignarle el plan de estudio es: "+nMateria);
             }
         });
         paginaPrincipalButton.addMouseListener(new MouseAdapter() {
@@ -100,6 +100,7 @@ public class AltaDePlanDeEstudio extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                limpiarTodo();
             }
         });
     }
@@ -122,11 +123,64 @@ public class AltaDePlanDeEstudio extends JFrame {
     }
 
     private String descripcionPlan(){
+        String texto = "";
         switch (planDeEstudio){
-            case "Plan de Estudio 'A'": {
-                clasePlanDeEstudio = new PlanDeEstudioA();
-                return clasePlanDeEstudio.getDescripion();
+            case "Plan de estudio 'A'.": {
+                clasePlanDeEstudio = new PlanDeEstudioA(null);
+                texto =  clasePlanDeEstudio.getDescripion();
+                break;
+            }
+            case "Plan de estudio 'B'.": {
+                clasePlanDeEstudio = new PlanDeEstudioB(null);
+                texto =  clasePlanDeEstudio.getDescripion();
+                break;
+            }
+            case "Plan de estudio 'C'.": {
+                clasePlanDeEstudio = new PlanDeEstudioC(null, null);
+                texto = clasePlanDeEstudio.getDescripion();
+                break;
+            }
+            case "Plan de estudio 'D'.": {
+                clasePlanDeEstudio = new PlanDeEstudioD(null, null);
+                texto = clasePlanDeEstudio.getDescripion();
+                break;
+            }
+            case "Plan de estudio 'E'.": {
+                clasePlanDeEstudio = new PlanDeEstudioE(null, null);
+                texto = clasePlanDeEstudio.getDescripion();
+                break;
             }
         }
+        return texto;
+    }
+
+    private void cargoDescripcionPlanDeEstudio(){
+        String texto = descripcionPlan();
+        int maxLineLength = 100; // Longitud máxima de caracteres por línea
+
+        String[] words = texto.split(" ");
+        StringBuilder formattedText = new StringBuilder("<html>");
+        int lineLength = 0;
+
+        for (String word : words) {
+            if (lineLength + word.length() > maxLineLength) {
+                formattedText.append("<br>");
+                lineLength = 0;
+            }
+            formattedText.append(word).append(" ");
+            lineLength += word.length() + 1; // +1 por el espacio
+        }
+
+        formattedText.append("</html>");
+        descripcionPlanDeEstudio.setText(formattedText.toString());
+
+    }
+
+    private void limpiarTodo(){
+        DefaultListModel<String> model = new DefaultListModel<>();
+        comboBoxPlanDeEstudio.setSelectedIndex(0);
+        listDeCarreras.setModel(model);
+        nombreDeCarreraElegida.setText("");
+        descripcionPlanDeEstudio.setText("");
     }
 }
