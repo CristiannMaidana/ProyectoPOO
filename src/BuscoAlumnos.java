@@ -134,6 +134,10 @@ public class BuscoAlumnos extends JFrame {
                     JOptionPane.showMessageDialog(null, "Busque a un alumno.", "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
+                else if (usuario.getCarrera() == null){
+                    JOptionPane.showMessageDialog(null, "Debe estar inscripto a una carrera.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     inscripcionAMaterias = true;
                     CountDownLatch latch = new CountDownLatch(1);
@@ -212,6 +216,10 @@ public class BuscoAlumnos extends JFrame {
                     JOptionPane.showMessageDialog(null, "Busque a un alumno.", "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
+                else if (usuario.getCarrera() == null){
+                    JOptionPane.showMessageDialog(null, "Debe estar inscripto a una carrera.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     VperfilUsuario perfilUsuario = new VperfilUsuario(usuario);
                     perfilUsuario.setVisible(true);
@@ -284,9 +292,14 @@ public class BuscoAlumnos extends JFrame {
 
     private void cargoDatosAlumnos(){
         modelDatosAlumno.clear();
-        modelDatosAlumno.addElement("Nombre: "+usuario.getNombre());
-        modelDatosAlumno.addElement("Legajo: "+usuario.getLegajo());
-        modelDatosAlumno.addElement("Carrera: "+usuario.getCarrera().getNombre());
+        if (!usuario.getNombre().isEmpty())
+            modelDatosAlumno.addElement("Nombre: "+usuario.getNombre());
+        if (usuario.getLegajo() > 0)
+            modelDatosAlumno.addElement("Legajo: "+usuario.getLegajo());
+        if (usuario.getCarrera() != null)
+            modelDatosAlumno.addElement("Carrera: "+usuario.getCarrera().getNombre());
+        else
+            modelDatosAlumno.addElement("Carrera: No esta inscripto a ninguna carrera.");
         modelDatosAlumno.addElement("Materias inscriptas: ");
         if (usuario.materiasLlenas()){
             for (byte i=0;i<3;i++){
