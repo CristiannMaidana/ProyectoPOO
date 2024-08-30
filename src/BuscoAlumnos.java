@@ -144,6 +144,10 @@ public class BuscoAlumnos extends JFrame {
                     JOptionPane.showMessageDialog(null, "Busque a un alumno.", "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
+                else if (!usuario.materiasLlenas()){
+                    JOptionPane.showMessageDialog(null, "Necesita estar inscripto a alguna " +
+                            "materia.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     CountDownLatch latch = new CountDownLatch(1);
                     VCargoNotas cargoNotas = new VCargoNotas(usuario, latch);
