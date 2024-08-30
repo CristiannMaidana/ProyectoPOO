@@ -108,6 +108,7 @@ public class AltaDePlanDeEstudio extends JFrame {
                     clasePlanDeEstudio.setCarrera(materiaElegida);
                     JOptionPane.showMessageDialog(null, "Se asigno correctamente la carrera al" +
                             " plan de estudio.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    limpiarTodo();
                 }
             }
         });
@@ -121,7 +122,8 @@ public class AltaDePlanDeEstudio extends JFrame {
                             "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else {
-                    int respuesta = JOptionPane.showConfirmDialog(null, "¿Cancelar el alta de plan de estudio?", "Aviso", JOptionPane.YES_NO_OPTION);
+                    int respuesta = JOptionPane.showConfirmDialog(null, "¿Cancelar el alta del" +
+                            " plan de estudio?", "Aviso", JOptionPane.YES_NO_OPTION);
                     if (respuesta == JOptionPane.YES_OPTION) {
                         limpiarTodo();
                     }
