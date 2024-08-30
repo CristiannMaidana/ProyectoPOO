@@ -27,4 +27,9 @@ public class PlanDeEstudioA extends PlanDeEstudio{
     public String toString() {
         return "Plan de estudio ¨A¨";
     }
+
+    @Override
+    public String getDescripion() {
+        return "En el plan de estudo 'A', tiene que tener aprobadas las cursadas de las correlativas para poder inscribirse.";
+    }
 }

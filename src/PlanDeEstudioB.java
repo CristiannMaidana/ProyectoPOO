@@ -27,5 +27,10 @@ public class PlanDeEstudioB extends PlanDeEstudio{
     public String toString() {
         return "Plan de estudio ¨B¨";
     }
+
+    @Override
+    public String getDescripion() {
+        return "En el plan de etudio 'B', tiene que tener aprobado los finales de las correlativas para poder inscribirse.";
+    }
 }
 

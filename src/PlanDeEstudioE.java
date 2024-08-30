@@ -34,6 +34,12 @@ public class PlanDeEstudioE extends PlanDeEstudio{
         return "Plan de estudio ¨E¨";
     }
 
+    @Override
+    public String getDescripion() {
+        return "El plan de estudio 'E', tiene que tener aprobado los finales de las correlativas y los finales de todas" +
+                " las materias de 3 cuatrimestres previos para poder inscribirse.";
+    }
+
     public boolean aproboLaCursadaDeLasCorrelativas (Materias materias, boolean aprobo1){
         if (materias.tieneCorrelativa){
             if (!materias.getCorrelativa().examenFinal){

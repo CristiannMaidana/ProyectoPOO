@@ -32,6 +32,12 @@ public class PlanDeEstudioD extends PlanDeEstudio {
         return "Plan de estudio ¨D¨";
     }
 
+    @Override
+    public String getDescripion() {
+        return "El plan de estudio 'D', tiene que tener aprobado las cursadas de las correlativas y los finales de todas" +
+                " las materias de 3 cuatrimestres previos al que se quiere anotar para poder inscribirse";
+    }
+
     public boolean aproboLaCursadaDeLasCorrelativas (Materias materias, boolean aprobo1){
         if (materias.tieneCorrelativa) {
             if (!materias.getCorrelativa().cursadaAprobada) {
