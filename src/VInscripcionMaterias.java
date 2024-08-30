@@ -92,6 +92,7 @@ public class VInscripcionMaterias extends JFrame {
                 super.mouseClicked(e);
                 aceptar = true;
                 setVisible(false);
+                latch.countDown();
                 dispose();
             }
         });
@@ -101,23 +102,8 @@ public class VInscripcionMaterias extends JFrame {
                 super.mouseClicked(e);
                 setVisible(false);
                 cancelar = true;
+                latch.countDown();
                 dispose();
-            }
-        });
-        cargoNotasButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                if (!alumno.materiasLlenas()){
-                    JOptionPane.showMessageDialog(null, "Debe cargar 3 materias para poder " +
-                            "cargar las notas.", "Error", JOptionPane.ERROR_MESSAGE);
-                    cargoNotas = false;
-                }
-                else {
-                    cargoNotas = true;
-                    setVisible(false);
-                    dispose();
-                }
             }
         });
         checkBox1.addMouseListener(new MouseAdapter() {
