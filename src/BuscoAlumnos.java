@@ -145,9 +145,30 @@ public class BuscoAlumnos extends JFrame {
                             JOptionPane.ERROR_MESSAGE);
                 }
                 else {
-                    VCargoNotas cargoNotas = new VCargoNotas(usuario);
+                    CountDownLatch latch = new CountDownLatch(1);
+                    VCargoNotas cargoNotas = new VCargoNotas(usuario, latch);
                     cargoNotas.setVisible(true);
                     cargoNotas.setLocationRelativeTo(null);
+
+                    // Usar SwingWorker para esperar de forma asíncrona
+                    SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                        @Override
+                        protected Void doInBackground() {
+                            try {
+                                latch.await(); // Espera de manera asíncrona
+                            } catch (InterruptedException ex) {
+                                ex.printStackTrace();
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void done() {
+                            cargoDatosAlumnos(); // Actualiza los datos después de que se cierre el frame secundario
+                        }
+                    };
+
+                    worker.execute(); // Iniciar el SwingWorker
                 }
             }
         });
