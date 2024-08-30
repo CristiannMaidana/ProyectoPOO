@@ -100,7 +100,17 @@ public class AltaDePlanDeEstudio extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                limpiarTodo();
+                String validoPlanDeEstudio = (String) comboBoxPlanDeEstudio.getSelectedItem();
+                if (validoPlanDeEstudio.equals("Plan de Estudio:")) {
+                    JOptionPane.showMessageDialog(null, "No hay nada que cancelar.",
+                            "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    int respuesta = JOptionPane.showConfirmDialog(null, "¿Cancelar el alta de plan de estudio?", "Aviso", JOptionPane.YES_NO_OPTION);
+                    if (respuesta == JOptionPane.YES_OPTION) {
+                        limpiarTodo();
+                    }
+                }
             }
         });
     }
