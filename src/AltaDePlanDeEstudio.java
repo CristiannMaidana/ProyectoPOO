@@ -23,6 +23,7 @@ public class AltaDePlanDeEstudio extends JFrame {
     private AlmacenCarreras almacenCarreras;
     private String planDeEstudio;
     private PlanDeEstudio clasePlanDeEstudio;
+    private Carreras materiaElegida;
 
     public AltaDePlanDeEstudio(AlmacenCarreras almacenCarreras) {
         listDeCarreras.setBorder(new LineBorder(Color.BLACK, 1)); // Color y grosor del borde
@@ -57,6 +58,7 @@ public class AltaDePlanDeEstudio extends JFrame {
                 super.mouseClicked(e);
                 int index = listDeCarreras.getSelectedIndex();
                 String nMateria = (String) listDeCarreras.getModel().getElementAt(index);
+                materiaElegida=almacenCarreras.getCarreraPorNombre(nMateria);
                 nombreDeCarreraElegida.setText("La carrera para asignarle el plan de estudio es: "+nMateria);
             }
         });
@@ -94,6 +96,19 @@ public class AltaDePlanDeEstudio extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (clasePlanDeEstudio == null) {
+                    JOptionPane.showMessageDialog(null, "Elija un plan de estudio.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else if (materiaElegida == null){
+                    JOptionPane.showMessageDialog(null, "Elija una carrera para asignarle el" +
+                            " plan de estudio.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    clasePlanDeEstudio.setCarrera(materiaElegida);
+                    JOptionPane.showMessageDialog(null, "Se asigno correctamente la carrera al" +
+                            " plan de estudio.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
         cancelarButton.addMouseListener(new MouseAdapter() {
