@@ -102,37 +102,65 @@ public class AltaDeAlumnos extends JFrame {
                 }
             }
         });
-
-        textFieldUsuario.addActionListener(new ActionListener() {
+        textFieldUsuario.addFocusListener(new FocusAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
                 usuario=textFieldUsuario.getText();
             }
         });
-        textFieldNombre.addActionListener(new ActionListener() {
+        textFieldNombre.addFocusListener(new FocusAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
                 nombre=textFieldNombre.getText();
             }
         });
-        textFieldApellido.addActionListener(new ActionListener() {
+        textFieldApellido.addFocusListener(new FocusAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
                 apellido=textFieldApellido.getText();
             }
         });
-        textFieldDNI.addActionListener(new ActionListener() {
+        textFieldDNI.addFocusListener(new FocusAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
                 String valido = textFieldDNI.getText();
-                if(!valido.matches("")){
+                if (!valido.matches(""))
                     dni=Integer.parseInt(valido);
-                }
             }
         });
-        textFieldContrasenna.addActionListener(new ActionListener() {
+        textFieldContrasenna.addFocusListener(new FocusAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
                 contrasenna=textFieldContrasenna.getText();
             }
         });
@@ -144,7 +172,6 @@ public class AltaDeAlumnos extends JFrame {
         textFieldApellido.setText("");
         textFieldNombre.setText("");
         textFieldUsuario.setText("");
-        comboBoxCarrera.setSelectedIndex(0);
     }
 
     public String getNombre() {
