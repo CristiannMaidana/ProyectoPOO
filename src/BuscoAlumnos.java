@@ -90,6 +90,10 @@ public class BuscoAlumnos extends JFrame {
                     JOptionPane.showMessageDialog(null, "Busque a un alumno.", "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
+                else if (usuario.getCarrera() !=null){
+                    JOptionPane.showMessageDialog(null, "Ya esta inscripto a una carrera.",
+                            "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }
                 else {
                     inscripcionACarreras = true;
                 }
@@ -134,8 +138,6 @@ public class BuscoAlumnos extends JFrame {
                 }
             }
         });
-
-
         cargoDeNotasButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -198,13 +200,17 @@ public class BuscoAlumnos extends JFrame {
                 if (textFieldDNI.getText().isEmpty() || !textFieldDNI.getText().matches("\\d+")) {
                     JOptionPane.showMessageDialog(null, "Ingrese un DNI.", "Error",
                             JOptionPane.ERROR_MESSAGE);
-                }else if (getAlumno() != null){
+                }
+                else if (getAlumno() != null){
                     JOptionPane.showMessageDialog(null, "Alumno encontrado!", "Aviso",
                             JOptionPane.INFORMATION_MESSAGE);
                     usuario = getAlumno();
                     cargoDatosAlumnos();
-                }else JOptionPane.showMessageDialog(null, "El DNI es incorrecto: No existe alumno.",
-                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "El DNI es incorrecto: No existe alumno.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
