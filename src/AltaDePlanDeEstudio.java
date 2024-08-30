@@ -243,11 +243,11 @@ public class AltaDePlanDeEstudio extends JFrame {
         return altaDeCarreras;
     }
 
-    private boolean getBuscoAlumnos(){
+    public boolean getBuscoAlumnos(){
         return buscoAlumnos;
     }
 
-    private boolean getModificoCarrera(){
+    public boolean getModificoCarrera(){
         return modificoCarreras;
     }
 
