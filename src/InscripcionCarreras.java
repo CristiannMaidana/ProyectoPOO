@@ -72,7 +72,6 @@ public class InscripcionCarreras extends JFrame {
 
     private void cargoCarreras(){
         opcionesCarrerasComboBox.removeAllItems();
-        opcionesCarrerasComboBox.addItem("prueba");
         for(int i= 0; i<almacenCarreras.getCantidadCarreras(); i++){
             opcionesCarrerasComboBox.addItem(almacenCarreras.getCarrera(i).getNombre());
         }
