@@ -27,10 +27,12 @@ public class BuscoAlumnos extends JFrame {
     private Alumnos usuario = null;
     private DefaultListModel<String> modelDatosAlumno = new DefaultListModel<>();
     private AlmacenCarreras almacenCarreras = null;
+    private CountDownLatch latch;
 
-    public BuscoAlumnos(AlumnosRegistrados registroAlumnos, AlmacenCarreras almacenCarreras) {
+    public BuscoAlumnos(AlumnosRegistrados registroAlumnos, AlmacenCarreras almacenCarreras, CountDownLatch latch) {
         this.registroAlumnos = registroAlumnos;
         this.almacenCarreras = almacenCarreras;
+        this.latch = latch;
         listDatosAlumno.setBorder(new LineBorder(Color.BLACK, 1)); // Color y grosor del borde
 
         setUndecorated(true);
@@ -41,6 +43,7 @@ public class BuscoAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                latch.countDown();
                 dispose();
             }
         });
@@ -49,6 +52,7 @@ public class BuscoAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 paginaPrincipal=true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -57,6 +61,7 @@ public class BuscoAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaDeAlumnos=true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -65,6 +70,7 @@ public class BuscoAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaDeCarreras=true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -73,6 +79,7 @@ public class BuscoAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaPlanDeEstudio=true;
+                latch.countDown();
                 dispose();
             }
         });
@@ -81,6 +88,7 @@ public class BuscoAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 modificoCarreras=true;
+                latch.countDown();
                 dispose();
             }
         });
