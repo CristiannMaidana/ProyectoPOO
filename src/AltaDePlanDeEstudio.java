@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.concurrent.CountDownLatch;
 
 public class AltaDePlanDeEstudio extends JFrame {
     private JPanel altaDePlanDeEstudio;
@@ -24,10 +25,13 @@ public class AltaDePlanDeEstudio extends JFrame {
     private String planDeEstudio;
     private PlanDeEstudio clasePlanDeEstudio;
     private Carreras materiaElegida;
+    private boolean paginaPrincipal=false, altaDeAlumnos=false, altaDeCarreras=false, buscoAlumnos=false, modificoCarreras=false, altaPlanDeEstudio = false;
+    private CountDownLatch latch;
 
-    public AltaDePlanDeEstudio(AlmacenCarreras almacenCarreras) {
+    public AltaDePlanDeEstudio(AlmacenCarreras almacenCarreras, CountDownLatch latch) {
         listDeCarreras.setBorder(new LineBorder(Color.BLACK, 1)); // Color y grosor del borde
         this.almacenCarreras = almacenCarreras;
+        this.latch = latch;
 
         setContentPane(altaDePlanDeEstudio);
         setUndecorated(true);
@@ -39,6 +43,7 @@ public class AltaDePlanDeEstudio extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                latch.countDown();
                 dispose();
             }
         });
@@ -66,30 +71,45 @@ public class AltaDePlanDeEstudio extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                paginaPrincipal = true;
+                latch.countDown();
+                dispose();
             }
         });
         altaDeAlumnosButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                altaDeAlumnos = true;
+                latch.countDown();
+                dispose();
             }
         });
         altaDeCarrerasButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                altaDeCarreras = true;
+                latch.countDown();
+                dispose();
             }
         });
         buscoAlumnosButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                buscoAlumnos = true;
+                latch.countDown();
+                dispose();
             }
         });
         modificoCarreraButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                modificoCarreras = true;
+                latch.countDown();
+                dispose();
             }
         });
         asignarCarreraButton.addMouseListener(new MouseAdapter() {
@@ -209,5 +229,29 @@ public class AltaDePlanDeEstudio extends JFrame {
         listDeCarreras.setModel(model);
         nombreDeCarreraElegida.setText("");
         descripcionPlanDeEstudio.setText("");
+    }
+
+    public boolean getPaginaPrincipal(){
+        return paginaPrincipal;
+    }
+
+    public boolean getAltaDeAlumnos(){
+        return altaDeAlumnos;
+    }
+
+    public boolean getAltaDeCarreras(){
+        return altaDeCarreras;
+    }
+
+    private boolean getBuscoAlumnos(){
+        return buscoAlumnos;
+    }
+
+    private boolean getModificoCarrera(){
+        return modificoCarreras;
+    }
+
+    public boolean getAltaDeEstudios(){
+        return altaPlanDeEstudio;
     }
 }
