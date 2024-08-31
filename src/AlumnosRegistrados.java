@@ -37,4 +37,12 @@ public class AlumnosRegistrados {
         }
         return alumnoEncontrado;
     }
+
+    public int getSize(){
+        return alumnosRegistrados.size();
+    }
+
+    public Alumnos getAlumno(int i){
+        return alumnosRegistrados.get(i);
+    }
 }
