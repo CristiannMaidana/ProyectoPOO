@@ -314,25 +314,25 @@
               <text value="Cargo notas"/>
             </properties>
           </component>
-          <component id="f0c7" class="javax.swing.JButton" binding="cargarMasMateriasButton">
-            <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-12790785"/>
-              <foreground color="-854792"/>
-              <text value="Cargar mas materias"/>
-            </properties>
-          </component>
           <component id="d4627" class="javax.swing.JButton" binding="cancelarButton" default-binding="true">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-12790785"/>
               <font name="Arial" size="12"/>
               <foreground color="-854792"/>
               <text value="Cancelar"/>
+            </properties>
+          </component>
+          <component id="f0c7" class="javax.swing.JButton" binding="aceptarButton">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12790785"/>
+              <foreground color="-854792"/>
+              <text value="Aceptar"/>
             </properties>
           </component>
         </children>

@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.concurrent.CountDownLatch;
 
 public class VCargoNotas extends JFrame{
     private JLabel nombreAlumno;
@@ -10,7 +11,7 @@ public class VCargoNotas extends JFrame{
     private JList listMateriasAprobadas;
     private JPanel panelCargoNotas;
     private JButton cargoNotasButton;
-    private JButton cargarMasMateriasButton;
+    private JButton aceptarButton;
     private JList listMateriasFaltaExamen;
     private JList listMateriasDesaprobadas;
     private JButton cancelarButton;
@@ -20,9 +21,11 @@ public class VCargoNotas extends JFrame{
     private final DefaultListModel<String> modelAprobado = new DefaultListModel<>(), modelExamen = new DefaultListModel<>(),modelDesaprobado = new DefaultListModel<>();
     private final Alumnos alumno;
     private boolean opciones, masMaterias;
+    private CountDownLatch latch;
 
-    public VCargoNotas(Alumnos alumno){
+    public VCargoNotas(Alumnos alumno, CountDownLatch latch){
         this.alumno=alumno;
+        this.latch=latch;
         cargoMateriasAprobadasAnteriores(modelAprobado);
         JScrollPane scrollPane = new JScrollPane(panelCargoNotas);
 
@@ -97,13 +100,14 @@ public class VCargoNotas extends JFrame{
                     opcionesNotaExamen(opciones);
             }
         });
-        cargarMasMateriasButton.addMouseListener(new MouseAdapter() {
+        aceptarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 DefaultListModel<String> model = (DefaultListModel<String>) listMateriasParaSeleccionar.getModel();
                 if (model.isEmpty()) {
                     masMaterias = true;
+                    latch.countDown();
                     dispose();
                 }
                 else {
@@ -115,20 +119,21 @@ public class VCargoNotas extends JFrame{
                 }
             }
         });
-            textFieldNotaExamen.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusLost(FocusEvent e) {
-                    super.focusLost(e);
-                    if (textFieldNotaExamen.isEnabled() && !textFieldNotaExamen.getText().isEmpty()) {
-                        notaExamen = Integer.parseInt(textFieldNotaExamen.getText());
-                    }
+        textFieldNotaExamen.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                if (textFieldNotaExamen.isEnabled() && !textFieldNotaExamen.getText().isEmpty()) {
+                    notaExamen = Integer.parseInt(textFieldNotaExamen.getText());
                 }
-            });
+            }
+        });
         cancelarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 alumno.vacioMaterias();
+                latch.countDown();
                 dispose();
             }
         });
@@ -136,6 +141,7 @@ public class VCargoNotas extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                latch.countDown();
                 dispose();
             }
         });
