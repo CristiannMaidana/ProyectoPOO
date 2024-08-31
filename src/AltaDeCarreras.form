@@ -101,7 +101,8 @@
             <properties>
               <background color="-16777216"/>
               <font name="Arial" size="16"/>
-              <text value="Sistema de soporte universitario"/>
+              <foreground color="-16777216"/>
+              <text value="Alta de carreras"/>
             </properties>
           </component>
           <component id="5b117" class="javax.swing.JButton" binding="altaDeCarrerasButton" default-binding="true">
@@ -315,6 +316,11 @@
       <vspacer id="d0b3f">
         <constraints>
           <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="7ec0c">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
     </children>
