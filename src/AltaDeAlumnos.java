@@ -18,6 +18,7 @@ public class AltaDeAlumnos extends JFrame {
     private JButton crearNuevoAlumnoButton;
     private JButton cancelarButton;
     private JCheckBox checkBox1;
+    private JButton altaDeAlumnosButton;
     private boolean paginaPrincipal=false, modificoCarrera=false, altaPlanDeEstudio=false, altaDeCarreras=false,
             buscoAlumnos=false, BaltaDeAlumnos=true, creoNuevoAlumno = false;
     private CountDownLatch latch;
@@ -25,11 +26,10 @@ public class AltaDeAlumnos extends JFrame {
     private int dni=0;
 
     public AltaDeAlumnos(){
-
         setUndecorated(true);
         setContentPane(altaDeAlumnos);
         setLocationRelativeTo(null);
-        setSize(1000,550);
+        setSize(1100,550);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         checkBox1.addMouseListener(new MouseAdapter() {
             @Override
@@ -176,6 +176,14 @@ public class AltaDeAlumnos extends JFrame {
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                 contrasenna=textFieldContrasenna.getText();
+            }
+        });
+        altaDeAlumnosButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(null, "Ya se encuentra en la pagina alta de alumnos.",
+                        "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
