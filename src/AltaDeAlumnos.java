@@ -111,9 +111,17 @@ public class AltaDeAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea cancelar?", "Confirmación", JOptionPane.YES_NO_OPTION);
-                if (respuesta == JOptionPane.YES_OPTION) {
-                    limpiarTodo();
+                if (textFieldUsuario.getText().isEmpty() && textFieldApellido.getText().isEmpty() &&
+                        passwordFieldContrasenna.getText().isEmpty() && textFieldDNI.getText().isEmpty() &&
+                        textFieldNombre.getText().isEmpty() && textFieldUsuario.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "No hay nada que cancelar.",
+                            "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea cancelar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                    if (respuesta == JOptionPane.YES_OPTION) {
+                        limpiarTodo();
+                    }
                 }
             }
         });
