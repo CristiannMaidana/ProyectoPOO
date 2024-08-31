@@ -10,7 +10,6 @@ public class AltaDeAlumnos extends JFrame {
     private JButton altaDeCarrerasButton;
     private JButton buscoAlumnosButton;
     private JComboBox comboBoxCarrera;
-    private JTextField textFieldContrasenna;
     private JTextField textFieldDNI;
     private JTextField textFieldApellido;
     private JTextField textFieldNombre;
@@ -19,6 +18,7 @@ public class AltaDeAlumnos extends JFrame {
     private JButton cancelarButton;
     private JCheckBox checkBox1;
     private JButton altaDeAlumnosButton;
+    private JPasswordField passwordFieldContrasenna;
     private boolean paginaPrincipal=false, modificoCarrera=false, altaPlanDeEstudio=false, altaDeCarreras=false,
             buscoAlumnos=false, BaltaDeAlumnos=true, creoNuevoAlumno = false;
     private CountDownLatch latch;
@@ -162,20 +162,10 @@ public class AltaDeAlumnos extends JFrame {
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                 String valido = textFieldDNI.getText();
-                if (!valido.matches(""))
+                if (valido.matches("\\d+"))
                     dni=Integer.parseInt(valido);
-            }
-        });
-        textFieldContrasenna.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                contrasenna=textFieldContrasenna.getText();
+                else
+                    dni=0;
             }
         });
         altaDeAlumnosButton.addMouseListener(new MouseAdapter() {
@@ -186,10 +176,22 @@ public class AltaDeAlumnos extends JFrame {
                         "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         });
+        passwordFieldContrasenna.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                contrasenna=passwordFieldContrasenna.getText();
+            }
+        });
     }
 
     private void limpiarTodo() {
-        textFieldContrasenna.setText("");
+        passwordFieldContrasenna.setText("");
         textFieldDNI.setText("");
         textFieldApellido.setText("");
         textFieldNombre.setText("");
@@ -249,14 +251,27 @@ public class AltaDeAlumnos extends JFrame {
     }
 
     private boolean validoTodo(){
-        if (textFieldUsuario.getText().isEmpty() || textFieldApellido.getText().isEmpty() || textFieldContrasenna.getText().isEmpty() || textFieldDNI.getText().isEmpty() || textFieldNombre.getText().isEmpty() || textFieldUsuario.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (textFieldUsuario.getText().isEmpty() || textFieldApellido.getText().isEmpty() ||
+                passwordFieldContrasenna.getText().isEmpty() || textFieldDNI.getText().isEmpty() ||
+                textFieldNombre.getText().isEmpty() || textFieldUsuario.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (!textFieldNombre.getText().matches("[a-zA-Z]*")) {
+            JOptionPane.showMessageDialog(null, "Tiene que ingresar un nombre valido",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (!textFieldApellido.getText().matches("[a-zA-Z]*")) {
+            JOptionPane.showMessageDialog(null, "Tiene que ingresar un apellido valido.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (!textFieldDNI.getText().matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "El dni debe ser un numero valido.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El dni debe ser un numero valido.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            int respuesta = JOptionPane.showConfirmDialog(null, "Se va a crear al alumno: " + getNombre()+" "+getApellido(), "Confirmación", JOptionPane.YES_NO_OPTION);
+            int respuesta = JOptionPane.showConfirmDialog(null, "Se va a crear al alumno: " +
+                    getNombre()+" "+getApellido(), "Confirmación", JOptionPane.YES_NO_OPTION);
             if (respuesta == JOptionPane.YES_OPTION) {
                 JOptionPane.showMessageDialog(null, "Se creo al usuario: "  + getNombre()+" "+getApellido(), "Exito", JOptionPane.INFORMATION_MESSAGE);
                 //cerrar y volver a abrir la pagina? o solo limpiar?
