@@ -22,7 +22,7 @@ public class BuscoAlumnos extends JFrame {
     private JButton buscarButton;
     private boolean paginaPrincipal=false, altaDeAlumnos=false, altaDeCarreras=false, modificoCarreras=false,
             altaPlanDeEstudio=false, cargoDeNotas=false, consultarSiEstaGraduado=false, inscripcionAMaterias=false,
-            inscripcionACarreras=false;
+            inscripcionACarreras=false, BbuscoAlumnos=false;
     private AlumnosRegistrados registroAlumnos;
     private Alumnos usuario = null;
     private DefaultListModel<String> modelDatosAlumno = new DefaultListModel<>();
@@ -318,5 +318,26 @@ public class BuscoAlumnos extends JFrame {
             modelDatosAlumno.addElement("No esta inscripto a ninguna materia.");
         }
         listDatosAlumno.setModel(modelDatosAlumno);
+    }
+
+
+    public void setAltaDeAlumnos(boolean v) {
+        this.altaDeAlumnos = v;
+    }
+
+    public void setAltaDeCarreras(boolean v) {
+        this.altaDeCarreras = v;
+    }
+
+    public void setAltaPlanDeEstudio(boolean v) {
+        this.altaPlanDeEstudio = v;
+    }
+
+    public void setBuscoAlumnos(boolean v) {
+        this.BbuscoAlumnos = v;
+    }
+
+    public void setPaginaPrincipal(boolean v){
+        this.paginaPrincipal=v;
     }
 }
