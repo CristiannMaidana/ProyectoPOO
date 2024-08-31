@@ -18,13 +18,13 @@ public class AltaDeCarreras extends JFrame {
     private JCheckBox checkBox1;
     private JButton crearButton;
     private JButton cancelarButton;
-    private boolean paginaPrincipal= false, altaDeAlumnos = false, modificoCarrera = false, buscoAlumnos = false, altaDePlanDe = false, nuevaCarrera=true;
+    private boolean paginaPrincipal= false, altaDeAlumnos = false, modificoCarrera = false, buscoAlumnos = false,
+            altaDePlanDe = false, nuevaCarrera=false, BaltaDeCarreras=false;
     private String nombreDeCarrera="";
     private int cantMatOb=0, cantMatOp=0, cuatriCarrera=0, annioCarrera=0;
     private CountDownLatch latch;
 
-    public AltaDeCarreras(CountDownLatch latch) {
-        this.latch = latch;
+    public AltaDeCarreras() {
         setUndecorated(true);
         setContentPane(altaDeCarreras);
         setSize(1250,500);
@@ -34,6 +34,7 @@ public class AltaDeCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 nuevaCarrera = false;
+                BaltaDeCarreras=false;
                 latch.countDown();
                 dispose();
             }
@@ -43,6 +44,8 @@ public class AltaDeCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 paginaPrincipal = true;
+                nuevaCarrera = false;
+                BaltaDeCarreras=false;
                 latch.countDown();
                 dispose();
             }
@@ -52,6 +55,8 @@ public class AltaDeCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaDeAlumnos = true;
+                nuevaCarrera = false;
+                BaltaDeCarreras=false;
                 latch.countDown();
                 dispose();
             }
@@ -61,6 +66,8 @@ public class AltaDeCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaDePlanDe = true;
+                nuevaCarrera = false;
+                BaltaDeCarreras=false;
                 latch.countDown();
                 dispose();
             }
@@ -70,6 +77,8 @@ public class AltaDeCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 buscoAlumnos = true;
+                nuevaCarrera = false;
+                BaltaDeCarreras=false;
                 latch.countDown();
                 dispose();
             }
@@ -79,6 +88,8 @@ public class AltaDeCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 modificoCarrera = true;
+                nuevaCarrera = false;
+                BaltaDeCarreras=false;
                 latch.countDown();
                 dispose();
             }
@@ -156,7 +167,9 @@ public class AltaDeCarreras extends JFrame {
                     String cuatri = (String) cantidadCuatri.getSelectedItem();
                     if (!cuatri.equals("Cantidad de cuatrimestres:")) {
                         cuatri = cuatri.substring(0, cuatri.length() - 1); // Elimino el °
-                        cuatriCarrera = Integer.parseInt(cuatri);
+                        if(cuatri.equals("1"))
+                            cuatriCarrera = 3;
+                        else cuatriCarrera = 6;
                     }
                 }
 
@@ -256,5 +269,29 @@ public class AltaDeCarreras extends JFrame {
 
     public void setLatch(CountDownLatch latch){
         this.latch = latch;
+    }
+
+    public void setAltaDeAlumnos(boolean v) {
+        this.altaDeAlumnos = v;
+    }
+
+    public void setAltaDeCarreras(boolean v) {
+        this.BaltaDeCarreras = v;
+    }
+
+    public void setAltaPlanDeEstudio(boolean v) {
+        this.altaDePlanDe = v;
+    }
+
+    public void setBuscoAlumnos(boolean v) {
+        this.buscoAlumnos = v;
+    }
+
+    public void setPaginaPrincipal(boolean v){
+        this.paginaPrincipal=v;
+    }
+
+    public boolean getAltaDeCarreras() {
+        return BaltaDeCarreras;
     }
 }
