@@ -21,7 +21,9 @@ public class ModificoCarreras extends JFrame {
     private JButton button2;
     private JList list1;
     private JCheckBox checkBox1;
-    private boolean paginaPrincipal=false, altaDeAlumnos = false, buscoAlumnos = false, altaDeCarreras = false, altaPlanDeEstudio = false, BmodificoCarreras=true;
+    private boolean paginaPrincipal=false, altaDeAlumnos = false, buscoAlumnos = false, altaDeCarreras = false,
+            altaPlanDeEstudio = false, BmodificoCarreras=true;
+    private AlmacenCarreras almacenCarreras;
 
     public ModificoCarreras(){
         setUndecorated(true);
@@ -29,6 +31,7 @@ public class ModificoCarreras extends JFrame {
         setSize(1300,400);
         setLocationRelativeTo(null);
         setVisible(true);
+        cargoCarreras();
         checkBox1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -173,5 +176,15 @@ public class ModificoCarreras extends JFrame {
 
     public void setModificoCarreras(boolean modificoCarreras) {
         this.BmodificoCarreras = modificoCarreras;
+    }
+
+    public void setAlmacenCarreras(AlmacenCarreras almacenCarreras) {
+        this.almacenCarreras = almacenCarreras;
+    }
+
+    public void cargoCarreras(){
+        for(int i=0; i<almacenCarreras.getCantidadCarreras(); i++){
+            comboBoxCarreras.addItem(almacenCarreras.getCarrera(i));
+        }
     }
 }
