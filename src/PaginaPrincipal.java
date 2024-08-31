@@ -14,7 +14,8 @@ public class PaginaPrincipal extends JFrame {
     private JPanel paginaPrincipal;
     private JCheckBox cierroPestaña;
     private JLabel tituloPrincipal;
-    private boolean altaDeAlumnos = false, altaDeCarreras = false, altaDePlanDeEstudio = false, buscoAlumnos = false, modificoCarrera = false;
+    private boolean altaDeAlumnos = false, altaDeCarreras = false, altaDePlanDeEstudio = false, buscoAlumnos = false,
+            modificoCarrera = false, BpaginaPrincipal=false;
     private CountDownLatch latch;
 
     public PaginaPrincipal(CountDownLatch latch) {
@@ -96,5 +97,29 @@ public class PaginaPrincipal extends JFrame {
 
     public boolean getModificoCarreraButton() {
         return modificoCarrera;
+    }
+
+    public void setAltaDeAlumnos(boolean v) {
+        this.altaDeAlumnos = v;
+    }
+
+    public void setAltaDeCarreras(boolean v) {
+        this.altaDeCarreras = v;
+    }
+
+    public void setAltaPlanDeEstudio(boolean v) {
+        this.altaDePlanDeEstudio = v;
+    }
+
+    public void setBuscoAlumnos(boolean v) {
+        this.buscoAlumnos = v;
+    }
+
+    public void setPaginaPrincipal(boolean v){
+        this.BpaginaPrincipal=v;
+    }
+
+    public boolean getPaginaPrincipal(){
+        return BpaginaPrincipal;
     }
 }
