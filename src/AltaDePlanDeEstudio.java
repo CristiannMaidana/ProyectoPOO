@@ -24,7 +24,7 @@ public class AltaDePlanDeEstudio extends JFrame {
     private AlmacenCarreras almacenCarreras;
     private String planDeEstudio;
     private PlanDeEstudio clasePlanDeEstudio;
-    private Carreras materiaElegida;
+    private Carreras carreraElegida;
     private boolean paginaPrincipal=false, altaDeAlumnos=false, altaDeCarreras=false, buscoAlumnos=false, modificoCarreras=false, altaPlanDeEstudio = false;
     private CountDownLatch latch;
 
@@ -63,7 +63,7 @@ public class AltaDePlanDeEstudio extends JFrame {
                 super.mouseClicked(e);
                 int index = listDeCarreras.getSelectedIndex();
                 String nMateria = (String) listDeCarreras.getModel().getElementAt(index);
-                materiaElegida=almacenCarreras.getCarreraPorNombre(nMateria);
+                carreraElegida =almacenCarreras.getCarreraPorNombre(nMateria);
                 nombreDeCarreraElegida.setText("La carrera para asignarle el plan de estudio es: "+nMateria);
             }
         });
@@ -120,12 +120,13 @@ public class AltaDePlanDeEstudio extends JFrame {
                     JOptionPane.showMessageDialog(null, "Elija un plan de estudio.",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                else if (materiaElegida == null){
+                else if (carreraElegida == null){
                     JOptionPane.showMessageDialog(null, "Elija una carrera para asignarle el" +
                             " plan de estudio.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
-                    clasePlanDeEstudio.setCarrera(materiaElegida);
+                    clasePlanDeEstudio.setCarrera(carreraElegida);
+                    carreraElegida.setPlanDeEstudio(clasePlanDeEstudio);
                     JOptionPane.showMessageDialog(null, "Se asigno correctamente la carrera al" +
                             " plan de estudio.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                     limpiarTodo();
@@ -253,5 +254,26 @@ public class AltaDePlanDeEstudio extends JFrame {
 
     public boolean getAltaDeEstudios(){
         return altaPlanDeEstudio;
+    }
+
+
+    public void setAltaDeAlumnos(boolean v) {
+        this.altaDeAlumnos = v;
+    }
+
+    public void setAltaDeCarreras(boolean v) {
+        this.altaDeCarreras = v;
+    }
+
+    public void setAltaPlanDeEstudio(boolean v) {
+        this.altaPlanDeEstudio = v;
+    }
+
+    public void setBuscoAlumnos(boolean v) {
+        this.buscoAlumnos = v;
+    }
+
+    public void setPaginaPrincipal(boolean v){
+        this.paginaPrincipal=v;
     }
 }
