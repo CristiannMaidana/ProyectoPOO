@@ -129,7 +129,7 @@
                 </properties>
                 <border type="line"/>
                 <children>
-                  <component id="c2f83" class="javax.swing.JList" binding="list1" default-binding="true">
+                  <component id="c2f83" class="javax.swing.JList" binding="listMaterias">
                     <constraints/>
                     <properties>
                       <background color="-1"/>
@@ -185,7 +185,7 @@
                       <background color="-12790785"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <text value="Button"/>
+                      <text value="Aceptar"/>
                     </properties>
                   </component>
                   <component id="51b5e" class="javax.swing.JButton" binding="button2" default-binding="true">
@@ -196,7 +196,7 @@
                       <background color="-12790785"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <text value="Button"/>
+                      <text value="Cancelar"/>
                     </properties>
                   </component>
                 </children>
