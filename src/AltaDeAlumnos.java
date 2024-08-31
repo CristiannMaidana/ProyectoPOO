@@ -24,6 +24,7 @@ public class AltaDeAlumnos extends JFrame {
     private CountDownLatch latch;
     private String nombre="", apellido="", contrasenna="", usuario="", carrera="";
     private int dni=0;
+    private AlumnosRegistrados alumnosRegistrados;
 
     public AltaDeAlumnos(){
         setUndecorated(true);
@@ -270,16 +271,22 @@ public class AltaDeAlumnos extends JFrame {
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            int respuesta = JOptionPane.showConfirmDialog(null, "Se va a crear al alumno: " +
-                    getNombre()+" "+getApellido(), "Confirmación", JOptionPane.YES_NO_OPTION);
-            if (respuesta == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, "Se creo al usuario: "  + getNombre()+" "+getApellido(), "Exito", JOptionPane.INFORMATION_MESSAGE);
-                //cerrar y volver a abrir la pagina? o solo limpiar?
-                limpiarTodo();
-                return true;
-            }
-            else{
+            if (alumnosRegistrados.buscoPorDNI(Integer.parseInt(textFieldDNI.getText())) != null) {
+                JOptionPane.showMessageDialog(null, "El alumno ya existe.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return false;
+            }
+            else {
+                int respuesta = JOptionPane.showConfirmDialog(null, "Se va a crear al alumno: " +
+                        getNombre() + " " + getApellido(), "Confirmación", JOptionPane.YES_NO_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Se creo al usuario: " + getNombre() + " " + getApellido(), "Exito", JOptionPane.INFORMATION_MESSAGE);
+                    //cerrar y volver a abrir la pagina? o solo limpiar?
+                    limpiarTodo();
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
     }
@@ -306,5 +313,9 @@ public class AltaDeAlumnos extends JFrame {
 
     public void setLatch(CountDownLatch latch){
         this.latch=latch;
+    }
+
+    public void setRegistroAlumnos(AlumnosRegistrados alumnosRegistrados){
+        this.alumnosRegistrados = alumnosRegistrados;
     }
 }
