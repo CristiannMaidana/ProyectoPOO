@@ -99,11 +99,21 @@ public class AltaDeCarreras extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                    int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea cancelar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                String validoAnnios = (String) cantidadAnnios.getSelectedItem();
+                String validoCuatri = (String) cantidadCuatri.getSelectedItem();
+                if (nombreCarrera.getText().isEmpty() && cantMateriasOb.getText().isEmpty() &&
+                        cantMateriasOp.getText().isEmpty() && validoAnnios.equals("Cantidad de años:") &&
+                        validoCuatri.equals("Cantidad de cuatrimestres:")){
+                    JOptionPane.showMessageDialog(null, "No hay nada que cancelar", "Aviso",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que " +
+                            "desea cancelar?", "Confirmación", JOptionPane.YES_NO_OPTION);
                     if (respuesta == JOptionPane.YES_OPTION) {
                         limpiarCampos();
                     }
-
+                }
             }
         });
         crearButton.addMouseListener(new MouseAdapter() {
@@ -241,19 +251,26 @@ public class AltaDeCarreras extends JFrame {
     private boolean validoTodo(){
         String validoAnnios = (String) cantidadAnnios.getSelectedItem();
         String validoCuatri = (String) cantidadCuatri.getSelectedItem();
-        if (nombreCarrera.getText().isEmpty() || cantMateriasOb.getText().isEmpty() || cantMateriasOp.getText().isEmpty() || validoAnnios.equals("Cantidad de años:") || validoCuatri.equals("Cantidad de cuatrimestres:")) {
-            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (nombreCarrera.getText().isEmpty() || cantMateriasOb.getText().isEmpty() ||
+                cantMateriasOp.getText().isEmpty() || validoAnnios.equals("Cantidad de años:") ||
+                validoCuatri.equals("Cantidad de cuatrimestres:")) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (!cantMateriasOp.getText().matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "Cantidad de materias optativas debe se un numero valido.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Cantidad de materias optativas debe se un " +
+                    "numero valido.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (!cantMateriasOb.getText().matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "Cantidad de materias obligatorias debe ser un numero valido.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Cantidad de materias obligatorias debe ser" +
+                    " un numero valido.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            int respuesta = JOptionPane.showConfirmDialog(null, "Se va a crear la carrera: " + getNombreDeCarrera(), "Confirmación", JOptionPane.YES_NO_OPTION);
+            int respuesta = JOptionPane.showConfirmDialog(null, "Se va a crear la carrera: "
+                    + getNombreDeCarrera(), "Confirmación", JOptionPane.YES_NO_OPTION);
             if (respuesta == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, "Se creo la materia: " + getNombreDeCarrera(), "Exito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Se creo la materia: " +
+                        getNombreDeCarrera(), "Exito", JOptionPane.INFORMATION_MESSAGE);
                 //cerrar y volver a abrir la pagina? o solo limpiar?
                 limpiarCampos();
                 return true;
