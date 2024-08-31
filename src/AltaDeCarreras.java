@@ -28,7 +28,7 @@ public class AltaDeCarreras extends JFrame {
     public AltaDeCarreras() {
         setUndecorated(true);
         setContentPane(altaDeCarreras);
-        setSize(1450,500);
+        setSize(1300,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         checkBox1.addMouseListener(new MouseAdapter() {
             @Override

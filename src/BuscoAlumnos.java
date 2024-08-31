@@ -38,7 +38,7 @@ public class BuscoAlumnos extends JFrame {
 
         setUndecorated(true);
         setContentPane(buscoAlumnos);
-        setSize(1100,400);
+        setSize(1300,400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         checkBox1.addMouseListener(new MouseAdapter() {
             @Override
