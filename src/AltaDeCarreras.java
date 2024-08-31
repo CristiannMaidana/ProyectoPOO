@@ -18,6 +18,7 @@ public class AltaDeCarreras extends JFrame {
     private JCheckBox checkBox1;
     private JButton crearButton;
     private JButton cancelarButton;
+    private JButton altaDeCarrerasButton;
     private boolean paginaPrincipal= false, altaDeAlumnos = false, modificoCarrera = false, buscoAlumnos = false,
             altaDePlanDe = false, nuevaCarrera=false, BaltaDeCarreras=false;
     private String nombreDeCarrera="";
@@ -27,7 +28,7 @@ public class AltaDeCarreras extends JFrame {
     public AltaDeCarreras() {
         setUndecorated(true);
         setContentPane(altaDeCarreras);
-        setSize(1250,500);
+        setSize(1450,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         checkBox1.addMouseListener(new MouseAdapter() {
             @Override
@@ -185,6 +186,14 @@ public class AltaDeCarreras extends JFrame {
                         annioCarrera = Integer.parseInt(annio);
                     }
                 }
+            }
+        });
+        altaDeCarrerasButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(null, "Ya se encuentra en la pagina alta de " +
+                        "carreras.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
