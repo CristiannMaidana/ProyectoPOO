@@ -28,6 +28,7 @@ public class AltaDePlanDeEstudio extends JFrame {
     private Carreras carreraElegida;
     private boolean paginaPrincipal=false, altaDeAlumnos=false, altaDeCarreras=false, buscoAlumnos=false, modificoCarreras=false, altaPlanDeEstudio = false;
     private CountDownLatch latch;
+    private AlumnosRegistrados alumnosRegistrados;
 
     public AltaDePlanDeEstudio(AlmacenCarreras almacenCarreras, CountDownLatch latch) {
         listDeCarreras.setBorder(new LineBorder(Color.BLACK, 1)); // Color y grosor del borde
@@ -126,11 +127,32 @@ public class AltaDePlanDeEstudio extends JFrame {
                             " plan de estudio.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
-                    clasePlanDeEstudio.setCarrera(carreraElegida);
-                    carreraElegida.setPlanDeEstudio(clasePlanDeEstudio);
-                    JOptionPane.showMessageDialog(null, "Se asigno correctamente la carrera al" +
-                            " plan de estudio.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                    limpiarTodo();
+                    if (carreraElegida.getPlanDeEstudio() != null){
+                        if (buscoAlumnosCursandoCarrera()){
+                            JOptionPane.showMessageDialog(null,"No puede cambiar el plan de" +
+                                            " estudio de la carrera porque hay alumnos inscriptos", "Aviso",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else{
+                            int respuesta = JOptionPane.showConfirmDialog(null, "La carrera " +
+                                    "ya tiene un plan de estudio, ¿Desea cambiarlo?", "Aviso",
+                                    JOptionPane.YES_NO_OPTION);
+                            if (respuesta == JOptionPane.YES_OPTION){
+                                clasePlanDeEstudio.setCarrera(carreraElegida);
+                                carreraElegida.setPlanDeEstudio(clasePlanDeEstudio);
+                                JOptionPane.showMessageDialog(null, "Se asigno correctamente " +
+                                        "la carrera al plan de estudio.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                                limpiarTodo();
+                            }
+                        }
+                    }
+                    else {
+                        clasePlanDeEstudio.setCarrera(carreraElegida);
+                        carreraElegida.setPlanDeEstudio(clasePlanDeEstudio);
+                        JOptionPane.showMessageDialog(null, "Se asigno correctamente la carrera " +
+                                "al plan de estudio.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                        limpiarTodo();
+                    }
                 }
             }
         });
@@ -284,5 +306,20 @@ public class AltaDePlanDeEstudio extends JFrame {
 
     public void setPaginaPrincipal(boolean v){
         this.paginaPrincipal=v;
+    }
+
+    public void setAlumnos(AlumnosRegistrados almacenAlumnos){
+        this.alumnosRegistrados = almacenAlumnos;
+    }
+
+    private boolean buscoAlumnosCursandoCarrera(){
+        boolean encontrado=false;
+        for (int i=0; i<alumnosRegistrados.getSize(); i++){
+            if (alumnosRegistrados.getAlumno(i).getCarrera() == carreraElegida){
+                encontrado=true;
+                break;
+            }
+        }
+        return encontrado;
     }
 }
