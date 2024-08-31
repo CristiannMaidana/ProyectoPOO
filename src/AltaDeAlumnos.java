@@ -18,13 +18,14 @@ public class AltaDeAlumnos extends JFrame {
     private JButton crearNuevoAlumnoButton;
     private JButton cancelarButton;
     private JCheckBox checkBox1;
-    private boolean paginaPrincipal=false, modificoCarrera=false, altaPlanDeEstudio=false, altaDeCarreras=false, buscoAlumnos=false, creoNuevoAlumno = false, cancelar=false;
+    private boolean paginaPrincipal=false, modificoCarrera=false, altaPlanDeEstudio=false, altaDeCarreras=false,
+            buscoAlumnos=false, BaltaDeAlumnos=true, creoNuevoAlumno = false;
     private CountDownLatch latch;
     private String nombre="", apellido="", contrasenna="", usuario="", carrera="";
     private int dni=0;
 
-    public AltaDeAlumnos(CountDownLatch latch){
-        this.latch = latch;
+    public AltaDeAlumnos(){
+
         setUndecorated(true);
         setContentPane(altaDeAlumnos);
         setLocationRelativeTo(null);
@@ -34,6 +35,8 @@ public class AltaDeAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                BaltaDeAlumnos=false;
+                creoNuevoAlumno=false;
                 latch.countDown();
                 dispose();
             }
@@ -43,6 +46,8 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 paginaPrincipal=true;
+                BaltaDeAlumnos=false;
+                creoNuevoAlumno=false;
                 latch.countDown();
                 dispose();
             }
@@ -52,6 +57,8 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaDeCarreras=true;
+                BaltaDeAlumnos = false;
+                creoNuevoAlumno=false;
                 latch.countDown();
                 dispose();
             }
@@ -61,6 +68,8 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaPlanDeEstudio=true;
+                BaltaDeAlumnos=false;
+                creoNuevoAlumno=false;
                 latch.countDown();
                 dispose();
             }
@@ -70,6 +79,8 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 buscoAlumnos=true;
+                BaltaDeAlumnos=false;
+                creoNuevoAlumno=false;
                 latch.countDown();
                 dispose();
             }
@@ -79,6 +90,9 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 modificoCarrera=true;
+                BaltaDeAlumnos=false;
+                creoNuevoAlumno=false;
+                latch.countDown();
                 dispose();
             }
         });
@@ -218,6 +232,14 @@ public class AltaDeAlumnos extends JFrame {
         return buscoAlumnos;
     }
 
+    public boolean getCreoNuevoAlumno(){
+        return creoNuevoAlumno;
+    }
+
+    public boolean getAltaDeAlumnos(){
+        return BaltaDeAlumnos;
+    }
+
     private boolean validoTodo(){
         if (textFieldUsuario.getText().isEmpty() || textFieldApellido.getText().isEmpty() || textFieldContrasenna.getText().isEmpty() || textFieldDNI.getText().isEmpty() || textFieldNombre.getText().isEmpty() || textFieldUsuario.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -237,5 +259,29 @@ public class AltaDeAlumnos extends JFrame {
                 return false;
             }
         }
+    }
+
+    public void setAltaDeAlumnos(boolean v) {
+        this.BaltaDeAlumnos = v;
+    }
+
+    public void setAltaDeCarreras(boolean v) {
+        this.altaDeCarreras = v;
+    }
+
+    public void setAltaPlanDeEstudio(boolean v) {
+        this.altaPlanDeEstudio = v;
+    }
+
+    public void setBuscoAlumnos(boolean v) {
+        this.buscoAlumnos = v;
+    }
+
+    public void setPaginaPrincipal(boolean v){
+        this.paginaPrincipal=v;
+    }
+
+    public void setLatch(CountDownLatch latch){
+        this.latch=latch;
     }
 }
