@@ -6,6 +6,7 @@ public abstract class   Carreras {
     private final String nombre;
     private PlanDeEstudio planDeEstudioElegido;
     public Materias[][] carrera;
+    private int  mObligatorias, mOptativas;
 
     public Carreras(String nombre, int annio, int cuatri) {
         this.nombre = nombre;
@@ -202,5 +203,23 @@ public abstract class   Carreras {
             }
         }
         return materiasOptativas;
+    }
+
+    public void setMateriasObligatoria(int mObligatorias){
+        this.mObligatorias = mObligatorias;
+    }
+
+    public void setMateriasOptativas (int mOptativas){
+        this.mOptativas = mOptativas;
+    }
+
+    public void imprimo(){
+        int annio = getAnniosCarrera();
+        int cuatri = getCuatriCarrera();
+        for (byte annios = 0; annios<annio; annios++){
+            for (byte cuatris = 0; cuatris<cuatri; cuatris++){
+                System.out.println(carrera[annios][cuatris].getNombreDeMateria());
+            }
+        }
     }
 }
