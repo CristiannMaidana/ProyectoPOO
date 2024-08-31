@@ -20,6 +20,7 @@ public class BuscoAlumnos extends JFrame {
     private JButton historialAcademicoButton;
     private JCheckBox checkBox1;
     private JButton buscarButton;
+    private JButton buscoAlumnosButton;
     private boolean paginaPrincipal=false, altaDeAlumnos=false, altaDeCarreras=false, modificoCarreras=false,
             altaPlanDeEstudio=false, cargoDeNotas=false, consultarSiEstaGraduado=false, inscripcionAMaterias=false,
             inscripcionACarreras=false, BbuscoAlumnos=false;
@@ -37,7 +38,7 @@ public class BuscoAlumnos extends JFrame {
 
         setUndecorated(true);
         setContentPane(buscoAlumnos);
-        setSize(1000,400);
+        setSize(1100,400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         checkBox1.addMouseListener(new MouseAdapter() {
             @Override
@@ -255,6 +256,14 @@ public class BuscoAlumnos extends JFrame {
                 }
             }
         });
+        buscoAlumnosButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(null, "Ya se encuentra en la pagina busco alumnos.",
+                        "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
     }
 
     private Alumnos getAlumno(){
@@ -319,7 +328,6 @@ public class BuscoAlumnos extends JFrame {
         }
         listDatosAlumno.setModel(modelDatosAlumno);
     }
-
 
     public void setAltaDeAlumnos(boolean v) {
         this.altaDeAlumnos = v;
