@@ -258,19 +258,23 @@ public class AltaDeAlumnos extends JFrame {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else if (!textFieldNombre.getText().matches("[a-zA-Z]*")) {
+        }
+        else if (!textFieldNombre.getText().matches("[a-zA-Z]*")) {
             JOptionPane.showMessageDialog(null, "Tiene que ingresar un nombre valido",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else if (!textFieldApellido.getText().matches("[a-zA-Z]*")) {
+        }
+        else if (!textFieldApellido.getText().matches("[a-zA-Z]*")) {
             JOptionPane.showMessageDialog(null, "Tiene que ingresar un apellido valido.",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else if (!textFieldDNI.getText().matches("\\d+")) {
+        }
+        else if (!textFieldDNI.getText().matches("\\d+")) {
             JOptionPane.showMessageDialog(null, "El dni debe ser un numero valido.",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else {
+        }
+        else {
             if (alumnosRegistrados.buscoPorDNI(Integer.parseInt(textFieldDNI.getText())) != null) {
                 JOptionPane.showMessageDialog(null, "El alumno ya existe.", "Error",
                         JOptionPane.ERROR_MESSAGE);
