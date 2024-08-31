@@ -13,6 +13,7 @@ public class PaginaPrincipal extends JFrame {
     private JLabel imagenSIULabel;
     private JPanel paginaPrincipal;
     private JCheckBox cierroPestaña;
+    private JButton paginaPrincipalButton;
     private JLabel tituloPrincipal;
     private boolean altaDeAlumnos = false, altaDeCarreras = false, altaDePlanDeEstudio = false, buscoAlumnos = false,
             modificoCarrera = false, BpaginaPrincipal=false;
@@ -22,7 +23,7 @@ public class PaginaPrincipal extends JFrame {
         this.latch = latch;
         setUndecorated(true);
         setContentPane(paginaPrincipal);
-        setSize(850,400);
+        setSize(1100,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         altaDeAlumnosButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -75,6 +76,14 @@ public class PaginaPrincipal extends JFrame {
                 super.mouseClicked(e);
                 latch.countDown();
                 dispose();
+            }
+        });
+        paginaPrincipalButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(null, "Ya se encuentra en la pagina principal.",
+                        "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
