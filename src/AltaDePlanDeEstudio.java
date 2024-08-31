@@ -21,6 +21,7 @@ public class AltaDePlanDeEstudio extends JFrame {
     private JButton asignarCarreraButton;
     private JButton cancelarButton;
     private JCheckBox checkBox1;
+    private JButton altaDePlanDeButton;
     private AlmacenCarreras almacenCarreras;
     private String planDeEstudio;
     private PlanDeEstudio clasePlanDeEstudio;
@@ -36,7 +37,7 @@ public class AltaDePlanDeEstudio extends JFrame {
         setContentPane(altaDePlanDeEstudio);
         setUndecorated(true);
         setLocationRelativeTo(null);
-        setSize(900,350);
+        setSize(1100,350);
 
         cargoPlanDeEstudio();
         checkBox1.addMouseListener(new MouseAdapter() {
@@ -149,6 +150,14 @@ public class AltaDePlanDeEstudio extends JFrame {
                         limpiarTodo();
                     }
                 }
+            }
+        });
+        altaDePlanDeButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(null, "Ya se encuentra en la pagina alta de plan " +
+                        "de estudio.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
