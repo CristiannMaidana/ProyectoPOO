@@ -1,18 +1,20 @@
 public abstract class PlanDeEstudio {
-    protected Carreras carrera;
     protected boolean aprobo;
+    protected Carreras carrera;
 
+    //Constructor
     public PlanDeEstudio(Carreras carrera) {
         this.carrera = carrera;
     }
 
-    public abstract boolean aproboCorrelativas(Materias materias);
+    //Metodos get
+    public abstract String getDescripion();
 
+    //Metodos set
     public abstract void setCarrera(Carreras carrera);
-
     public abstract void setAlumno(Alumnos alumno);
 
-    public abstract String toString();
 
-    public abstract String getDescripion();
+    public abstract String toString();
+    public abstract boolean aproboCorrelativas(Materias materias);
 }
