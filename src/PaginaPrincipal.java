@@ -19,6 +19,7 @@ public class PaginaPrincipal extends JFrame {
             modificoCarrera = false, BpaginaPrincipal=false;
     private CountDownLatch latch;
 
+    //Constructor
     public PaginaPrincipal(CountDownLatch latch) {
         this.latch = latch;
         setUndecorated(true);
@@ -88,50 +89,42 @@ public class PaginaPrincipal extends JFrame {
         });
     }
 
+    //Metodos get
     public boolean getAltaDeAlumnosButton() {
         return altaDeAlumnos;
     }
-
     public boolean getAltaDeCarrerasButton() {
         return altaDeCarreras;
     }
-
     public boolean getAltaDePlanDeButton() {
         return altaDePlanDeEstudio;
     }
-
     public boolean getBuscoAlumnoButton() {
         return buscoAlumnos;
     }
-
     public boolean getModificoCarreraButton() {
         return modificoCarrera;
     }
-
-    public void setAltaDeAlumnos(boolean v) {
-        this.altaDeAlumnos = v;
-    }
-
-    public void setAltaDeCarreras(boolean v) {
-        this.altaDeCarreras = v;
-    }
-
-    public void setAltaPlanDeEstudio(boolean v) {
-        this.altaDePlanDeEstudio = v;
-    }
-
-    public void setBuscoAlumnos(boolean v) {
-        this.buscoAlumnos = v;
-    }
-
-    public void setPaginaPrincipal(boolean v){
-        this.BpaginaPrincipal=v;
-    }
-
     public boolean getPaginaPrincipal(){
         return BpaginaPrincipal;
     }
 
+    //Metodos set
+    public void setAltaDeAlumnos(boolean v) {
+        this.altaDeAlumnos = v;
+    }
+    public void setAltaDeCarreras(boolean v) {
+        this.altaDeCarreras = v;
+    }
+    public void setAltaPlanDeEstudio(boolean v) {
+        this.altaDePlanDeEstudio = v;
+    }
+    public void setBuscoAlumnos(boolean v) {
+        this.buscoAlumnos = v;
+    }
+    public void setPaginaPrincipal(boolean v){
+        this.BpaginaPrincipal=v;
+    }
     public void setModificoCarreras(boolean v){
         this.modificoCarrera=v;
     }
