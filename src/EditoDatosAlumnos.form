@@ -111,7 +111,7 @@
               <background color="-12790785"/>
               <font name="Arial" size="12"/>
               <foreground color="-854792"/>
-              <icon value="imagenes/check.png"/>
+              <icon value="imagenes/editarAlumno/check.png"/>
               <text value="  Guardar cambios"/>
             </properties>
           </component>
@@ -123,7 +123,7 @@
               <background color="-12790785"/>
               <font name="Arial" size="12"/>
               <foreground color="-854792"/>
-              <icon value="imagenes/remove-user.png"/>
+              <icon value="imagenes/editarAlumno/remove-user.png"/>
               <text value="  Borrar alumno"/>
             </properties>
           </component>
@@ -136,7 +136,7 @@
               <enabled value="true"/>
               <font name="Arial" size="12"/>
               <foreground color="-854792"/>
-              <icon value="imagenes/delete.png"/>
+              <icon value="imagenes/editarAlumno/delete.png"/>
               <text value="  Cancelar"/>
             </properties>
           </component>
