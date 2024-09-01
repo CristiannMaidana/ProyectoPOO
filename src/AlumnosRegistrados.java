@@ -45,4 +45,12 @@ public class AlumnosRegistrados {
     public Alumnos getAlumno(int i){
         return alumnosRegistrados.get(i);
     }
+
+    public void remove(Alumnos alumno){
+        for (int i=0; i<alumnosRegistrados.size(); i++){
+            if (alumnosRegistrados.get(i) == alumno){
+                alumnosRegistrados.remove(i);
+            }
+        }
+    }
 }
