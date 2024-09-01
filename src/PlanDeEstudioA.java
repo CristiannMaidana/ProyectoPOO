@@ -33,5 +33,4 @@ public class PlanDeEstudioA extends PlanDeEstudio{
         }
         return aprobo;
     }
-
 }
