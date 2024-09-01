@@ -93,11 +93,19 @@ public class VCargoNotas extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                opciones = true;
-                if (notaParcial != 0 && !textFieldNotaExamen.isEnabled())
-                    opcionesNotaParcial(opciones);
-                else  if (notaExamen != 0 && !textFieldNotaParcial.isEnabled())
-                    opcionesNotaExamen(opciones);
+                if (textFieldNotaParcial.isEnabled() && textFieldNotaParcial.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Ingreso una nota valida para poder " +
+                            "cargar las notas", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (textFieldNotaExamen.isEnabled() && textFieldNotaExamen.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Ingreso una nota valida para poder " +
+                            "cargar las notas", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    opciones = true;
+                    if (notaParcial != 0 && !textFieldNotaExamen.isEnabled())
+                        opcionesNotaParcial(opciones);
+                    else if (notaExamen != 0 && !textFieldNotaParcial.isEnabled())
+                        opcionesNotaExamen(opciones);
+                }
             }
         });
         aceptarButton.addMouseListener(new MouseAdapter() {
@@ -132,9 +140,12 @@ public class VCargoNotas extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                alumno.vacioMaterias();
-                latch.countDown();
-                dispose();
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea cancelar la carga de" +
+                        " notas?", "Aviso", JOptionPane.YES_NO_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    latch.countDown();
+                    dispose();
+                }
             }
         });
         checkBox1.addMouseListener(new MouseAdapter() {
