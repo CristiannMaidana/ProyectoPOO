@@ -322,4 +322,8 @@ public class AltaDePlanDeEstudio extends JFrame {
         }
         return encontrado;
     }
+
+    public void setModificoCarreras(boolean v){
+        this.modificoCarreras=v;
+    }
 }

@@ -131,4 +131,8 @@ public class PaginaPrincipal extends JFrame {
     public boolean getPaginaPrincipal(){
         return BpaginaPrincipal;
     }
+
+    public void setModificoCarreras(boolean v){
+        this.modificoCarrera=v;
+    }
 }

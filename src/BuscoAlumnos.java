@@ -371,4 +371,8 @@ public class BuscoAlumnos extends JFrame {
     public void setPaginaPrincipal(boolean v){
         this.paginaPrincipal=v;
     }
+
+    public void setModificoCarreras(boolean v){
+        this.modificoCarreras=v;
+    }
 }

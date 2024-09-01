@@ -330,4 +330,8 @@ public class AltaDeAlumnos extends JFrame {
     public void setRegistroAlumnos(AlumnosRegistrados alumnosRegistrados){
         this.alumnosRegistrados = alumnosRegistrados;
     }
+
+    public void setModificoCarreras(boolean v){
+        this.modificoCarrera=v;
+    }
 }

@@ -320,4 +320,8 @@ public class AltaDeCarreras extends JFrame {
     public boolean getAltaDeCarreras() {
         return BaltaDeCarreras;
     }
+
+    public void setModificoCarreras(boolean v){
+        this.modificoCarrera=v;
+    }
 }
