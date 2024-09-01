@@ -18,10 +18,10 @@ public class VperfilUsuario extends JFrame{
     private JButton materiasOptativasButton;
     private JList listMateriasParaGraduarse;
     private JCheckBox checkBox1;
-    private boolean botonOpciones = false, masMaterias= false;
+    private boolean masMaterias= false;
     private final DefaultListModel<String> modelAprobado = new DefaultListModel<>(), modelDesaprobado = new DefaultListModel<>();
 
-
+    //Constructor
     public VperfilUsuario(Alumnos alumno) {
         JScrollPane scrollPane = new JScrollPane(panelPerfilAlumno);
 
@@ -76,6 +76,7 @@ public class VperfilUsuario extends JFrame{
         });
     }
 
+
     public void buscoMateriasAprobadasDesaprobadas(Alumnos alumno){
         for (byte annio=0;annio<alumno.getCarrera().getAnniosCarrera();annio++){
             for (byte cuatri=0;cuatri <alumno.getCarrera().getCuatriCarrera(); cuatri++) {
@@ -88,7 +89,6 @@ public class VperfilUsuario extends JFrame{
             }
         }
     }
-
     public void cargoMateriasAprobadas(Materias materias, DefaultListModel<String> model){
         switch (model.size()){
             case 0 : {
@@ -134,7 +134,6 @@ public class VperfilUsuario extends JFrame{
         model.addElement(materias.getNombreDeMateria());
         listMateriasAprobadas.setModel(model);
     }
-
     public void cargoMateriasDesaprobadas(String nombreMateria, DefaultListModel<String> model){
         switch (model.size()){
             case 0 : {
@@ -196,15 +195,6 @@ public class VperfilUsuario extends JFrame{
         model.addElement(nombreMateria);
         listMateriasPendientes.setModel(model);
     }
-
-    public boolean getCargoMasMaterias(){
-        return masMaterias;
-    }
-
-    public boolean getBoton(){
-        return botonOpciones;
-    }
-
     public void cargoMateriasOptativasPendientes(Alumnos alumno){
         // Limpiar el JList
         DefaultListModel<String> model = (DefaultListModel<String>) listMateriasParaGraduarse.getModel();
@@ -216,7 +206,6 @@ public class VperfilUsuario extends JFrame{
         }
         listMateriasParaGraduarse.setModel(model);
     }
-
     public void cargoMateriasObligatoriasPendientes(Alumnos alumno){
         // Limpiar el JList
         DefaultListModel<String> model = (DefaultListModel<String>) listMateriasParaGraduarse.getModel();
