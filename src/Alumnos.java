@@ -1,11 +1,12 @@
 public class Alumnos {
-    private String nombre, contrasenna;
+    private String nombre, contrasenna, apellido;
     private final Materias[] materiasCursando = new Materias[3];
     private int legajo;
     private Carreras carreraDeAlumno;
 
-    public Alumnos(String nombre, int legajo, String contrasenna) {
+    public Alumnos(String nombre, String apellido, int legajo, String contrasenna) {
         this.nombre = nombre;
+        this.apellido = apellido;
         this.legajo = legajo;
         this.contrasenna = contrasenna;
     }
@@ -127,5 +128,13 @@ public class Alumnos {
 
     public void setLegajo(int legajo){
         this.legajo = legajo;
+    }
+
+    public void setApellido(String apellido){
+        this.apellido = apellido;
+    }
+
+    public String getApellido(){
+        return apellido;
     }
 }
