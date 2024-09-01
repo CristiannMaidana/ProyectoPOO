@@ -71,21 +71,21 @@ public class VInscripcionMaterias extends JFrame {
         comboBoxCuatri.addActionListener(listener);
         comboBoxSituacion.addActionListener(listener);
 
-            listMateriasNuevas.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    super.mouseClicked(e);
-                    int index = listMateriasNuevas.getSelectedIndex();
-                    String nMateria = (String) listMateriasNuevas.getModel().getElementAt(index);
-                    cargoMateriasAlAlumno(nMateria, alumno);
-                    if (alumno.materiasLlenas()) {
-                        JOptionPane.showMessageDialog(VInscripcionMaterias.this,
-                                "Cargo las materias maximas por cuatrimestre. ",
-                                "Aviso",
-                                JOptionPane.WARNING_MESSAGE);
-                    }
+        listMateriasNuevas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int index = listMateriasNuevas.getSelectedIndex();
+                String nMateria = (String) listMateriasNuevas.getModel().getElementAt(index);
+                cargoMateriasAlAlumno(nMateria, alumno);
+                if (alumno.materiasLlenas()) {
+                    JOptionPane.showMessageDialog(VInscripcionMaterias.this,
+                            "Cargo las materias maximas por cuatrimestre. ",
+                            "Aviso",
+                            JOptionPane.WARNING_MESSAGE);
                 }
-            });
+            }
+        });
         aceptarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
