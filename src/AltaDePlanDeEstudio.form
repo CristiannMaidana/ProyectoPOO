@@ -229,6 +229,7 @@
                   <background color="-12790785"/>
                   <font name="Arial" size="12"/>
                   <foreground color="-854792"/>
+                  <icon value="imagenes/medical-book2.png"/>
                   <text value="Asignar carrera"/>
                 </properties>
               </component>
