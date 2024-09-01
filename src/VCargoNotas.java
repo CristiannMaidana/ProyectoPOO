@@ -18,11 +18,13 @@ public class VCargoNotas extends JFrame{
     private JCheckBox checkBox1;
     private double notaParcial, notaExamen;
     private String nMateria;
-    private final DefaultListModel<String> modelAprobado = new DefaultListModel<>(), modelExamen = new DefaultListModel<>(),modelDesaprobado = new DefaultListModel<>();
+    private final DefaultListModel<String> modelAprobado = new DefaultListModel<>(),
+            modelExamen = new DefaultListModel<>(),modelDesaprobado = new DefaultListModel<>();
     private final Alumnos alumno;
     private boolean opciones, masMaterias;
     private CountDownLatch latch;
 
+    //Constructor
     public VCargoNotas(Alumnos alumno, CountDownLatch latch){
         this.alumno=alumno;
         this.latch=latch;
@@ -158,6 +160,7 @@ public class VCargoNotas extends JFrame{
         });
     }
 
+    //Metodos void
     private void cargoMateriasAprobadasAnteriores(DefaultListModel<String> model){
         for (int i = 0; i <alumno.getCarrera().getAnniosCarrera(); i++){
             for (int j = 0; j <alumno.getCarrera().getCuatriCarrera(); j++){
@@ -167,7 +170,6 @@ public class VCargoNotas extends JFrame{
         }
         listMateriasAprobadas.setModel(model);
     }
-
     public void cargoMateriasEnCurso(Alumnos alumnos){
         DefaultListModel <String> model = new DefaultListModel<>();
         for (byte i=0;i<3;i++){
@@ -176,26 +178,18 @@ public class VCargoNotas extends JFrame{
         }
         listMateriasParaSeleccionar.setModel(model);
     }
-
     public void cargoMateriasAprobadas (String materiaAprobada,  DefaultListModel<String> model ){
         model.addElement(materiaAprobada);
         listMateriasAprobadas.setModel(model);
     }
-
     public void cargoMateriasDesaprobadas(String materiaAprobada,  DefaultListModel<String> model ){
         model.addElement(materiaAprobada);
         listMateriasDesaprobadas.setModel(model);
     }
-
     public void cargoMateriasExamen (String materiaExamen, DefaultListModel<String> model ){
         model.addElement(materiaExamen);
         listMateriasFaltaExamen.setModel(model);
     }
-
-    public boolean repitoCargaMaterias(){
-        return masMaterias;
-    }
-
     public void opcionesNotaParcial(boolean opciones){
         if (opciones){
             if (nMateria != null && notaParcial != 0){
@@ -238,7 +232,6 @@ public class VCargoNotas extends JFrame{
             opciones=false;
         }
     }
-
     public void opcionesNotaExamen(boolean opciones){
         if (opciones){
             if (nMateria != null && notaExamen != 0){
