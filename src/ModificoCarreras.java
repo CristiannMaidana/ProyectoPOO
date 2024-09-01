@@ -123,7 +123,7 @@ public class ModificoCarreras extends JFrame {
                             " "+nombreCarreraElegida+" exitosamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                     seleccioneUnaMateiraLabel.setText("Seleccione una materia:");
                     aceptarButton.setText("Hacer obligatoria");
-                    cancelarButton.setText("Hacer Optativa");
+                    cancelarButton.setText("Hacer optativa");
                 }
             }
         });
@@ -138,7 +138,7 @@ public class ModificoCarreras extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(aceptarButton.getName().equals("Hacer obligatoria")){
+                if(aceptarButton.getText().equals("Hacer obligatoria")){
                     if(textFieldCambiaMateriaCarrera.getText().isEmpty()){
                         JOptionPane.showMessageDialog(null, "Seleccione una materia antes.",
                                 "Error", JOptionPane.ERROR_MESSAGE);
@@ -149,6 +149,7 @@ public class ModificoCarreras extends JFrame {
                                 materiaACambiar+" obligatoria?", "Aviso", JOptionPane.YES_NO_OPTION);
                         if (respuesta == JOptionPane.YES_OPTION){
                             carreraElegida.getMateriasPorNombre(materiaACambiar).setObligatoria(true);
+                            carreraElegida.getMateriasPorNombre(materiaACambiar).setOptativa(false);
                             JOptionPane.showMessageDialog(null, "Se hizo la materia obligatoria" +
                                     " correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                             reseteoModificarMaterias();
@@ -161,7 +162,7 @@ public class ModificoCarreras extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(cancelarButton.getName().equals("Hacer optativa")){
+                if(cancelarButton.getText().equals("Hacer optativa")){
                     if(textFieldCambiaMateriaCarrera.getText().isEmpty()){
                         JOptionPane.showMessageDialog(null, "Seleccione una materia antes.",
                                 "Error", JOptionPane.ERROR_MESSAGE);
@@ -171,7 +172,8 @@ public class ModificoCarreras extends JFrame {
                         int respuesta = JOptionPane.showConfirmDialog(null, "¿Quiere hacer la materia: "+
                                 materiaACambiar+" optativa?", "Aviso", JOptionPane.YES_NO_OPTION);
                         if (respuesta == JOptionPane.YES_OPTION){
-                            carreraElegida.getMateriasPorNombre(materiaACambiar).setObligatoria(true);
+                            carreraElegida.getMateriasPorNombre(materiaACambiar).setOptativa(true);
+                            carreraElegida.getMateriasPorNombre(materiaACambiar).setObligatoria(false);
                             JOptionPane.showMessageDialog(null, "Se hizo la materia optativa" +
                                     " correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                             reseteoModificarMaterias();
@@ -190,10 +192,12 @@ public class ModificoCarreras extends JFrame {
                 textFieldCambiaMateriaCarrera.setText(nombreMateria);
                 if (carreraElegida.getMateriasPorNombre(nombreMateria).getObligatoria()) {
                     JOptionPane.showMessageDialog(null, "La materia " + nombreMateria + ", es " +
-                            "obligatoria seleccione de que tipo de materia será", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                            "obligatoria seleccione que tipo de materia será", "Aviso",
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
-                else {JOptionPane.showMessageDialog(null, "La materia " + nombreMateria + ", es " +
-                        "optativa seleccione de que tipo de materia será", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                else if(carreraElegida.getMateriasPorNombre(nombreMateria).getOptativa()) {
+                    JOptionPane.showMessageDialog(null, "La materia " + nombreMateria + ", es " +
+                        "optativa seleccione que tipo de materia será", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -269,6 +273,7 @@ public class ModificoCarreras extends JFrame {
 
     public void reseteoModificarMaterias(){
         textFieldCambiaMateriaCarrera.setText("");
+        cargoMaterias();
     }
 
     public void setLatch(CountDownLatch latch){
