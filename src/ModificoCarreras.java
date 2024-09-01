@@ -48,6 +48,7 @@ public class ModificoCarreras extends JFrame {
                 super.mouseClicked(e);
                 paginaPrincipal=true;
                 BmodificoCarreras=false;
+                latch.countDown();
                 dispose();
             }
         });
@@ -57,6 +58,7 @@ public class ModificoCarreras extends JFrame {
                 super.mouseClicked(e);
                 altaDeAlumnos=true;
                 BmodificoCarreras=false;
+                latch.countDown();
                 dispose();
             }
         });
@@ -66,6 +68,7 @@ public class ModificoCarreras extends JFrame {
                 super.mouseClicked(e);
                 altaDeCarreras=true;
                 BmodificoCarreras=false;
+                latch.countDown();
                 dispose();
             }
         });
@@ -75,6 +78,7 @@ public class ModificoCarreras extends JFrame {
                 super.mouseClicked(e);
                 altaPlanDeEstudio=true;
                 BmodificoCarreras=false;
+                latch.countDown();
                 dispose();
             }
         });
@@ -84,6 +88,7 @@ public class ModificoCarreras extends JFrame {
                 super.mouseClicked(e);
                 buscoAlumnos=true;
                 BmodificoCarreras=false;
+                latch.countDown();
                 dispose();
             }
         });
