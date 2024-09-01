@@ -30,6 +30,7 @@ public class AltaDePlanDeEstudio extends JFrame {
     private CountDownLatch latch;
     private AlumnosRegistrados alumnosRegistrados;
 
+    //Constructor
     public AltaDePlanDeEstudio(AlmacenCarreras almacenCarreras, CountDownLatch latch) {
         listDeCarreras.setBorder(new LineBorder(Color.BLACK, 1)); // Color y grosor del borde
         this.almacenCarreras = almacenCarreras;
@@ -184,6 +185,7 @@ public class AltaDePlanDeEstudio extends JFrame {
         });
     }
 
+    //Metodos void
     private void cargoPlanDeEstudio(){
         comboBoxPlanDeEstudio.addItem("Plan de Estudio:");
         comboBoxPlanDeEstudio.addItem("Plan de estudio 'A'.");
@@ -192,7 +194,6 @@ public class AltaDePlanDeEstudio extends JFrame {
         comboBoxPlanDeEstudio.addItem("Plan de estudio 'D'.");
         comboBoxPlanDeEstudio.addItem("Plan de estudio 'E'.");
     }
-
     private void cargoCarreras(){
         DefaultListModel<String> model = new DefaultListModel<>();
         for (int i=0; i<almacenCarreras.getCantidadCarreras(); i++){
@@ -200,6 +201,78 @@ public class AltaDePlanDeEstudio extends JFrame {
         }
         listDeCarreras.setModel(model);
     }
+    private void cargoDescripcionPlanDeEstudio(){
+        String texto = descripcionPlan();
+        int maxLineLength = 100; // Longitud máxima de caracteres por línea
+
+        String[] words = texto.split(" ");
+        StringBuilder formattedText = new StringBuilder("<html>");
+        int lineLength = 0;
+
+        for (String word : words) {
+            if (lineLength + word.length() > maxLineLength) {
+                formattedText.append("<br>");
+                lineLength = 0;
+            }
+            formattedText.append(word).append(" ");
+            lineLength += word.length() + 1; // +1 por el espacio
+        }
+
+        formattedText.append("</html>");
+        descripcionPlanDeEstudio.setText(formattedText.toString());
+
+    }
+    private void limpiarTodo(){
+        DefaultListModel<String> model = new DefaultListModel<>();
+        comboBoxPlanDeEstudio.setSelectedIndex(0);
+        listDeCarreras.setModel(model);
+        nombreDeCarreraElegida.setText("");
+        descripcionPlanDeEstudio.setText("");
+    }
+
+    //Metodos get
+    public boolean getPaginaPrincipal(){
+        return paginaPrincipal;
+    }
+    public boolean getAltaDeAlumnos(){
+        return altaDeAlumnos;
+    }
+    public boolean getAltaDeCarreras(){
+        return altaDeCarreras;
+    }
+    public boolean getBuscoAlumnos(){
+        return buscoAlumnos;
+    }
+    public boolean getModificoCarrera(){
+        return modificoCarreras;
+    }
+    public boolean getAltaDeEstudios(){
+        return altaPlanDeEstudio;
+    }
+
+    //Metodos set
+    public void setAltaDeAlumnos(boolean v) {
+        this.altaDeAlumnos = v;
+    }
+    public void setAltaDeCarreras(boolean v) {
+        this.altaDeCarreras = v;
+    }
+    public void setAltaPlanDeEstudio(boolean v) {
+        this.altaPlanDeEstudio = v;
+    }
+    public void setBuscoAlumnos(boolean v) {
+        this.buscoAlumnos = v;
+    }
+    public void setPaginaPrincipal(boolean v){
+        this.paginaPrincipal=v;
+    }
+    public void setModificoCarreras(boolean v){
+        this.modificoCarreras=v;
+    }
+    public void setAlumnos(AlumnosRegistrados almacenAlumnos){
+        this.alumnosRegistrados = almacenAlumnos;
+    }
+
 
     private String descripcionPlan(){
         String texto = "";
@@ -232,86 +305,6 @@ public class AltaDePlanDeEstudio extends JFrame {
         }
         return texto;
     }
-
-    private void cargoDescripcionPlanDeEstudio(){
-        String texto = descripcionPlan();
-        int maxLineLength = 100; // Longitud máxima de caracteres por línea
-
-        String[] words = texto.split(" ");
-        StringBuilder formattedText = new StringBuilder("<html>");
-        int lineLength = 0;
-
-        for (String word : words) {
-            if (lineLength + word.length() > maxLineLength) {
-                formattedText.append("<br>");
-                lineLength = 0;
-            }
-            formattedText.append(word).append(" ");
-            lineLength += word.length() + 1; // +1 por el espacio
-        }
-
-        formattedText.append("</html>");
-        descripcionPlanDeEstudio.setText(formattedText.toString());
-
-    }
-
-    private void limpiarTodo(){
-        DefaultListModel<String> model = new DefaultListModel<>();
-        comboBoxPlanDeEstudio.setSelectedIndex(0);
-        listDeCarreras.setModel(model);
-        nombreDeCarreraElegida.setText("");
-        descripcionPlanDeEstudio.setText("");
-    }
-
-    public boolean getPaginaPrincipal(){
-        return paginaPrincipal;
-    }
-
-    public boolean getAltaDeAlumnos(){
-        return altaDeAlumnos;
-    }
-
-    public boolean getAltaDeCarreras(){
-        return altaDeCarreras;
-    }
-
-    public boolean getBuscoAlumnos(){
-        return buscoAlumnos;
-    }
-
-    public boolean getModificoCarrera(){
-        return modificoCarreras;
-    }
-
-    public boolean getAltaDeEstudios(){
-        return altaPlanDeEstudio;
-    }
-
-
-    public void setAltaDeAlumnos(boolean v) {
-        this.altaDeAlumnos = v;
-    }
-
-    public void setAltaDeCarreras(boolean v) {
-        this.altaDeCarreras = v;
-    }
-
-    public void setAltaPlanDeEstudio(boolean v) {
-        this.altaPlanDeEstudio = v;
-    }
-
-    public void setBuscoAlumnos(boolean v) {
-        this.buscoAlumnos = v;
-    }
-
-    public void setPaginaPrincipal(boolean v){
-        this.paginaPrincipal=v;
-    }
-
-    public void setAlumnos(AlumnosRegistrados almacenAlumnos){
-        this.alumnosRegistrados = almacenAlumnos;
-    }
-
     private boolean buscoAlumnosCursandoCarrera(){
         boolean encontrado=false;
         for (int i=0; i<alumnosRegistrados.getSize(); i++){
@@ -321,9 +314,5 @@ public class AltaDePlanDeEstudio extends JFrame {
             }
         }
         return encontrado;
-    }
-
-    public void setModificoCarreras(boolean v){
-        this.modificoCarreras=v;
     }
 }
