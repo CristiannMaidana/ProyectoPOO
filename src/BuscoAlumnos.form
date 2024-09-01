@@ -112,6 +112,7 @@
                   <background color="-16777216"/>
                   <font name="Arial" size="14"/>
                   <foreground color="-16777216"/>
+                  <icon value="imagenes/search.png"/>
                   <text value="  Ingrese el DNI del alumno:"/>
                 </properties>
               </component>
@@ -184,6 +185,7 @@
                   <background color="-16777216"/>
                   <font name="Arial" size="14"/>
                   <foreground color="-16777216"/>
+                  <icon value="imagenes/user.png"/>
                   <text value="Datos del alumno:"/>
                 </properties>
               </component>
@@ -206,7 +208,8 @@
                       <enabled value="true"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <text value="Inscripcion a carreras"/>
+                      <icon value="imagenes/programming-course.png"/>
+                      <text value="  Inscripcion a carreras"/>
                     </properties>
                   </component>
                   <component id="e3738" class="javax.swing.JButton" binding="inscripcionAMateriasButton" default-binding="true">
@@ -218,7 +221,8 @@
                       <enabled value="true"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <text value="Inscripcion a materias"/>
+                      <icon value="imagenes/e-book.png"/>
+                      <text value="  Inscripcion a materias"/>
                     </properties>
                   </component>
                   <component id="815c4" class="javax.swing.JButton" binding="cargoDeNotasButton" default-binding="true">
@@ -230,7 +234,8 @@
                       <enabled value="true"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <text value="Cargo de notas"/>
+                      <icon value="imagenes/paper.png"/>
+                      <text value="  Cargo de notas"/>
                     </properties>
                   </component>
                   <component id="b0ef4" class="javax.swing.JButton" binding="historialAcademicoButton">
@@ -242,7 +247,8 @@
                       <enabled value="true"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <text value="Historial academico"/>
+                      <icon value="imagenes/graduated.png"/>
+                      <text value="  Historial academico"/>
                     </properties>
                   </component>
                 </children>
