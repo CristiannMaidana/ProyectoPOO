@@ -140,10 +140,11 @@ public class Alumnos {
 
     public boolean materiasVacias(){
         boolean vacio=false;
-        for (byte i=0; i<3; i++){
-            if(materiasCursando[i]!=null)
-                vacio=true;
-            break;
+        for (byte i=0; i<3; ++i){
+            if(materiasCursando[i]!=null) {
+                vacio = true;
+                break;
+            }
         }
         return vacio;
     }
