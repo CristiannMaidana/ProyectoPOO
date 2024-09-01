@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Materias {
     private final String nombre;
     public boolean parcial, cursadaAprobada, examenFinal, promocion, tieneCorrelativa, optativa, obligatoria;
@@ -12,9 +10,8 @@ public class Materias {
         examenFinal=false;
         promocion=false;
         tieneCorrelativa=false;
-        Random random = new Random();
-        obligatoria=random.nextBoolean();
-        optativa=random.nextBoolean();
+        optativa=false;
+        obligatoria=false;
     }
 
     //BOORAR porque solo lo uso en pruebas, deberia ir correctamente la cantidad en cada carrera
