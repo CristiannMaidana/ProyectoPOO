@@ -19,6 +19,7 @@ public class EditoDatosAlumnos extends JFrame {
     private int alumnoAEliminar;
     private CountDownLatch latch;
 
+    //Constructor
     public EditoDatosAlumnos(Alumnos alumno, CountDownLatch latch) {
         this.latch = latch;
         this.usuario = alumno;
@@ -89,33 +90,7 @@ public class EditoDatosAlumnos extends JFrame {
         });
     }
 
-    private boolean datosCargados(){
-        boolean datosCargados = false;
-        if (!cambiarApellidoTextField.getText().isEmpty() ||
-                !cambiarContrasennaPasswordField.getText().isEmpty() || !cambiarNombreTextField.getText().isEmpty() ||
-                !cambiarLegajoTextField.getText().isEmpty()){
-            datosCargados =true;
-        }
-        return datosCargados;
-    }
-
-    private boolean hayCambios(){
-        boolean hayCambios = false;
-        String nuevoAlumno = cambiarNombreTextField.getText(), nuevoApellido = cambiarApellidoTextField.getText(),
-                nuevoContrasenna = cambiarContrasennaPasswordField.getText(),
-                cambiarLegajo = cambiarLegajoTextField.getText(), actualNombre = usuario.getNombre(),
-                actualContrasenna = usuario.getContrasenna(), actualApellido = usuario.getApellido();
-        int actualLegajo= usuario.getLegajo();
-
-         if (!nuevoAlumno.equals(actualNombre) || !nuevoApellido.equals(actualApellido) ||
-                 !nuevoContrasenna.equals(actualContrasenna) || !cambiarLegajo.equals(actualLegajo)){
-             hayCambios = true;
-         }
-
-
-        return hayCambios;
-    }
-
+    //Metodos void
     private void guardarCambios(){
         String nuevoNombre = cambiarNombreTextField.getText(), nuevoApellido = cambiarApellidoTextField.getText(),
                 nuevoContrasenna = cambiarContrasennaPasswordField.getText(),
@@ -138,7 +113,6 @@ public class EditoDatosAlumnos extends JFrame {
             usuario.setLegajo(Integer.parseInt(nuevoLegajo));
         }
     }
-
     private void reseteoPagina(){
         cambiarNombreTextField.setText("");
         cambiarLegajoTextField.setText("");
@@ -146,11 +120,38 @@ public class EditoDatosAlumnos extends JFrame {
         cambiarContrasennaPasswordField.setText("");
     }
 
+    //Metodos get
     public boolean getHayCambios(){
         return hayCambiosDatos;
     }
-
     public boolean getBorrarAlumno(){
         return borrarAlumno;
+    }
+
+
+    private boolean datosCargados(){
+        boolean datosCargados = false;
+        if (!cambiarApellidoTextField.getText().isEmpty() ||
+                !cambiarContrasennaPasswordField.getText().isEmpty() || !cambiarNombreTextField.getText().isEmpty() ||
+                !cambiarLegajoTextField.getText().isEmpty()){
+            datosCargados =true;
+        }
+        return datosCargados;
+    }
+    private boolean hayCambios(){
+        boolean hayCambios = false;
+        String nuevoAlumno = cambiarNombreTextField.getText(), nuevoApellido = cambiarApellidoTextField.getText(),
+                nuevoContrasenna = cambiarContrasennaPasswordField.getText(),
+                cambiarLegajo = cambiarLegajoTextField.getText(), actualNombre = usuario.getNombre(),
+                actualContrasenna = usuario.getContrasenna(), actualApellido = usuario.getApellido();
+        int actualLegajo= usuario.getLegajo();
+
+        if (!nuevoAlumno.equals(actualNombre) || !nuevoApellido.equals(actualApellido) ||
+                !nuevoContrasenna.equals(actualContrasenna) || !cambiarLegajo.equals(actualLegajo)){
+            hayCambios = true;
+        }
+
+
+        return hayCambios;
     }
 }
