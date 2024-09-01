@@ -38,9 +38,9 @@
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <component id="e14e8" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="e14e8" class="javax.swing.JTextField" binding="cambiarNombreTextField">
         <constraints>
-          <grid row="5" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -54,9 +54,9 @@
           <text value="Cambiar DNI"/>
         </properties>
       </component>
-      <component id="e7c40" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="e7c40" class="javax.swing.JTextField" binding="cambiarLegajoTextField">
         <constraints>
-          <grid row="9" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -70,9 +70,9 @@
           <text value="Cambiar contraseña"/>
         </properties>
       </component>
-      <component id="a5230" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+      <component id="a5230" class="javax.swing.JPasswordField" binding="cambiarContrasennaPasswordField">
         <constraints>
-          <grid row="11" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="11" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -135,9 +135,9 @@
           <text value="Cambiar apellido"/>
         </properties>
       </component>
-      <component id="e1326" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="e1326" class="javax.swing.JTextField" binding="cambiarApellidoTextField">
         <constraints>
-          <grid row="7" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -150,14 +150,6 @@
         <properties>
           <text value="Cambiar usuario:"/>
         </properties>
-      </component>
-      <component id="afa62" class="javax.swing.JPasswordField" binding="passwordField2" default-binding="true">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
       </component>
       <vspacer id="a9748">
         <constraints>
@@ -180,6 +172,14 @@
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
+      <component id="f2965" class="javax.swing.JTextField" binding="cambiarUsuarioTextField">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
     </children>
   </grid>
 </form>
