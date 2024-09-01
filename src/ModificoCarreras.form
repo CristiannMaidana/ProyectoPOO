@@ -177,7 +177,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="342f1" class="javax.swing.JButton" binding="button1" default-binding="true">
+                  <component id="342f1" class="javax.swing.JButton" binding="aceptarButton">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -188,7 +188,7 @@
                       <text value="Aceptar"/>
                     </properties>
                   </component>
-                  <component id="51b5e" class="javax.swing.JButton" binding="button2" default-binding="true">
+                  <component id="51b5e" class="javax.swing.JButton" binding="cancelarButton">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
