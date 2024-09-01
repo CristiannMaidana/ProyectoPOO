@@ -1,9 +1,16 @@
 public class Alumnos {
-    private String nombre, contrasenna, apellido;
+
+    //Constantes
     private final Materias[] materiasCursando = new Materias[3];
+
+    //Variables primitivas
+    private String nombre, contrasenna, apellido;
     private int legajo;
+
+    //Objetos
     private Carreras carreraDeAlumno;
 
+    //Constructor
     public Alumnos(String nombre, String apellido, int legajo, String contrasenna) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -11,21 +18,12 @@ public class Alumnos {
         this.contrasenna = contrasenna;
     }
 
-    public void setCarrera(Carreras carreraElegida) {
-        this.carreraDeAlumno = carreraElegida;
-    }
-
-    public boolean incribirAMaterias(String materiaElelgida){
-        boolean puedeCursar=true;
-        if(carreraDeAlumno.getPlanDeEstudio().aproboCorrelativas(carreraDeAlumno.getMateriasPorNombre(materiaElelgida))){
-            almacenoMateriasActivas(carreraDeAlumno.getMateriasPorNombre(materiaElelgida));
+    //Metodos void
+    public void vacioMaterias(){
+        for (int i=0; i<3;i++){
+            materiasCursando[i]=null;
         }
-        else {
-            puedeCursar=false;
-        }
-        return puedeCursar;
     }
-
     public void almacenoMateriasActivas(Materias materias){
         for (int pos=0; pos<6;pos++){
             if (materiasCursando[pos] == null) {
@@ -38,6 +36,53 @@ public class Alumnos {
         }
     }
 
+    //Metodos gets
+    public int getLegajo(){
+        return legajo;
+    }
+    public String getNombre(){
+        return nombre;
+    }
+    public String getContrasenna(){
+        return contrasenna;
+    }
+    public boolean getAnioAprobado (int annio){
+        boolean annioAprobado=true;
+        for (byte i=0; i<6; i++){
+            if (!carreraDeAlumno.carrera[annio][i].getNotaExamenFinal()){
+                annioAprobado=false;
+                break;
+            }
+        }
+        return annioAprobado;
+    }
+
+    public String getApellido(){
+        return apellido;
+    }
+    public Carreras getCarrera(){
+        return carreraDeAlumno;
+    }
+    public Materias getMateriasAlmacenadas (byte i){
+        return materiasCursando[i];
+    }
+    public Materias getMateriasDeCarrera(int annio, int materiaCuatri){
+        return carreraDeAlumno.getMateriasPorAnnioYMateria(annio,materiaCuatri);
+    }
+
+    //Metodos void sets
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+    public void setContrasenna(String contrasenna){
+        this.contrasenna=contrasenna;
+    }
+    public void setLegajo(int legajo){
+        this.legajo = legajo;
+    }
+    public void setApellido(String apellido){
+        this.apellido = apellido;
+    }
     public void setNotasParcial(double nota, String nombreMateria){
         for (byte i=0; i<3;i++){
             if (materiasCursando[i]!=null && nombreMateria.equals( materiasCursando[i].getNombreDeMateria()) && !materiasCursando[i].parcial){
@@ -54,7 +99,6 @@ public class Alumnos {
             }
         }//vacia la materia aprobada
     }
-
     public void setNotasExamen(double nota, String nombreMateria){
         for (byte i=0; i<3;i++){
             if (materiasCursando[i]!=null && nombreMateria.equals( materiasCursando[i].getNombreDeMateria()) && !materiasCursando[i].examenFinal)
@@ -68,76 +112,27 @@ public class Alumnos {
             }
         }//vacia la materia aprobada
     }
-
-    public Carreras getCarrera(){
-        return carreraDeAlumno;
+    public void setCarrera(Carreras carreraElegida) {
+        this.carreraDeAlumno = carreraElegida;
     }
+
 
     public String toString(){
         return nombre+", legajo: "+legajo;
     }
-
     public boolean materiasLlenas (){
         return materiasCursando[2] != null;
     }
-
-    public Materias getMateriasAlmacenadas (byte i){
-        return materiasCursando[i];
-    }
-
-    public Materias getMateriasDeCarrera(int annio, int materiaCuatri){
-        return carreraDeAlumno.getMateriasPorAnnioYMateria(annio,materiaCuatri);
-    }
-
-    public boolean getAnioAprobado (int annio){
-        boolean annioAprobado=true;
-        for (byte i=0; i<6; i++){
-            if (!carreraDeAlumno.carrera[annio][i].getNotaExamenFinal()){
-                annioAprobado=false;
-                break;
-            }
+    public boolean inscribirAMaterias(String materiaElelgida){
+        boolean puedeCursar=true;
+        if(carreraDeAlumno.getPlanDeEstudio().aproboCorrelativas(carreraDeAlumno.getMateriasPorNombre(materiaElelgida))){
+            almacenoMateriasActivas(carreraDeAlumno.getMateriasPorNombre(materiaElelgida));
         }
-        return annioAprobado;
-    }
-
-    public String getNombre(){
-        return nombre;
-    }
-
-    public String getContrasenna(){
-        return contrasenna;
-    }
-
-    public void vacioMaterias(){
-        for (int i=0; i<3;i++){
-            materiasCursando[i]=null;
+        else {
+            puedeCursar=false;
         }
+        return puedeCursar;
     }
-
-    public int getLegajo(){
-        return legajo;
-    }
-
-    public void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-
-    public void setContrasenna(String contrasenna){
-        this.contrasenna=contrasenna;
-    }
-
-    public void setLegajo(int legajo){
-        this.legajo = legajo;
-    }
-
-    public void setApellido(String apellido){
-        this.apellido = apellido;
-    }
-
-    public String getApellido(){
-        return apellido;
-    }
-
     public boolean materiasVacias(){
         boolean vacio=false;
         for (byte i=0; i<3; ++i){
