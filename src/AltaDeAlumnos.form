@@ -233,7 +233,8 @@
                   <background color="-12790785"/>
                   <font name="Arial" size="12"/>
                   <foreground color="-854792"/>
-                  <text value="Crear nuevo alumno"/>
+                  <icon value="imagenes/new-user.png"/>
+                  <text value="  Crear nuevo alumno"/>
                 </properties>
               </component>
               <component id="e57f8" class="javax.swing.JButton" binding="cancelarButton" default-binding="true">
