@@ -18,6 +18,7 @@ public class ModificoCarreras extends JFrame {
     private JButton cancelarButton;
     private JList listMaterias;
     private JCheckBox checkBox1;
+    private JLabel seleccioneUnaMateiraLabel;
     private boolean paginaPrincipal=false, altaDeAlumnos = false, buscoAlumnos = false, altaDeCarreras = false,
             altaPlanDeEstudio = false, BmodificoCarreras=false;
     private AlmacenCarreras almacenCarreras;
@@ -120,7 +121,7 @@ public class ModificoCarreras extends JFrame {
                     cargoMaterias();
                     JOptionPane.showMessageDialog(null, "Se cargaron las materias de la carrera:" +
                             " "+nombreCarreraElegida+" exitosamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                    textFieldCambiaMateriaCarrera.setText("Seleccione una materia...");
+                    seleccioneUnaMateiraLabel.setText("Seleccione una materia:");
                     aceptarButton.setText("Hacer obligatoria");
                     cancelarButton.setText("Hacer Optativa");
                 }
