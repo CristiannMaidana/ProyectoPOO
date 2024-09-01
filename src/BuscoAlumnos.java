@@ -147,6 +147,10 @@ public class BuscoAlumnos extends JFrame {
                     JOptionPane.showMessageDialog(null, "Debe estar inscripto a una carrera.",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
+                else if (usuario.getCarrera().getPlanDeEstudio() != null){
+                    JOptionPane.showMessageDialog(null, "La carrera no tiene asignado ningun" +
+                            " plan de estudio. Cargue uno para avanzar.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     inscripcionAMaterias = true;
                     CountDownLatch latch = new CountDownLatch(1);
@@ -230,9 +234,15 @@ public class BuscoAlumnos extends JFrame {
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
-                    VperfilUsuario perfilUsuario = new VperfilUsuario(usuario);
-                    perfilUsuario.setVisible(true);
-                    perfilUsuario.setLocationRelativeTo(null);
+                    if (usuario.getCarrera().getPlanDeEstudio() != null){
+                        JOptionPane.showMessageDialog(null, "La carrera no tiene asignado ningun" +
+                                " plan de estudio. Cargue uno para avanzar.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        VperfilUsuario perfilUsuario = new VperfilUsuario(usuario);
+                        perfilUsuario.setVisible(true);
+                        perfilUsuario.setLocationRelativeTo(null);
+                    }
                 }
             }
         });
