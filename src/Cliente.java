@@ -1,289 +1,273 @@
-import javax.swing.*;
+import java.util.concurrent.CountDownLatch;
 
 public class Cliente {
-    static Alumnos alumno1;
-    static AlumnosRegistrados cargoAlumnoNuevo;
-    static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
+private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
+        private static AlumnosRegistrados alumnosRegistrados = new AlumnosRegistrados(null);
+        private static PaginaPrincipal paginaPrincipal;
+        private static AltaDeAlumnos altaDeAlumnos;
+        private static AltaDeCarreras altaDeCarreras;
+        private static AltaDePlanDeEstudio altaDePlanDeEstudio;
+        private static BuscoAlumnos buscoAlumnos;
+        private static ModificoCarreras modificoCarreras;
+        private static CountDownLatch latch = new CountDownLatch(1);
 
-    public static void main (String[]args) {
-        cargoAlumnosRegistrados();//Cargo los alumnos en la clase "AlumnosRegistrados"
-        VCreoCarreras panelCreoCarreras;
-        //VperfilUsuario panelUsuario;
-        Vlogeo panelLogearse = ejecutoPanelLogearse();
-        while (panelLogearse.getBotones() || panelLogearse.getCrearUsuario()) {
-            //Si ingreso un admin creara carreras:
-            if (verificoAdmin(panelLogearse)){
-                panelCreoCarreras = ejecutoPanelCreoCarreras();
-                if (panelCreoCarreras.getBoton())
-                    creoCarrera(panelCreoCarreras);
-                else
-                    panelLogearse = ejecutoPanelLogearse();
-            }
-            //Si no es admin o muestra perfil si se logea o crea usuario
-            else {
-                if (panelLogearse.getCrearUsuario()) {
-                    VInscripcion panelInscripcion = ejecutoPanelInscripcion();
 
-                    if (panelInscripcion.getBoton())
-                        almacenoNuevoAlumno(panelInscripcion);
-
-                    panelLogearse.crearUsuario = false;
-                    panelLogearse = ejecutoPanelLogearse();
+        public static void main(String[] args) throws InterruptedException {
+            creoCarrera();
+            creoAlumno();
+            do {
+                if (paginaPrincipal == null || verificoPaginaPrincipal(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras)) {
+                    reseteo(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras);
+                    if (paginaPrincipal != null)
+                        latch = new CountDownLatch(1);
+                    paginaPrincipal = new PaginaPrincipal(latch);//Envio el semaforo a la ventana
+                    paginaPrincipal.setVisible(true);           //Hago visible la ventana
+                    paginaPrincipal.setLocationRelativeTo(null);//La coloco en el centro de la pantalla a la ventana
+                    latch.await();  //Espero a que termine con mi semaforo.
                 }
+                else if (verificoAltaDeAlumnos(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras)) {
+                    reseteo(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras);
+                    inicializoSemaforo();
+                    altaDeAlumnos = new AltaDeAlumnos();            //Creo la ventana
+                    altaDeAlumnos.setLatch(latch);                  //envio el semaforo inicializado
+                    altaDeAlumnos.setRegistroAlumnos(alumnosRegistrados);
+                    altaDeAlumnos.setVisible(true);                 //Hago visible la pagina
+                    altaDeAlumnos.setLocationRelativeTo(null);      //Coloco la ventana en el medio de la pantalla
 
-                if (verificoAdmin(panelLogearse)){
-                    panelCreoCarreras = ejecutoPanelCreoCarreras();
-                    if (panelCreoCarreras.getBoton())
-                        creoCarrera(panelCreoCarreras);
-                    else
-                        panelLogearse = ejecutoPanelLogearse();
-                }
+                    latch.await();                                  //espera a que termine de usar el semaforo
+                    creoAlumnoNuevo(altaDeAlumnos);                 //Le manda el form para que cree el alumno
 
-                if (panelLogearse.getBotones()) {
-                    alumno1 = cargoAlumnoNuevo.buscoAlumno(panelLogearse.getNombreUsuario(), panelLogearse.getContrasennaUsuario());
-
-                    if (alumno1.getCarrera() != null) {
-                        VperfilUsuario panelUsuario = ejecutoPanelUsuario();
-
-                        if (panelUsuario.getCargoMasMaterias()) {
-                            VInscripcionMaterias panelCargoMaterias = ejecutoPanelInscripcionMaterias();
-
-                            if (!panelCargoMaterias.getBotonAceptar())
-                                if (!panelCargoMaterias.getBotonCancelar() || panelCargoMaterias.getBotonCargoNotas()) {
-                                    VCargoNotas panelCargoNotas = ejecutoPanelCargoNotas();
-
-                                    boolean repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
-                                    while (repito) {
-                                        repito = cargoMateriasNotasMuestroHistorial(panelCargoNotas, panelCargoMaterias);
-                                    }
-                                }
-                        }
-                        if (panelUsuario.getBoton()) {
-                            panelLogearse = ejecutoPanelLogearse();
-                        }
+                    while (altaDeAlumnos.getCreoNuevoAlumno()) {
+                        inicializoSemaforo();
+                        altaDeAlumnos.setLatch(latch);
+                        altaDeAlumnos.setRegistroAlumnos(alumnosRegistrados);
+                        latch.await();
+                        creoAlumnoNuevo(altaDeAlumnos);                 //Le manda el form para que cree el alumno
                     }
                 }
-            }
+                else if (verificoALtaDeCarreras(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras)) {
+                    reseteo(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras);
+                    inicializoSemaforo();
+                    altaDeCarreras = new AltaDeCarreras();            //Creo la ventana y envio el semaforo inicializado
+                    altaDeCarreras.setLatch(latch);
+                    altaDeCarreras.setVisible(true);                 //Hago visible la pagina
+                    altaDeCarreras.setLocationRelativeTo(null);      //Coloco la ventana en el medio de la pantalla
+
+                    latch.await();                                  //espera a que termine de usar el semaforo
+                    if (altaDeCarreras.getNuevaCarreras())
+                        creoCarreraNueva(altaDeCarreras);
+
+                    while (altaDeCarreras.getNuevaCarreras()) {
+                        inicializoSemaforo();
+                        altaDeCarreras.setLatch(latch);
+                        latch.await();
+                        if (altaDeCarreras.getNuevaCarreras())
+                            creoCarreraNueva(altaDeCarreras);
+                    }
+                }
+                else if (verificoBuscoAlumnos(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras)) {
+                    reseteo(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras);
+                    inicializoSemaforo();
+                    buscoAlumnos = new BuscoAlumnos(alumnosRegistrados, almacenCarreras, latch);
+                    buscoAlumnos.setVisible(true);
+                    buscoAlumnos.setLocationRelativeTo(null);
+                    latch.await();
+                }
+                else if (verificoAltaDePlanDeEstudio(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras)) {
+                    reseteo(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras);
+                    inicializoSemaforo();
+                    altaDePlanDeEstudio = new AltaDePlanDeEstudio(almacenCarreras, latch);
+                    altaDePlanDeEstudio.setAlumnos(alumnosRegistrados);
+                    altaDePlanDeEstudio.setVisible(true);
+                    altaDePlanDeEstudio.setLocationRelativeTo(null);
+                    latch.await();
+                }
+                else if (verificoModificoCarrera(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras)){
+                    reseteo(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras);
+                    inicializoSemaforo();
+                    modificoCarreras = new ModificoCarreras(almacenCarreras);
+                    modificoCarreras.setLatch(latch);
+                    modificoCarreras.setVisible(true);
+                    modificoCarreras.setLocationRelativeTo(null);
+                    latch.await();
+                }
+            } while(todo(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras));
         }
-    }
 
-    static boolean verificoAdmin(Vlogeo panelLogearse) {
-        return panelLogearse.getNombreUsuario().equals("admin");
-    }
+        private static void inicializoSemaforo(){
+            latch = new CountDownLatch(1);                   //Inicializo el semaforo de nuevo
+        }
 
-    static void creoCarrera(VCreoCarreras panelCarreras) {
-        int annio, cuatri;
-        String nombre, planDeEstudio;
-
-        annio = panelCarreras.getAnnioCarrera();
-        cuatri = panelCarreras.getCuatriCarrera();
-        nombre = panelCarreras.getNombreCarrera();
-        planDeEstudio = panelCarreras.getPlanEstudioCarrera();
-
-        Carreras newCarrera;
-        if (cuatri == 2) {
-             newCarrera= new Carreras(nombre, annio, 6) {
+        private static void creoCarrera(){
+            Carreras carreras = new Carreras("CarreraA", 4,6) {
                 @Override
                 public float getCantMateriasOptativas() {
                     return 0;
                 }
             };
-        }else {
-            newCarrera = new Carreras(nombre, annio, 3) {
+            carreras.setPlanDeEstudio(new PlanDeEstudioA(null));
+            carreras.getPlanDeEstudio().setCarrera(carreras);
+            carreras.setMateriasOptativas(5);
+            carreras.setMateriasObligatoria(3);
+            carreras.generoMaterias();
+            almacenCarreras.add(carreras);
+        }
+
+        private static void creoAlumno(){
+            Alumnos alumnos = new Alumnos("Cristian", "prueba", 1, "sdfsf");
+            alumnosRegistrados.add(alumnos);
+        }
+
+        private static void creoAlumnoNuevo(AltaDeAlumnos al) {
+            Alumnos alumnoX = new Alumnos(al.getNombre(), al.getApellido() ,al.getDni(),al.getContrasenna());
+            alumnoX.setCarrera(null);
+            alumnosRegistrados.add(alumnoX);
+        }
+
+        private static void creoCarreraNueva(AltaDeCarreras altaCarrrera) {
+            Carreras carreraX = new Carreras(altaCarrrera.getNombreDeCarrera(), altaCarrrera.getAnnioCarrera(), altaCarrrera.getCuatriCarrera()) {
                 @Override
                 public float getCantMateriasOptativas() {
                     return 0;
                 }
             };
+            carreraX.setPlanDeEstudio(null);
+            carreraX.setMateriasObligatoria(altaCarrrera.getCantMatOb());
+            carreraX.setMateriasOptativas(altaCarrrera.getCantMatOp());
+            carreraX.generoMaterias();
+            almacenCarreras.add(carreraX);
         }
 
-        newCarrera.generoMaterias();
-
-        switch (planDeEstudio){
-            case "Plan A": {
-                newCarrera.setPlanDeEstudio(new PlanDeEstudioA(newCarrera));
-                break;
-            }
-            case "Plan B": {
-                newCarrera.setPlanDeEstudio(new PlanDeEstudioB(newCarrera));
-                break;
-            }
-            case "Plan C": {
-                newCarrera.setPlanDeEstudio(new PlanDeEstudioC(newCarrera,null));
-                break;
-            }
-            case "Plan D": {
-                newCarrera.setPlanDeEstudio(new PlanDeEstudioD(newCarrera,null));
-                break;
-            }
-            case "Plan E": {
-                newCarrera.setPlanDeEstudio(new PlanDeEstudioE(newCarrera,null));
-                break;
-            }
+        private static boolean verificoPaginaPrincipal(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
+                                                       AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
+                                                       BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
+            return (fPrincipal != null && fPrincipal.getPaginaPrincipal()) ||
+                    (fAltaAlumnos != null && fAltaAlumnos.getPaginaPrincipal()) ||
+                    (fAltaCarreras != null && fAltaCarreras.getPaginaPrincipal()) ||
+                    (fAltaPlan != null && fAltaPlan.getPaginaPrincipal()) ||
+                    (fBuscoAlumnos != null && fBuscoAlumnos.getPaginaPrincipa()) ||
+                    (fModificoCarreras != null && fModificoCarreras.getPaginaPrincipal());
         }
 
-        almacenCarreras.add(newCarrera);
-    }
+        private static boolean verificoAltaDeAlumnos(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
+                                                     AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
+                                                     BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
+            return (fPrincipal != null && fPrincipal.getAltaDeAlumnosButton()) ||
+                    (fAltaCarreras != null && fAltaCarreras.getAltaDeAlumnos()) ||
+                    (fAltaAlumnos != null && fAltaAlumnos.getAltaDeAlumnos()) ||
+                    (fAltaPlan != null && fAltaPlan.getAltaDeAlumnos()) ||
+                    (fBuscoAlumnos != null && fBuscoAlumnos.getAltaDeAlumnos()) ||
+                    (fModificoCarreras != null && fModificoCarreras.getAltaDeAlumnos());
+        }
 
-    static void cargoAlumnosRegistrados (){
-        cargoAlumnoNuevo = new AlumnosRegistrados(creoAlumnoSofia());
-        //admin 123456
-        Alumnos admin = new Alumnos("admin", 123456, "123456");
-        cargoAlumnoNuevo.add(admin);
-    }
+        private static boolean verificoALtaDeCarreras(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
+                                                      AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
+                                                      BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
+            return (fPrincipal != null && fPrincipal.getAltaDeCarrerasButton()) ||
+                    (fAltaAlumnos != null && fAltaAlumnos.getAltaDeCarreras()) ||
+                    (fAltaPlan != null && fAltaPlan.getAltaDeCarreras()) ||
+                    (fBuscoAlumnos != null && fBuscoAlumnos.getAltaDeCarreras()) ||
+                    (fAltaCarreras != null && fAltaCarreras.getAltaDeCarreras()) ||
+                    (fModificoCarreras != null && fModificoCarreras.getAltaDeCarreras());
+        }
 
-    static void almacenoNuevoAlumno (VInscripcion panelInscripcion){
-        alumno1 = new Alumnos(panelInscripcion.getNombre() + " " + panelInscripcion.getApellido(),
-                panelInscripcion.getDni(), panelInscripcion.getContrasenna());
-        alumno1.setCarrera(almacenCarreras.getCarreraPorNombre(panelInscripcion.getCarrera()));
-        switch (panelInscripcion.getPlanElegido()){
-            case "Plan de estudio ¨A¨": {
-                alumno1.getCarrera().getPlanDeEstudio().setCarrera(alumno1.getCarrera());
+        private static boolean verificoAltaDePlanDeEstudio(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
+                                                           AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
+                                                           BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
+            return (fPrincipal != null && fPrincipal.getAltaDePlanDeButton()) ||
+                    (fAltaAlumnos != null && fAltaAlumnos.getAltaPlanDeEstudio()) ||
+                    (fAltaCarreras != null && fAltaCarreras.getAltaDePlanDe()) ||
+                    (fBuscoAlumnos != null && fBuscoAlumnos.getAltaDePlanDeEstudio()) ||
+                    (fModificoCarreras !=null && fModificoCarreras.getAltaPlanDeEstudio());
+        }
 
-                break;
+        private static boolean verificoBuscoAlumnos(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
+                                                    AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
+                                                    BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
+            return (fPrincipal != null && fPrincipal.getBuscoAlumnoButton()) ||
+                    (fAltaAlumnos != null && fAltaAlumnos.getBuscoAlumnos()) ||
+                    (fAltaCarreras != null && fAltaCarreras.getBuscoAlumnos()) ||
+                    (fAltaPlan != null && fAltaPlan.getBuscoAlumnos()) ||
+                    (fModificoCarreras != null && fModificoCarreras.getBuscoAlumnos());
+        }
+
+
+        private static boolean verificoModificoCarrera(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
+                                                       AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
+                                                       BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
+            return (fPrincipal != null && fPrincipal.getModificoCarreraButton()) ||
+                    (fAltaAlumnos != null && fAltaAlumnos.getModificoCarrera()) ||
+                    (fAltaCarreras != null && fAltaCarreras.getModificoCarrera()) ||
+                    (fAltaPlan != null && fAltaPlan.getModificoCarrera()) ||
+                    (fBuscoAlumnos != null && fBuscoAlumnos.getModificoCarreras()) ||
+                    (fModificoCarreras != null && fModificoCarreras.getModificoCarreras());
+        }
+
+        private static boolean todo(PaginaPrincipal paginaPrincipal, AltaDeAlumnos altaDeAlumnos,
+                                    AltaDeCarreras altaDeCarreras, AltaDePlanDeEstudio altaDePlanDeEstudio,
+                                    BuscoAlumnos buscoAlumnos, ModificoCarreras modificoCarreras) {
+            return verificoPaginaPrincipal(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras) ||
+                    verificoAltaDeAlumnos(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras) ||
+                    verificoALtaDeCarreras(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras) ||
+                    verificoAltaDePlanDeEstudio(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras) ||
+                    verificoBuscoAlumnos(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras) ||
+                    verificoModificoCarrera(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras);
+        }
+
+        private static void reseteo(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
+                                    AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
+                                    BuscoAlumnos fBuscoAlumnos, ModificoCarreras fmodificoCarreras) {
+            if (fPrincipal != null) {
+                fPrincipal.setPaginaPrincipal(false);
+                fPrincipal.setAltaDeAlumnos(false);
+                fPrincipal.setAltaDeCarreras(false);
+                fPrincipal.setAltaPlanDeEstudio(false);
+                fPrincipal.setBuscoAlumnos(false);
+                fPrincipal.setModificoCarreras(false);
             }
-            case "Plan de estudio ¨B¨": {
-                alumno1.getCarrera().getPlanDeEstudio().setCarrera(alumno1.getCarrera());
-                break;
+
+            if (fAltaAlumnos != null) {
+                fAltaAlumnos.setPaginaPrincipal(false);
+                fAltaAlumnos.setAltaDeAlumnos(false);
+                fAltaAlumnos.setAltaDeCarreras(false);
+                fAltaAlumnos.setAltaPlanDeEstudio(false);
+                fAltaAlumnos.setBuscoAlumnos(false);
+                fAltaAlumnos.setModificoCarreras(false);
             }
-            case "Plan de estudio ¨C¨": {
-                alumno1.getCarrera().getPlanDeEstudio().setCarrera(alumno1.getCarrera());
-                alumno1.getCarrera().getPlanDeEstudio().setAlumno(alumno1);
-                break;
+
+            if (fAltaCarreras != null) {
+                fAltaCarreras.setPaginaPrincipal(false);
+                fAltaCarreras.setAltaDeAlumnos(false);
+                fAltaCarreras.setAltaDeCarreras(false);
+                fAltaCarreras.setAltaPlanDeEstudio(false);
+                fAltaCarreras.setBuscoAlumnos(false);
+                fAltaCarreras.setModificoCarreras(false);
             }
-            case "Plan de estudio ¨D¨": {
-                alumno1.getCarrera().getPlanDeEstudio().setCarrera(alumno1.getCarrera());
-                alumno1.getCarrera().getPlanDeEstudio().setAlumno(alumno1);
-                break;
+
+            if (fAltaPlan != null) {
+                fAltaPlan.setPaginaPrincipal(false);
+                fAltaPlan.setAltaDeAlumnos(false);
+                fAltaPlan.setAltaDeCarreras(false);
+                fAltaPlan.setAltaPlanDeEstudio(false);
+                fAltaPlan.setBuscoAlumnos(false);
+                fAltaPlan.setModificoCarreras(false);
             }
-            case "Plan de estudio ¨E¨": {
-                alumno1.getCarrera().getPlanDeEstudio().setCarrera(alumno1.getCarrera());
-                alumno1.getCarrera().getPlanDeEstudio().setAlumno(alumno1);
-                break;
+
+            if (fBuscoAlumnos != null) {
+                fBuscoAlumnos.setPaginaPrincipal(false);
+                fBuscoAlumnos.setAltaDeAlumnos(false);
+                fBuscoAlumnos.setAltaDeCarreras(false);
+                fBuscoAlumnos.setAltaPlanDeEstudio(false);
+                fBuscoAlumnos.setBuscoAlumnos(false);
+                fBuscoAlumnos.setModificoCarreras(false);
             }
-        }//fin switch Incripcion Plan de Estudio al alumno
-        cargoAlumnoNuevo.add(alumno1);
-    }
-
-    static Alumnos creoAlumnoSofia (){
-        Alumnos alumno2 = new Alumnos("Sofia Martinez", 43248234, "123456");
-        alumno2.setCarrera(new CarreraPruebas(4,6));
-        alumno2.getCarrera().setPlanDeEstudio(new PlanDeEstudioB(alumno2.getCarrera()));
-        materiasAlumnos(alumno2);
-        return alumno2;
-    }
-
-    static void materiasAlumnos(Alumnos alumno1){
-        alumno1.incribirAMaterias("materia1");
-        alumno1.incribirAMaterias("materia2");
-        alumno1.incribirAMaterias("materia3");
-        alumno1.setNotasParcial(9,"materia1");
-        alumno1.setNotasParcial(9,"materia2");
-        alumno1.setNotasParcial(9,"materia3");
-        alumno1.incribirAMaterias("materia4");
-        alumno1.incribirAMaterias("materia5");
-        alumno1.incribirAMaterias("materia6");
-        alumno1.setNotasParcial(3,"materia4");
-        alumno1.setNotasParcial(3,"materia5");
-        alumno1.setNotasParcial(3,"materia6");
-
-        alumno1.incribirAMaterias("materia21");
-        alumno1.incribirAMaterias("materia22");
-        alumno1.incribirAMaterias("materia23");
-        alumno1.setNotasParcial(3,"materia21");
-        alumno1.setNotasParcial(3,"materia22");
-        alumno1.setNotasParcial(3,"materia23");
-
-
-
-        alumno1.incribirAMaterias("materia24");
-        alumno1.incribirAMaterias("materia25");
-        alumno1.incribirAMaterias("materia26");
-        alumno1.setNotasParcial(3,"materia24");
-        alumno1.setNotasParcial(3,"materia25");
-        alumno1.setNotasParcial(3,"materia26");
-/*
-
-        alumno1.incribirAMaterias("materia31");
-        alumno1.incribirAMaterias("materia32");
-        alumno1.incribirAMaterias("materia33");
-        alumno1.setNotasParcial(9,"materia31");
-        alumno1.setNotasParcial(9,"materia32");
-        alumno1.setNotasParcial(9,"materia33");
-        alumno1.incribirAMaterias("materia34");
-        alumno1.incribirAMaterias("materia35");
-        alumno1.incribirAMaterias("materia36");
-        alumno1.setNotasParcial(9,"materia34");
-        alumno1.setNotasParcial(9,"materia35");
-        alumno1.setNotasParcial(9,"materia36");*/
-    }
-
-    static void hiloEspero(JFrame panelLogearse){
-        while (panelLogearse.isVisible()) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (fmodificoCarreras != null) {
+                fmodificoCarreras.setPaginaPrincipal(false);
+                fmodificoCarreras.setAltaDeAlumnos(false);
+                fmodificoCarreras.setAltaDeCarreras(false);
+                fmodificoCarreras.setAltaPlanDeEstudio(false);
+                fmodificoCarreras.setBuscoAlumnos(false);
+                fmodificoCarreras.setModificoCarreras(false);
             }
         }
-    }
-
-    static boolean cargoMateriasNotasMuestroHistorial(VCargoNotas panelCargoNotas, VInscripcionMaterias panelCargoMaterias){
-        while (panelCargoNotas.repitoCargaMaterias() && !panelCargoMaterias.getBotonCancelar()) {
-            panelCargoMaterias = ejecutoPanelInscripcionMaterias();
-
-            if (panelCargoMaterias.getBotonCargoNotas()) {
-                panelCargoNotas = ejecutoPanelCargoNotas();
-            }
-        }
-        return panelCargoMaterias.getBotonCargoNotas();
-    }
-
-    static Vlogeo ejecutoPanelLogearse(){
-        Vlogeo panelLogearse = new Vlogeo(cargoAlumnoNuevo);
-        panelLogearse.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-        panelLogearse.setVisible(true);
-        hiloEspero(panelLogearse);
-        return panelLogearse;
-    }
-
-    static VInscripcion ejecutoPanelInscripcion(){
-        VInscripcion panelInscripcion = new VInscripcion(almacenCarreras);
-        panelInscripcion.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-        panelInscripcion.setVisible(true);
-        hiloEspero(panelInscripcion);
-        return panelInscripcion;
-    }
-
-    static VInscripcionMaterias ejecutoPanelInscripcionMaterias(){
-        VInscripcionMaterias panelCargoMaterias = new VInscripcionMaterias(alumno1);
-        panelCargoMaterias.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-        panelCargoMaterias.setVisible(true);
-        hiloEspero(panelCargoMaterias);
-        return panelCargoMaterias;
-    }
-
-    static VCargoNotas ejecutoPanelCargoNotas(){
-        VCargoNotas panelCargoNotas = new VCargoNotas(alumno1);
-        panelCargoNotas.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-        panelCargoNotas.setVisible(true);
-        hiloEspero(panelCargoNotas);
-        return panelCargoNotas;
-    }
-
-    static VperfilUsuario ejecutoPanelUsuario(){
-        VperfilUsuario panelUsuario = new VperfilUsuario(alumno1);
-        panelUsuario.setLocationRelativeTo(null);//Me ejecuta en el medio de la pantalla mi frame
-        panelUsuario.setVisible(true);
-        hiloEspero(panelUsuario);
-        return panelUsuario;
-    }
-
-    static VCreoCarreras ejecutoPanelCreoCarreras(){
-        VCreoCarreras panelCarreras = new VCreoCarreras();
-        panelCarreras.setLocationRelativeTo(null);
-        panelCarreras.setVisible(true);
-        hiloEspero(panelCarreras);
-        return panelCarreras;
-    }
 }
