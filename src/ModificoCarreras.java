@@ -26,6 +26,7 @@ public class ModificoCarreras extends JFrame {
     private Carreras carreraElegida;
     private CountDownLatch latch;
 
+    //Constructor
     public ModificoCarreras(AlmacenCarreras almacenCarreras){
         this.almacenCarreras = almacenCarreras;
         setUndecorated(true);
@@ -251,58 +252,7 @@ public class ModificoCarreras extends JFrame {
         });
     }
 
-    public boolean getPaginaPrincipal() {
-        return paginaPrincipal;
-    }
-
-    public boolean getAltaDeAlumnos() {
-        return altaDeAlumnos;
-    }
-
-    public boolean getAltaDeCarreras() {
-        return altaDeCarreras;
-    }
-
-    public boolean getBuscoAlumnos() {
-        return buscoAlumnos;
-    }
-
-    public boolean getAltaPlanDeEstudio() {
-        return altaPlanDeEstudio;
-    }
-
-    public boolean getModificoCarreras() {
-        return BmodificoCarreras;
-    }
-
-    public void setPaginaPrincipal(boolean paginaPrincipal) {
-        this.paginaPrincipal = paginaPrincipal;
-    }
-
-    public void setAltaDeAlumnos(boolean altaDeAlumnos) {
-        this.altaDeAlumnos = altaDeAlumnos;
-    }
-
-    public void setAltaDeCarreras(boolean altaDeCarreras) {
-        this.altaDeCarreras = altaDeCarreras;
-    }
-
-    public void setAltaPlanDeEstudio(boolean altaPlanDeEstudio) {
-        this.altaPlanDeEstudio = altaPlanDeEstudio;
-    }
-
-    public void setBuscoAlumnos(boolean buscoAlumnos) {
-        this.buscoAlumnos = buscoAlumnos;
-    }
-
-    public void setModificoCarreras(boolean modificoCarreras) {
-        this.BmodificoCarreras = modificoCarreras;
-    }
-
-    public void setAlmacenCarreras(AlmacenCarreras almacenCarreras) {
-        this.almacenCarreras = almacenCarreras;
-    }
-
+    //Metodos void
     public void cargoCarreras(){
         comboBoxCarreras.removeAllItems();
         comboBoxCarreras.addItem("Elija una carrera:");
@@ -310,7 +260,6 @@ public class ModificoCarreras extends JFrame {
             comboBoxCarreras.addItem(almacenCarreras.getCarrera(i).getNombre());
         }
     }
-
     public void cargoMaterias(){
         DefaultListModel modelo = new DefaultListModel();
         for (int i=0; i<carreraElegida.getAnniosCarrera(); i++){
@@ -320,16 +269,10 @@ public class ModificoCarreras extends JFrame {
         }
         listMaterias.setModel(modelo);
     }
-
     public void reseteoModificarMaterias(){
         textFieldCambiaMateriaCarrera.setText("");
         cargoMaterias();
     }
-
-    public void setLatch(CountDownLatch latch){
-        this.latch = latch;
-    }
-
     public void reseteoTodo(){
         DefaultListModel modelo = new DefaultListModel();
         comboBoxCarreras.setSelectedIndex(0);
@@ -339,7 +282,6 @@ public class ModificoCarreras extends JFrame {
         aceptarButton.setText("Aceptar");
         cancelarButton.setText("Cancelar");
     }
-
     public void reseteoTodoDos(){
         cargoCarreras();
         cargoCarreraslist();
@@ -348,12 +290,54 @@ public class ModificoCarreras extends JFrame {
         aceptarButton.setText("Aceptar");
         cancelarButton.setText("Cancelar");
     }
-
     private void cargoCarreraslist(){
         DefaultListModel modelo = new DefaultListModel();
         for(int i=0; i<almacenCarreras.getCantidadCarreras(); i++){
             modelo.addElement(almacenCarreras.getCarrera(i).getNombre());
         }
         listMaterias.setModel(modelo);
+    }
+
+    //Metodos gets
+    public boolean getPaginaPrincipal() {
+        return paginaPrincipal;
+    }
+    public boolean getAltaDeAlumnos() {
+        return altaDeAlumnos;
+    }
+    public boolean getAltaDeCarreras() {
+        return altaDeCarreras;
+    }
+    public boolean getBuscoAlumnos() {
+        return buscoAlumnos;
+    }
+    public boolean getAltaPlanDeEstudio() {
+        return altaPlanDeEstudio;
+    }
+    public boolean getModificoCarreras() {
+        return BmodificoCarreras;
+    }
+
+    //Metodos set
+    public void setPaginaPrincipal(boolean paginaPrincipal) {
+        this.paginaPrincipal = paginaPrincipal;
+    }
+    public void setAltaDeAlumnos(boolean altaDeAlumnos) {
+        this.altaDeAlumnos = altaDeAlumnos;
+    }
+    public void setAltaDeCarreras(boolean altaDeCarreras) {
+        this.altaDeCarreras = altaDeCarreras;
+    }
+    public void setAltaPlanDeEstudio(boolean altaPlanDeEstudio) {
+        this.altaPlanDeEstudio = altaPlanDeEstudio;
+    }
+    public void setBuscoAlumnos(boolean buscoAlumnos) {
+        this.buscoAlumnos = buscoAlumnos;
+    }
+    public void setModificoCarreras(boolean modificoCarreras) {
+        this.BmodificoCarreras = modificoCarreras;
+    }
+    public void setLatch(CountDownLatch latch){
+        this.latch = latch;
     }
 }
