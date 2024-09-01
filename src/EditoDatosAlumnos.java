@@ -37,13 +37,18 @@ public class EditoDatosAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                //Si algo esta cambiado y no vacio caso correcto
                 if (datosCargados() && hayCambios()) {
-                    JOptionPane.showMessageDialog(null, "Se guardaron los cambios.", "Aviso",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    guardarCambios();
-                    reseteoPagina();
-                    hayCambiosDatos = true;
+                    if (cambiarLegajoTextField.getText().matches("\\d+")) {
+                        JOptionPane.showMessageDialog(null, "Se guardaron los cambios.", "Aviso",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        guardarCambios();
+                        reseteoPagina();
+                        hayCambiosDatos = true;
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "El DNI tiene que ser un numero " +
+                                "valido.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "No hay cambios por hacer.", "Aviso",
@@ -86,7 +91,7 @@ public class EditoDatosAlumnos extends JFrame {
 
     private boolean datosCargados(){
         boolean datosCargados = false;
-        if (!cambiarApellidoTextField.getText().isEmpty() || !cambiarUsuarioTextField.getText().isEmpty() ||
+        if (!cambiarApellidoTextField.getText().isEmpty() ||
                 !cambiarContrasennaPasswordField.getText().isEmpty() || !cambiarNombreTextField.getText().isEmpty() ||
                 !cambiarLegajoTextField.getText().isEmpty()){
             datosCargados =true;
