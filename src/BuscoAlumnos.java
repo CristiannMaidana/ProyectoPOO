@@ -191,7 +191,7 @@ public class BuscoAlumnos extends JFrame {
                     JOptionPane.showMessageDialog(null, "Busque a un alumno.", "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
-                else if (!usuario.materiasLlenas()){
+                else if (!usuario.materiasLlenas() && !usuario.materiasVacias()){
                     JOptionPane.showMessageDialog(null, "Necesita estar inscripto a alguna " +
                             "materia.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -376,6 +376,7 @@ public class BuscoAlumnos extends JFrame {
     }
 
     private void cargoDatosAlumnos(){
+        boolean siHabiaMaterias=false;
         modelDatosAlumno.clear();
         if (!usuario.getNombre().isEmpty())
             modelDatosAlumno.addElement("Nombre: "+usuario.getNombre()+" "+usuario.getApellido());
@@ -391,9 +392,18 @@ public class BuscoAlumnos extends JFrame {
                 if (usuario.getMateriasAlmacenadas(i) != null)
                     modelDatosAlumno.addElement("   - "+usuario.getMateriasAlmacenadas(i).getNombreDeMateria());
             }
-        }else{
-            modelDatosAlumno.addElement("No esta inscripto a ninguna materia.");
+            siHabiaMaterias=true;
         }
+        else if(!siHabiaMaterias){
+            for (byte i=0;i<3;i++){
+                if (usuario.getMateriasAlmacenadas(i) != null) {
+                    modelDatosAlumno.addElement("   - " + usuario.getMateriasAlmacenadas(i).getNombreDeMateria());
+                    siHabiaMaterias=true;
+                }
+            }
+        }
+        if(!siHabiaMaterias)
+             modelDatosAlumno.addElement("No esta inscripto a ninguna materia.");
         listDatosAlumno.setModel(modelDatosAlumno);
     }
 
