@@ -14,7 +14,8 @@ public class EditoDatosAlumnos extends JFrame {
     private JCheckBox checkBox1;
     private JTextField cambiarUsuarioTextField;
     private Alumnos usuario;
-    private boolean hayCambiosDatos;
+    private boolean hayCambiosDatos, borrarAlumno;
+    private int alumnoAEliminar;
 
     public EditoDatosAlumnos(Alumnos alumno) {
         this.usuario = alumno;
@@ -50,6 +51,16 @@ public class EditoDatosAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Eliminar al alumno: "+
+                        usuario.getLegajo()+"?", "Aviso", JOptionPane.YES_NO_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    usuario.setCarrera(null);
+                    borrarAlumno = true; // sabe que hacer la pagina principal con esto
+                    alumnoAEliminar = usuario.getLegajo(); //Usa eso para borrar al alumno del registro
+                }
+                else {
+                    reseteoPagina();
+                }
             }
         });
         cancelarButton.addMouseListener(new MouseAdapter() {
