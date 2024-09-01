@@ -3,6 +3,7 @@ public class Materias {
     public boolean parcial, cursadaAprobada, examenFinal, promocion, tieneCorrelativa, optativa, obligatoria;
     private Materias correlativa;
 
+    //Constructor
     public Materias(String nombre) {
         this.nombre = nombre;
         parcial=false;
@@ -14,15 +15,33 @@ public class Materias {
         obligatoria=false;
     }
 
-    //BOORAR porque solo lo uso en pruebas, deberia ir correctamente la cantidad en cada carrera
+    //Metodos get
+    public String getNombreDeMateria(){
+        return nombre;
+    }
+    public boolean getNotaExamenFinal(){
+        return examenFinal;
+    }
+    public boolean getCursadaAprobada(){
+        return cursadaAprobada;
+    }
+    public boolean getOptativa(){
+        return optativa;
+    }
+    public boolean getObligatoria(){
+        return obligatoria;
+    }
+    public Materias getCorrelativa(){
+        return this.correlativa;
+    }
+
+    //Metodos set
     public void setOptativa (boolean valor){
         optativa = valor;
     }
     public void setObligatoria (boolean valor){
         obligatoria = valor;
     }
-    //BOORAR
-
     public void setNotaParcial(double nota){
         if (nota >= 8) {
             parcial = true;
@@ -43,38 +62,12 @@ public class Materias {
             examenFinal = false;
         }
     }
-
     public void setExamenFinal(double nota){
         examenFinal= nota >= 4;
         cursadaAprobada = nota >= 4;
     }
-
     public void setCorrelativa(Materias correlativa){
         this.correlativa=correlativa;
         tieneCorrelativa=true;
-    }
-
-    public boolean getNotaExamenFinal(){
-        return examenFinal;
-    }
-
-    public boolean getCursadaAprobada(){
-        return cursadaAprobada;
-    }
-
-    public String getNombreDeMateria(){
-        return nombre;
-    }
-
-    public Materias getCorrelativa(){
-        return this.correlativa;
-    }
-
-    public boolean getOptativa(){
-        return optativa;
-    }
-
-    public boolean getObligatoria(){
-        return obligatoria;
     }
 }
