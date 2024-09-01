@@ -94,17 +94,12 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
             } while(todo(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras));
         }
 
+
         private static void inicializoSemaforo(){
             latch = new CountDownLatch(1);                   //Inicializo el semaforo de nuevo
         }
-
         private static void creoCarrera(){
-            Carreras carreras = new Carreras("CarreraA", 4,6) {
-                @Override
-                public float getCantMateriasOptativas() {
-                    return 0;
-                }
-            };
+            Carreras carreras = new Carreras("CarreraA", 4,6);
             carreras.setPlanDeEstudio(new PlanDeEstudioA(null));
             carreras.getPlanDeEstudio().setCarrera(carreras);
             carreras.setMateriasOptativas(5);
@@ -112,32 +107,24 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
             carreras.generoMaterias();
             almacenCarreras.add(carreras);
         }
-
         private static void creoAlumno(){
             Alumnos alumnos = new Alumnos("Cristian", "prueba", 1, "sdfsf");
             alumnosRegistrados.add(alumnos);
         }
-
         private static void creoAlumnoNuevo(AltaDeAlumnos al) {
             Alumnos alumnoX = new Alumnos(al.getNombre(), al.getApellido() ,al.getDni(),al.getContrasenna());
             alumnoX.setCarrera(null);
             alumnosRegistrados.add(alumnoX);
         }
-
         private static void creoCarreraNueva(AltaDeCarreras altaCarrrera) {
-            Carreras carreraX = new Carreras(altaCarrrera.getNombreDeCarrera(), altaCarrrera.getAnnioCarrera(), altaCarrrera.getCuatriCarrera()) {
-                @Override
-                public float getCantMateriasOptativas() {
-                    return 0;
-                }
-            };
+            Carreras carreraX = new Carreras(altaCarrrera.getNombreDeCarrera(), altaCarrrera.getAnnioCarrera(),
+                    altaCarrrera.getCuatriCarrera());
             carreraX.setPlanDeEstudio(null);
             carreraX.setMateriasObligatoria(altaCarrrera.getCantMatOb());
             carreraX.setMateriasOptativas(altaCarrrera.getCantMatOp());
             carreraX.generoMaterias();
             almacenCarreras.add(carreraX);
         }
-
         private static boolean verificoPaginaPrincipal(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
                                                        AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
                                                        BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
@@ -148,7 +135,6 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
                     (fBuscoAlumnos != null && fBuscoAlumnos.getPaginaPrincipa()) ||
                     (fModificoCarreras != null && fModificoCarreras.getPaginaPrincipal());
         }
-
         private static boolean verificoAltaDeAlumnos(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
                                                      AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
                                                      BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
@@ -159,7 +145,6 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
                     (fBuscoAlumnos != null && fBuscoAlumnos.getAltaDeAlumnos()) ||
                     (fModificoCarreras != null && fModificoCarreras.getAltaDeAlumnos());
         }
-
         private static boolean verificoALtaDeCarreras(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
                                                       AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
                                                       BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
@@ -170,7 +155,6 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
                     (fAltaCarreras != null && fAltaCarreras.getAltaDeCarreras()) ||
                     (fModificoCarreras != null && fModificoCarreras.getAltaDeCarreras());
         }
-
         private static boolean verificoAltaDePlanDeEstudio(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
                                                            AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
                                                            BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
@@ -180,7 +164,6 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
                     (fBuscoAlumnos != null && fBuscoAlumnos.getAltaDePlanDeEstudio()) ||
                     (fModificoCarreras !=null && fModificoCarreras.getAltaPlanDeEstudio());
         }
-
         private static boolean verificoBuscoAlumnos(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
                                                     AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
                                                     BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
@@ -190,8 +173,6 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
                     (fAltaPlan != null && fAltaPlan.getBuscoAlumnos()) ||
                     (fModificoCarreras != null && fModificoCarreras.getBuscoAlumnos());
         }
-
-
         private static boolean verificoModificoCarrera(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
                                                        AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
                                                        BuscoAlumnos fBuscoAlumnos, ModificoCarreras fModificoCarreras) {
@@ -202,7 +183,6 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
                     (fBuscoAlumnos != null && fBuscoAlumnos.getModificoCarreras()) ||
                     (fModificoCarreras != null && fModificoCarreras.getModificoCarreras());
         }
-
         private static boolean todo(PaginaPrincipal paginaPrincipal, AltaDeAlumnos altaDeAlumnos,
                                     AltaDeCarreras altaDeCarreras, AltaDePlanDeEstudio altaDePlanDeEstudio,
                                     BuscoAlumnos buscoAlumnos, ModificoCarreras modificoCarreras) {
@@ -213,7 +193,6 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
                     verificoBuscoAlumnos(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras) ||
                     verificoModificoCarrera(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras);
         }
-
         private static void reseteo(PaginaPrincipal fPrincipal, AltaDeAlumnos fAltaAlumnos,
                                     AltaDeCarreras fAltaCarreras, AltaDePlanDeEstudio fAltaPlan,
                                     BuscoAlumnos fBuscoAlumnos, ModificoCarreras fmodificoCarreras) {
@@ -261,6 +240,7 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
                 fBuscoAlumnos.setBuscoAlumnos(false);
                 fBuscoAlumnos.setModificoCarreras(false);
             }
+
             if (fmodificoCarreras != null) {
                 fmodificoCarreras.setPaginaPrincipal(false);
                 fmodificoCarreras.setAltaDeAlumnos(false);
