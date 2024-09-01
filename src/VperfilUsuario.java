@@ -13,7 +13,6 @@ public class VperfilUsuario extends JFrame{
     private JLabel planDeEstudioAlumno;
     private JLabel cargoSituacion;
     private JPanel panelPerfilAlumno;
-    private JButton cerrarSesionButton;
     private JButton masMateriasButton;
     private JButton materiasObligatoriasButton;
     private JButton materiasOptativasButton;
@@ -44,14 +43,6 @@ public class VperfilUsuario extends JFrame{
                     cargoSituacion.setText("Se graduo");
                 }else
                     cargoSituacion.setText("Desaprobado");
-            }
-        });
-        cerrarSesionButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                botonOpciones=true;
-                dispose();
             }
         });
         masMateriasButton.addMouseListener(new MouseAdapter() {
