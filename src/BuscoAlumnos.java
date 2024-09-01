@@ -288,6 +288,49 @@ public class BuscoAlumnos extends JFrame {
                 }
             }
         });
+        editarAlumnoButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (usuario == null) {
+                    JOptionPane.showMessageDialog(null, "Debe buscar un alumno antes.", "Aviso",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    CountDownLatch latch = new CountDownLatch(1);
+                    EditoDatosAlumnos editoDatosAlumnos = new EditoDatosAlumnos(usuario, latch);
+                    editoDatosAlumnos.setVisible(true);
+                    editoDatosAlumnos.setLocationRelativeTo(null);
+
+                    // Usar SwingWorker para esperar de forma asíncrona
+                    SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                        @Override
+                        protected Void doInBackground() {
+                            try {
+                                latch.await(); // Espera de manera asíncrona
+                            } catch (InterruptedException ex) {
+                                ex.printStackTrace();
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void done() {
+                            if (editoDatosAlumnos.getHayCambios()){
+                                cargoDatosAlumnos();
+                            }
+                            else if (editoDatosAlumnos.getBorrarAlumno()){
+                                registroAlumnos.remove(registroAlumnos.buscoPorDNI(usuario.getLegajo()));
+                                limpioTodo();
+                            }
+                            else cargoDatosAlumnos();
+                        }
+                    };
+
+                    worker.execute(); // Iniciar el SwingWorker
+                }
+            }
+        });
     }
 
     private Alumnos getAlumno(){
@@ -334,7 +377,7 @@ public class BuscoAlumnos extends JFrame {
     private void cargoDatosAlumnos(){
         modelDatosAlumno.clear();
         if (!usuario.getNombre().isEmpty())
-            modelDatosAlumno.addElement("Nombre: "+usuario.getNombre());
+            modelDatosAlumno.addElement("Nombre: "+usuario.getNombre()+" "+usuario.getApellido());
         if (usuario.getLegajo() > 0)
             modelDatosAlumno.addElement("Legajo: "+usuario.getLegajo());
         if (usuario.getCarrera() != null)
@@ -375,5 +418,10 @@ public class BuscoAlumnos extends JFrame {
 
     public void setModificoCarreras(boolean v){
         this.modificoCarreras=v;
+    }
+
+    public void limpioTodo(){
+        modelDatosAlumno.clear();
+        listDatosAlumno.setModel(modelDatosAlumno);
     }
 }
