@@ -40,9 +40,10 @@ public class EditoDatosAlumnos extends JFrame {
                     reseteoPagina();
                     hayCambiosDatos = true;
                 }
-                //else
-                JOptionPane.showMessageDialog(null, "No hay cambios por hacer,", "Aviso",
-                        JOptionPane.INFORMATION_MESSAGE);
+                else {
+                    JOptionPane.showMessageDialog(null, "No hay cambios por hacer,", "Aviso",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
         borrarAlumnoButton.addMouseListener(new MouseAdapter() {
