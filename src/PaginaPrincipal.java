@@ -23,7 +23,7 @@ public class PaginaPrincipal extends JFrame {
         this.latch = latch;
         setUndecorated(true);
         setContentPane(paginaPrincipal);
-        setSize(1300,400);
+        setSize(1300,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         altaDeAlumnosButton.addMouseListener(new MouseAdapter() {
             @Override

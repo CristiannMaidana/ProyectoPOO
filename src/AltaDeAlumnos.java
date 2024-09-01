@@ -29,7 +29,7 @@ public class AltaDeAlumnos extends JFrame {
         setUndecorated(true);
         setContentPane(altaDeAlumnos);
         setLocationRelativeTo(null);
-        setSize(1300,550);
+        setSize(1300,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         checkBox1.addMouseListener(new MouseAdapter() {
             @Override

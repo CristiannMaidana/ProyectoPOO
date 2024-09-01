@@ -30,7 +30,7 @@ public class ModificoCarreras extends JFrame {
         this.almacenCarreras = almacenCarreras;
         setUndecorated(true);
         setContentPane(modificoCarreras);
-        setSize(1300,400);
+        setSize(1300,500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         cargoCarreras();
         checkBox1.addMouseListener(new MouseAdapter() {
