@@ -185,6 +185,16 @@ public class ModificoCarreras extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                int index = listMaterias.getSelectedIndex();
+                String nombreMateria = (String) listMaterias.getModel().getElementAt(index);
+                textFieldCambiaMateriaCarrera.setText(nombreMateria);
+                if (carreraElegida.getMateriasPorNombre(nombreMateria).getObligatoria()) {
+                    JOptionPane.showMessageDialog(null, "La materia " + nombreMateria + ", es " +
+                            "obligatoria seleccione de que tipo de materia será", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {JOptionPane.showMessageDialog(null, "La materia " + nombreMateria + ", es " +
+                        "optativa seleccione de que tipo de materia será", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
     }
