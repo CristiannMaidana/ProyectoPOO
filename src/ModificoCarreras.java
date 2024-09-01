@@ -20,7 +20,7 @@ public class ModificoCarreras extends JFrame {
     private JCheckBox checkBox1;
     private JLabel seleccioneUnaMateiraLabel;
     private boolean paginaPrincipal=false, altaDeAlumnos = false, buscoAlumnos = false, altaDeCarreras = false,
-            altaPlanDeEstudio = false, BmodificoCarreras=false;
+            altaPlanDeEstudio = false, BmodificoCarreras=false, modificarUnaMateria=false, modificarUnaPlan=false;
     private AlmacenCarreras almacenCarreras;
     private String nombreCarreraElegida="";
     private Carreras carreraElegida;
@@ -113,6 +113,8 @@ public class ModificoCarreras extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                modificarUnaMateria=true;
+                modificarUnaPlan=false;
                 if (nombreCarreraElegida.isEmpty()){
                     JOptionPane.showMessageDialog(null, "Elija una carrera antes.",
                             "Error", JOptionPane.ERROR_MESSAGE);
@@ -131,6 +133,8 @@ public class ModificoCarreras extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                modificarUnaMateria=false;
+                modificarUnaPlan=true;
                 if (nombreCarreraElegida.isEmpty()){
                     JOptionPane.showMessageDialog(null, "Elija una carrera antes.",
                             "Error", JOptionPane.ERROR_MESSAGE);
@@ -199,16 +203,24 @@ public class ModificoCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 int index = listMaterias.getSelectedIndex();
-                String nombreMateria = (String) listMaterias.getModel().getElementAt(index);
-                textFieldCambiaMateriaCarrera.setText(nombreMateria);
-                if (carreraElegida.getMateriasPorNombre(nombreMateria).getObligatoria()) {
-                    JOptionPane.showMessageDialog(null, "La materia " + nombreMateria + ", es " +
-                            "obligatoria seleccione que tipo de materia será", "Aviso",
-                            JOptionPane.INFORMATION_MESSAGE);
+                if (modificarUnaMateria) {
+                    String nombreMateria = (String) listMaterias.getModel().getElementAt(index);
+                    textFieldCambiaMateriaCarrera.setText(nombreMateria);
+                    if (carreraElegida.getMateriasPorNombre(nombreMateria).getObligatoria()) {
+                        JOptionPane.showMessageDialog(null, "La materia " + nombreMateria + ", es " +
+                                        "obligatoria seleccione que tipo de materia será", "Aviso",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    } else if (carreraElegida.getMateriasPorNombre(nombreMateria).getOptativa()) {
+                        JOptionPane.showMessageDialog(null, "La materia " + nombreMateria + ", es " +
+                                "optativa seleccione que tipo de materia será", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
-                else if(carreraElegida.getMateriasPorNombre(nombreMateria).getOptativa()) {
-                    JOptionPane.showMessageDialog(null, "La materia " + nombreMateria + ", es " +
-                        "optativa seleccione que tipo de materia será", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                else if (modificarUnaPlan){
+                    String nombrePlan = (String) listMaterias.getModel().getElementAt(index);
+                    textFieldCambiaMateriaCarrera.setText(nombrePlan);
+                    JOptionPane.showMessageDialog(null, "La carrera tiene el plan de estudio: "+
+                                    carreraElegida.getPlanDeEstudio().toString()+ ".", "Aviso",
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
