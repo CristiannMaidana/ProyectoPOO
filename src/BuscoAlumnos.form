@@ -112,7 +112,7 @@
                   <background color="-16777216"/>
                   <font name="Arial" size="14"/>
                   <foreground color="-16777216"/>
-                  <icon value="imagenes/search.png"/>
+                  <icon value="imagenes/buscoAlumnos/search.png"/>
                   <text value="  Ingrese el DNI del alumno:"/>
                 </properties>
               </component>
@@ -166,7 +166,7 @@
                     <properties>
                       <background color="-12790785"/>
                       <foreground color="-854792"/>
-                      <icon value="imagenes/people.png"/>
+                      <icon value="imagenes/buscoAlumnos/people.png"/>
                       <text value="  Buscar"/>
                     </properties>
                   </component>
@@ -185,7 +185,7 @@
                   <background color="-16777216"/>
                   <font name="Arial" size="14"/>
                   <foreground color="-16777216"/>
-                  <icon value="imagenes/user.png"/>
+                  <icon value="imagenes/buscoAlumnos/user.png"/>
                   <text value="Datos del alumno:"/>
                 </properties>
               </component>
@@ -208,7 +208,7 @@
                       <enabled value="true"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <icon value="imagenes/programming-course.png"/>
+                      <icon value="imagenes/buscoAlumnos/programming-course.png"/>
                       <text value="  Inscripcion a carreras"/>
                     </properties>
                   </component>
@@ -221,7 +221,7 @@
                       <enabled value="true"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <icon value="imagenes/e-book.png"/>
+                      <icon value="imagenes/buscoAlumnos/e-book.png"/>
                       <text value="  Inscripcion a materias"/>
                     </properties>
                   </component>
@@ -234,7 +234,7 @@
                       <enabled value="true"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <icon value="imagenes/paper.png"/>
+                      <icon value="imagenes/buscoAlumnos/paper.png"/>
                       <text value="            Cargo de notas"/>
                     </properties>
                   </component>
@@ -247,7 +247,7 @@
                       <enabled value="true"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <icon value="imagenes/graduated.png"/>
+                      <icon value="imagenes/buscoAlumnos/graduated.png"/>
                       <text value="  Historial academico"/>
                     </properties>
                   </component>
@@ -259,7 +259,7 @@
                       <background color="-12790785"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <icon value="imagenes/no-content.png"/>
+                      <icon value="imagenes/buscoAlumnos/no-content.png"/>
                       <text value="  Dar de baja materias"/>
                     </properties>
                   </component>
@@ -271,7 +271,7 @@
                       <background color="-12790785"/>
                       <font name="Arial" size="12"/>
                       <foreground color="-854792"/>
-                      <icon value="imagenes/userConfiguracion.png"/>
+                      <icon value="imagenes/buscoAlumnos/userConfiguracion.png"/>
                       <text value="             Editar alumno"/>
                     </properties>
                   </component>
