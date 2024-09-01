@@ -281,11 +281,20 @@ public class BuscoAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Dar de baja todas las " +
-                        "materias?", "Aviso", JOptionPane.YES_NO_OPTION);
-                if (respuesta == JOptionPane.YES_OPTION){
-                    usuario.vacioMaterias();
-                    cargoDatosAlumnos();
+                if (usuario == null) {
+                    JOptionPane.showMessageDialog(null, "Busque un alumno antes.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }  else if (!usuario.materiasLlenas() && !usuario.materiasVacias()) {
+                    JOptionPane.showMessageDialog(null, "No está inscripto a ninguna materia.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    int respuesta = JOptionPane.showConfirmDialog(null, "¿Dar de baja todas las " +
+                            "materias?", "Aviso", JOptionPane.YES_NO_OPTION);
+                    if (respuesta == JOptionPane.YES_OPTION) {
+                        usuario.vacioMaterias();
+                        cargoDatosAlumnos();
+                    }
                 }
             }
         });
@@ -294,8 +303,8 @@ public class BuscoAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (usuario == null) {
-                    JOptionPane.showMessageDialog(null, "Debe buscar un alumno antes.", "Aviso",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Busque un alumno antes.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
                 else {
                     CountDownLatch latch = new CountDownLatch(1);
