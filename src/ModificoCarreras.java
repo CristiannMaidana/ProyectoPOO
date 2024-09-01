@@ -131,7 +131,18 @@ public class ModificoCarreras extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                altaPlanDeEstudio=true;
+                if (nombreCarreraElegida.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Elija una carrera antes.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    cargoPlanes();
+                    JOptionPane.showMessageDialog(null, "Se cargaron los planes de estudio " +
+                            "exitosamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    seleccioneUnaMateiraLabel.setText("Seleccione un plan de estudio:");
+                    aceptarButton.setText("Asignar plan de estudio");
+                    cancelarButton.setText("Cancelar");
+                }
             }
         });
         aceptarButton.addMouseListener(new MouseAdapter() {
@@ -278,5 +289,15 @@ public class ModificoCarreras extends JFrame {
 
     public void setLatch(CountDownLatch latch){
         this.latch = latch;
+    }
+
+    public void cargoPlanes(){
+        DefaultListModel modelo = new DefaultListModel();
+        modelo.addElement("Plan de estudio 'A'");
+        modelo.addElement("Plan de estudio 'B'");
+        modelo.addElement("Plan de estudio 'C'");
+        modelo.addElement("Plan de estudio 'D'");
+        modelo.addElement("Plan de estudio 'E'");
+        listMaterias.setModel(modelo);
     }
 }
