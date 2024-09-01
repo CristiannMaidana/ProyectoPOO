@@ -12,6 +12,7 @@ public class InscripcionCarreras extends JFrame {
     private AlmacenCarreras almacenCarreras;
     private CountDownLatch latch;
 
+    //Constructor
     public InscripcionCarreras(AlmacenCarreras almacenCarreras, CountDownLatch latch) {
         this.almacenCarreras = almacenCarreras;
         this.latch = latch;
@@ -66,14 +67,16 @@ public class InscripcionCarreras extends JFrame {
 
     }
 
-    public String getCarreraElegida() {
-        return carreraElegida;
-    }
-
+    //Metodos void
     private void cargoCarreras(){
         opcionesCarrerasComboBox.removeAllItems();
         for(int i= 0; i<almacenCarreras.getCantidadCarreras(); i++){
             opcionesCarrerasComboBox.addItem(almacenCarreras.getCarrera(i).getNombre());
         }
+    }
+
+    //Metodo get
+    public String getCarreraElegida() {
+        return carreraElegida;
     }
 }
