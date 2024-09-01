@@ -30,4 +30,8 @@ public class AlmacenCarreras {
     public int getCantidadCarreras(){
         return almacen.size();
     }
+
+    public void borrarCarrera(int indice){
+        almacen.remove(indice);
+    }
 }
