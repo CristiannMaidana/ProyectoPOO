@@ -1,7 +1,7 @@
 public class Alumnos {
-    private final String nombre, contrasenna;
+    private String nombre, contrasenna;
     private final Materias[] materiasCursando = new Materias[3];
-    private final int legajo;
+    private int legajo;
     private Carreras carreraDeAlumno;
 
     public Alumnos(String nombre, int legajo, String contrasenna) {
@@ -115,5 +115,17 @@ public class Alumnos {
 
     public int getLegajo(){
         return legajo;
+    }
+
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+
+    public void setContrasenna(String contrasenna){
+        this.contrasenna=contrasenna;
+    }
+
+    public void setLegajo(int legajo){
+        this.legajo = legajo;
     }
 }
