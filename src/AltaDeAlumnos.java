@@ -13,7 +13,6 @@ public class AltaDeAlumnos extends JFrame {
     private JTextField textFieldDNI;
     private JTextField textFieldApellido;
     private JTextField textFieldNombre;
-    private JTextField textFieldUsuario;
     private JButton crearNuevoAlumnoButton;
     private JButton cancelarButton;
     private JCheckBox checkBox1;
@@ -111,9 +110,9 @@ public class AltaDeAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (textFieldUsuario.getText().isEmpty() && textFieldApellido.getText().isEmpty() &&
+                if (textFieldApellido.getText().isEmpty() &&
                         passwordFieldContrasenna.getText().isEmpty() && textFieldDNI.getText().isEmpty() &&
-                        textFieldNombre.getText().isEmpty() && textFieldUsuario.getText().isEmpty()){
+                        textFieldNombre.getText().isEmpty()){
                     JOptionPane.showMessageDialog(null, "No hay nada que cancelar.",
                             "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -123,18 +122,6 @@ public class AltaDeAlumnos extends JFrame {
                         limpiarTodo();
                     }
                 }
-            }
-        });
-        textFieldUsuario.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                usuario=textFieldUsuario.getText();
             }
         });
         textFieldNombre.addFocusListener(new FocusAdapter() {
@@ -204,7 +191,6 @@ public class AltaDeAlumnos extends JFrame {
         textFieldDNI.setText("");
         textFieldApellido.setText("");
         textFieldNombre.setText("");
-        textFieldUsuario.setText("");
     }
 
     public String getNombre() {
@@ -260,9 +246,9 @@ public class AltaDeAlumnos extends JFrame {
     }
 
     private boolean validoTodo(){
-        if (textFieldUsuario.getText().isEmpty() || textFieldApellido.getText().isEmpty() ||
+        if (textFieldApellido.getText().isEmpty() ||
                 passwordFieldContrasenna.getText().isEmpty() || textFieldDNI.getText().isEmpty() ||
-                textFieldNombre.getText().isEmpty() || textFieldUsuario.getText().isEmpty()) {
+                textFieldNombre.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;
