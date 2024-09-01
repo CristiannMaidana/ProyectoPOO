@@ -21,6 +21,7 @@ public class BuscoAlumnos extends JFrame {
     private JCheckBox checkBox1;
     private JButton buscarButton;
     private JButton buscoAlumnosButton;
+    private JButton darDeBajaMateriasButton;
     private boolean paginaPrincipal=false, altaDeAlumnos=false, altaDeCarreras=false, modificoCarreras=false,
             altaPlanDeEstudio=false, cargoDeNotas=false, consultarSiEstaGraduado=false, inscripcionAMaterias=false,
             inscripcionACarreras=false, BbuscoAlumnos=false;
@@ -38,7 +39,7 @@ public class BuscoAlumnos extends JFrame {
 
         setUndecorated(true);
         setContentPane(buscoAlumnos);
-        setSize(1300,400);
+        setSize(1300,500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         checkBox1.addMouseListener(new MouseAdapter() {
             @Override
@@ -272,6 +273,18 @@ public class BuscoAlumnos extends JFrame {
                 super.mouseClicked(e);
                 JOptionPane.showMessageDialog(null, "Ya se encuentra en la pagina busco alumnos.",
                         "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        darDeBajaMateriasButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Dar de baja todas las " +
+                        "materias?", "Aviso", JOptionPane.YES_NO_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION){
+                    usuario.vacioMaterias();
+                    cargoDatosAlumnos();
+                }
             }
         });
     }
