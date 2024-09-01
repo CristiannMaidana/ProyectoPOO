@@ -181,6 +181,12 @@ public class ModificoCarreras extends JFrame {
 
             }
         });
+        listMaterias.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
     }
 
     public boolean getPaginaPrincipal() {
