@@ -110,7 +110,8 @@
           <background color="-12790785"/>
           <font name="Arial" size="12"/>
           <foreground color="-854792"/>
-          <text value="Consulte si esta graduado."/>
+          <icon value="imagenes/mortarboard.png"/>
+          <text value="  Consulte si esta graduado"/>
         </properties>
       </component>
       <grid id="fd549" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
