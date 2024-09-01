@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public abstract class   Carreras {
     private final int annio, cuatri;
@@ -155,13 +156,24 @@ public abstract class   Carreras {
     public abstract float getCantMateriasOptativas ();
 
     public void generoMaterias (){
+        Random random1 = new Random();
+        Random random2 = new Random();
         int annio = getAnniosCarrera();
         int cuatri = getCuatriCarrera();
+        int cantidadPositivasOptativas=0, cantidadPositivasObligatorias=0;
         for (byte annios = 0; annios<annio; annios++){
             for (byte cuatris = 0; cuatris<cuatri; cuatris++){
                 if (annios>0){
                     String nombre = "materia" + annios + cuatris;
                     Materias materia = new Materias(nombre);
+                    if(random1.nextBoolean() && cantidadPositivasOptativas < mOptativas){
+                        cantidadPositivasOptativas++;
+                        materia.setOptativa(true);
+                    }
+                    if(random2.nextBoolean() && cantidadPositivasObligatorias < mObligatorias){
+                        cantidadPositivasObligatorias++;
+                        materia.setObligatoria(true);
+                    }
                     carrera[annios][cuatris] = materia;
                     carrera[annios][cuatris].setCorrelativa(carrera[annios-1][cuatris]);
                 }else{
