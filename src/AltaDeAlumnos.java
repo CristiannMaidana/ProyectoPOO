@@ -9,7 +9,6 @@ public class AltaDeAlumnos extends JFrame {
     private JButton altaDePlanDeButton;
     private JButton altaDeCarrerasButton;
     private JButton buscoAlumnosButton;
-    private JComboBox comboBoxCarrera;
     private JTextField textFieldDNI;
     private JTextField textFieldApellido;
     private JTextField textFieldNombre;
@@ -111,7 +110,7 @@ public class AltaDeAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (textFieldApellido.getText().isEmpty() &&
-                        passwordFieldContrasenna.getText().isEmpty() && textFieldDNI.getText().isEmpty() &&
+                        new String(passwordFieldContrasenna.getPassword()).isEmpty() && textFieldDNI.getText().isEmpty() &&
                         textFieldNombre.getText().isEmpty()){
                     JOptionPane.showMessageDialog(null, "No hay nada que cancelar.",
                             "Aviso", JOptionPane.INFORMATION_MESSAGE);
@@ -181,11 +180,12 @@ public class AltaDeAlumnos extends JFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                contrasenna=passwordFieldContrasenna.getText();
+                contrasenna=new String(passwordFieldContrasenna.getPassword());
             }
         });
     }
 
+    //Metodos void
     private void limpiarTodo() {
         passwordFieldContrasenna.setText("");
         textFieldDNI.setText("");
@@ -193,61 +193,73 @@ public class AltaDeAlumnos extends JFrame {
         textFieldNombre.setText("");
     }
 
+    //Metodos get
     public String getNombre() {
         return nombre;
     }
-
     public String getApellido() {
         return apellido;
     }
-
     public String getContrasenna() {
         return contrasenna;
     }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
     public String getCarrera() {
         return carrera;
     }
-
     public int getDni() {
         return dni;
     }
-
     public boolean getPaginaPrincipal() {
         return paginaPrincipal;
     }
-
     public boolean getModificoCarrera() {
         return modificoCarrera;
     }
-
     public boolean getAltaPlanDeEstudio() {
         return altaPlanDeEstudio;
     }
-
     public boolean getAltaDeCarreras() {
         return altaDeCarreras;
     }
-
     public boolean getBuscoAlumnos() {
         return buscoAlumnos;
     }
-
     public boolean getCreoNuevoAlumno(){
         return creoNuevoAlumno;
     }
-
     public boolean getAltaDeAlumnos(){
         return BaltaDeAlumnos;
     }
 
+    //Metodos set
+    public void setAltaDeAlumnos(boolean v) {
+        this.BaltaDeAlumnos = v;
+    }
+    public void setAltaDeCarreras(boolean v) {
+        this.altaDeCarreras = v;
+    }
+    public void setAltaPlanDeEstudio(boolean v) {
+        this.altaPlanDeEstudio = v;
+    }
+    public void setBuscoAlumnos(boolean v) {
+        this.buscoAlumnos = v;
+    }
+    public void setPaginaPrincipal(boolean v){
+        this.paginaPrincipal=v;
+    }
+    public void setModificoCarreras(boolean v){
+        this.modificoCarrera=v;
+    }
+    public void setLatch(CountDownLatch latch){
+        this.latch=latch;
+    }
+    public void setRegistroAlumnos(AlumnosRegistrados alumnosRegistrados){
+        this.alumnosRegistrados = alumnosRegistrados;
+    }
+
     private boolean validoTodo(){
         if (textFieldApellido.getText().isEmpty() ||
-                passwordFieldContrasenna.getText().isEmpty() || textFieldDNI.getText().isEmpty() ||
+                new String(passwordFieldContrasenna.getPassword()).isEmpty() || textFieldDNI.getText().isEmpty() ||
                 textFieldNombre.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.",
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -287,37 +299,5 @@ public class AltaDeAlumnos extends JFrame {
                 }
             }
         }
-    }
-
-    public void setAltaDeAlumnos(boolean v) {
-        this.BaltaDeAlumnos = v;
-    }
-
-    public void setAltaDeCarreras(boolean v) {
-        this.altaDeCarreras = v;
-    }
-
-    public void setAltaPlanDeEstudio(boolean v) {
-        this.altaPlanDeEstudio = v;
-    }
-
-    public void setBuscoAlumnos(boolean v) {
-        this.buscoAlumnos = v;
-    }
-
-    public void setPaginaPrincipal(boolean v){
-        this.paginaPrincipal=v;
-    }
-
-    public void setLatch(CountDownLatch latch){
-        this.latch=latch;
-    }
-
-    public void setRegistroAlumnos(AlumnosRegistrados alumnosRegistrados){
-        this.alumnosRegistrados = alumnosRegistrados;
-    }
-
-    public void setModificoCarreras(boolean v){
-        this.modificoCarrera=v;
     }
 }
