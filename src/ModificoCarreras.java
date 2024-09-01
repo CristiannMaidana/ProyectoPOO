@@ -118,6 +118,9 @@ public class ModificoCarreras extends JFrame {
                 }
                 else{
                     cargoMaterias();
+                    JOptionPane.showMessageDialog(null, "Se cargaron las materias de la carrera:" +
+                            " "+nombreCarreraElegida+" exitosamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    textFieldCambiaMateriaCarrera.setText("Seleccione una materia...");
                     aceptarButton.setText("Hacer obligatoria");
                     cancelarButton.setText("Hacer Optativa");
                 }
