@@ -1,9 +1,6 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.util.concurrent.CountDownLatch;
 
 public class ModificoCarreras extends JFrame {
     private JPanel modificoCarreras;
@@ -17,26 +14,30 @@ public class ModificoCarreras extends JFrame {
     private JButton modificarUnaMateriaButton;
     private JButton modificarPlanDeEstudioButton;
     private JTextField textFieldCambiaMateriaCarrera;
-    private JButton button1;
-    private JButton button2;
-    private JList list1;
+    private JButton aceptarButton;
+    private JButton cancelarButton;
+    private JList listMaterias;
     private JCheckBox checkBox1;
     private boolean paginaPrincipal=false, altaDeAlumnos = false, buscoAlumnos = false, altaDeCarreras = false,
-            altaPlanDeEstudio = false, BmodificoCarreras=true;
+            altaPlanDeEstudio = false, BmodificoCarreras=false;
     private AlmacenCarreras almacenCarreras;
+    private String nombreCarreraElegida="";
+    private Carreras carreraElegida;
+    private CountDownLatch latch;
 
-    public ModificoCarreras(){
+    public ModificoCarreras(AlmacenCarreras almacenCarreras){
+        this.almacenCarreras = almacenCarreras;
         setUndecorated(true);
         setContentPane(modificoCarreras);
         setSize(1300,400);
-        setLocationRelativeTo(null);
-        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         cargoCarreras();
         checkBox1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 BmodificoCarreras=false;
+                latch.countDown();
                 dispose();
             }
         });
@@ -93,17 +94,33 @@ public class ModificoCarreras extends JFrame {
                         " carreras.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-        comboBoxCarreras.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
 
+
+        comboBoxCarreras.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nombreCarreraElegida = (String) comboBoxCarreras.getSelectedItem();
+                for(int i=0; i<almacenCarreras.getCantidadCarreras(); i++){
+                    if (almacenCarreras.getCarrera(i).getNombre().equals(nombreCarreraElegida)){
+                        carreraElegida = almacenCarreras.getCarrera(i);
+                        break;
+                    }
+                }
             }
         });
         modificarUnaMateriaButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dispose();
+                if (nombreCarreraElegida.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Elija una carrera antes.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    cargoMaterias();
+                    aceptarButton.setText("Hacer obligatoria");
+                    cancelarButton.setText("Hacer Optativa");
+                }
             }
         });
         modificarPlanDeEstudioButton.addMouseListener(new MouseAdapter() {
@@ -111,21 +128,53 @@ public class ModificoCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 altaPlanDeEstudio=true;
-                dispose();
             }
         });
-        button1.addMouseListener(new MouseAdapter() {
+        aceptarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dispose();
+                if(aceptarButton.getName().equals("Hacer obligatoria")){
+                    if(textFieldCambiaMateriaCarrera.getText().isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Seleccione una materia antes.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        String materiaACambiar = textFieldCambiaMateriaCarrera.getText();
+                        int respuesta = JOptionPane.showConfirmDialog(null, "¿Quiere hacer la materia: "+
+                                materiaACambiar+" obligatoria?", "Aviso", JOptionPane.YES_NO_OPTION);
+                        if (respuesta == JOptionPane.YES_OPTION){
+                            carreraElegida.getMateriasPorNombre(materiaACambiar).setObligatoria(true);
+                            JOptionPane.showMessageDialog(null, "Se hizo la materia obligatoria" +
+                                    " correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                            reseteoModificarMaterias();
+                        }
+                    }
+                }
             }
         });
-        button2.addMouseListener(new MouseAdapter() {
+        cancelarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dispose();
+                if(cancelarButton.getName().equals("Hacer optativa")){
+                    if(textFieldCambiaMateriaCarrera.getText().isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Seleccione una materia antes.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        String materiaACambiar = textFieldCambiaMateriaCarrera.getText();
+                        int respuesta = JOptionPane.showConfirmDialog(null, "¿Quiere hacer la materia: "+
+                                materiaACambiar+" optativa?", "Aviso", JOptionPane.YES_NO_OPTION);
+                        if (respuesta == JOptionPane.YES_OPTION){
+                            carreraElegida.getMateriasPorNombre(materiaACambiar).setObligatoria(true);
+                            JOptionPane.showMessageDialog(null, "Se hizo la materia optativa" +
+                                    " correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                            reseteoModificarMaterias();
+                        }
+                    }
+                }
+
             }
         });
     }
@@ -184,7 +233,25 @@ public class ModificoCarreras extends JFrame {
 
     public void cargoCarreras(){
         for(int i=0; i<almacenCarreras.getCantidadCarreras(); i++){
-            comboBoxCarreras.addItem(almacenCarreras.getCarrera(i));
+            comboBoxCarreras.addItem(almacenCarreras.getCarrera(i).getNombre());
         }
+    }
+
+    public void cargoMaterias(){
+        DefaultListModel modelo = new DefaultListModel();
+        for (int i=0; i<carreraElegida.getAnniosCarrera(); i++){
+            for(int j=0; j<carreraElegida.getCuatriCarrera(); j++){
+                modelo.addElement(carreraElegida.getMateriasPorAnnioYMateria(i,j).getNombreDeMateria());
+            }
+        }
+        listMaterias.setModel(modelo);
+    }
+
+    public void reseteoModificarMaterias(){
+        textFieldCambiaMateriaCarrera.setText("");
+    }
+
+    public void setLatch(CountDownLatch latch){
+        this.latch = latch;
     }
 }
