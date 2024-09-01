@@ -263,6 +263,7 @@ public class BuscoAlumnos extends JFrame {
                     cargoDatosAlumnos();
                 }
                 else {
+                    limpioTodo();
                     JOptionPane.showMessageDialog(null, "El DNI es incorrecto: No existe alumno.",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
