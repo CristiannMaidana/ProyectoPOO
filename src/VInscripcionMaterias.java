@@ -12,15 +12,15 @@ public class VInscripcionMaterias extends JFrame {
     private JPanel panelMaterias;
     private JButton aceptarButton;
     private JButton cancelarButton;
-    private JButton cargoNotasButton;
     private JComboBox comboBoxSituacion;
     private JPanel panelMateriasCursadas;
     private JCheckBox checkBox1;
     private int annioElegido=0, cuatriElegido=0;
     private final Alumnos alumno;
-    private boolean situacionB = false, faltaCursar = false, cancelar = false, cargoNotas = false, aceptar = false;
+    private boolean situacionB = false, faltaCursar = false, cancelar = false, aceptar = false;
     private CountDownLatch latch;
 
+    //Constructor
     public VInscripcionMaterias(Alumnos alumno, CountDownLatch latch) {
         this.alumno=alumno;
         this.latch=latch;
@@ -116,6 +116,7 @@ public class VInscripcionMaterias extends JFrame {
         });
     }
 
+    //Metodos void
     private void cargoAnniosEnPantalla(int annios){
         for (int i=0; i<annios; i++) {
             switch (i){
@@ -164,7 +165,6 @@ public class VInscripcionMaterias extends JFrame {
             }
         }
     }
-
     private void cargoMateriasEnPantalla( int annio, int cuatri){
         DefaultListModel<String> model = new DefaultListModel<>();
         if (cuatri == 1){
@@ -181,7 +181,6 @@ public class VInscripcionMaterias extends JFrame {
         }
         listMateriasNuevas.setModel(model);
     }
-
     private void cargoMateriasEnPantallaFaltaExamen( int annio, int cuatri){
         DefaultListModel<String> model = new DefaultListModel<>();
         if (cuatri == 1){
@@ -200,7 +199,6 @@ public class VInscripcionMaterias extends JFrame {
         }
         listMateriasNuevas.setModel(model);
     }
-
     private void cargoMateriasAlAlumno(String nombre, Alumnos alumno){
         boolean noHyaMateriaRepetidas = true;
         if (!alumno.materiasLlenas()) {//si esta llena no deja ingresar
@@ -216,7 +214,7 @@ public class VInscripcionMaterias extends JFrame {
                 }
             }
             if (noHyaMateriaRepetidas) {
-                if (!alumno.incribirAMaterias(nombre)) {
+                if (!alumno.inscribirAMaterias(nombre)) {
                     if (alumno.getCarrera().getMateriasPorNombre(nombre).getCorrelativa().getCursadaAprobada()){
                         JOptionPane.showMessageDialog(VInscripcionMaterias.this,
                                 "No puede inscribirse porque debe tener los cuatrimestres previos aprobados (examenes) .",
@@ -238,7 +236,6 @@ public class VInscripcionMaterias extends JFrame {
             }
         }
     }
-
     private void cargoMateriasAprobadasAnterioresYNotas(){
         DefaultListModel<String> modelCursada = new DefaultListModel<>();
         DefaultListModel<String> modelNotas = new DefaultListModel<>();
@@ -255,17 +252,5 @@ public class VInscripcionMaterias extends JFrame {
         }
         listMateriasCursadas.setModel(modelCursada);
         listMateriasNotas.setModel(modelNotas);
-    }
-
-    public boolean getBotonCancelar(){
-        return cancelar;
-    }
-
-    public boolean getBotonAceptar(){
-        return aceptar;
-    }
-
-    public boolean getBotonCargoNotas(){
-        return cargoNotas;
     }
 }
