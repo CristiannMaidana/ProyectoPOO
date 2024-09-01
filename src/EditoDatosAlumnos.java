@@ -11,6 +11,7 @@ public class EditoDatosAlumnos extends JFrame {
     private JButton cancelarButton;
     private JTextField textField3;
     private JPasswordField passwordField2;
+    private JCheckBox checkBox1;
 
     public EditoDatosAlumnos(){
         setContentPane(editarDatosAlumnos);
