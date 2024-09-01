@@ -25,6 +25,7 @@ public class AltaDeCarreras extends JFrame {
     private int cantMatOb=0, cantMatOp=0, cuatriCarrera=0, annioCarrera=0;
     private CountDownLatch latch;
 
+    //Constructor
     public AltaDeCarreras() {
         setUndecorated(true);
         setContentPane(altaDeCarreras);
@@ -125,8 +126,6 @@ public class AltaDeCarreras extends JFrame {
                     nuevaCarrera=true;
                     latch.countDown();
                 } else nuevaCarrera=false;
-
-                //creo materia si es correcto y cierro pestaña
             }
         });
 
@@ -208,6 +207,7 @@ public class AltaDeCarreras extends JFrame {
         });
     }
 
+    //Metodos void
     private void limpiarCampos() {
         nombreCarrera.setText("");
         cantMateriasOp.setText("");
@@ -216,37 +216,67 @@ public class AltaDeCarreras extends JFrame {
         cantidadCuatri.setSelectedIndex(0);
     }
 
+    //Metodos get
+    public String getNombreDeCarrera(){
+        return nombreDeCarrera;
+    }
+    public int getCuatriCarrera(){
+        return cuatriCarrera;
+    }
+    public int getAnnioCarrera(){
+        return annioCarrera;
+    }
+    public int getCantMatOb(){
+        return cantMatOb;
+    }
+    public int getCantMatOp(){
+        return cantMatOp;
+    }
+    public boolean getNuevaCarreras(){
+        return nuevaCarrera;
+    }
+    public boolean getAltaDeCarreras() {
+        return BaltaDeCarreras;
+    }
     public boolean getPaginaPrincipal() {
         return paginaPrincipal;
     }
-
     public boolean getAltaDeAlumnos() {
         return altaDeAlumnos;
     }
-
     public boolean getModificoCarrera() {
         return modificoCarrera;
     }
-
     public boolean getBuscoAlumnos() {
         return buscoAlumnos;
     }
-
     public boolean getAltaDePlanDe() {
         return altaDePlanDe;
     }
 
-    public String getNombreDeCarrera(){
-        return nombreDeCarrera;
+    //Metodos set
+    public void setAltaDeAlumnos(boolean v) {
+        this.altaDeAlumnos = v;
+    }
+    public void setAltaDeCarreras(boolean v) {
+        this.BaltaDeCarreras = v;
+    }
+    public void setAltaPlanDeEstudio(boolean v) {
+        this.altaDePlanDe = v;
+    }
+    public void setBuscoAlumnos(boolean v) {
+        this.buscoAlumnos = v;
+    }
+    public void setPaginaPrincipal(boolean v){
+        this.paginaPrincipal=v;
+    }
+    public void setModificoCarreras(boolean v){
+        this.modificoCarrera=v;
+    }
+    public void setLatch(CountDownLatch latch){
+        this.latch = latch;
     }
 
-    public int getCuatriCarrera(){
-        return cuatriCarrera;
-    }
-
-    public int getAnnioCarrera(){
-        return annioCarrera;
-    }
 
     private boolean validoTodo(){
         String validoAnnios = (String) cantidadAnnios.getSelectedItem();
@@ -279,49 +309,5 @@ public class AltaDeCarreras extends JFrame {
                 return false;
             }
         }
-    }
-
-    public int getCantMatOb(){
-        return cantMatOb;
-    }
-
-    public int getCantMatOp(){
-        return cantMatOp;
-    }
-
-    public boolean getNuevaCarreras(){
-        return nuevaCarrera;
-    }
-
-    public void setLatch(CountDownLatch latch){
-        this.latch = latch;
-    }
-
-    public void setAltaDeAlumnos(boolean v) {
-        this.altaDeAlumnos = v;
-    }
-
-    public void setAltaDeCarreras(boolean v) {
-        this.BaltaDeCarreras = v;
-    }
-
-    public void setAltaPlanDeEstudio(boolean v) {
-        this.altaDePlanDe = v;
-    }
-
-    public void setBuscoAlumnos(boolean v) {
-        this.buscoAlumnos = v;
-    }
-
-    public void setPaginaPrincipal(boolean v){
-        this.paginaPrincipal=v;
-    }
-
-    public boolean getAltaDeCarreras() {
-        return BaltaDeCarreras;
-    }
-
-    public void setModificoCarreras(boolean v){
-        this.modificoCarrera=v;
     }
 }
