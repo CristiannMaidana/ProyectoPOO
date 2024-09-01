@@ -97,7 +97,7 @@ public class ModificoCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 JOptionPane.showMessageDialog(null, "Ya se encuentra en la pagina modifico" +
-                        " carreras.", "Error", JOptionPane.ERROR_MESSAGE);
+                        " carreras.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
