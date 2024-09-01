@@ -69,4 +69,12 @@ public class Materias {
     public Materias getCorrelativa(){
         return this.correlativa;
     }
+
+    public boolean getOptativa(){
+        return optativa;
+    }
+
+    public boolean getObligatoria(){
+        return obligatoria;
+    }
 }
