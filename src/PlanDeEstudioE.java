@@ -1,44 +1,19 @@
 public class PlanDeEstudioE extends PlanDeEstudio{
+    //constantes
     private final byte cuatriPrevios = 3;
+
+    //Variables primitivas
     private byte cantidadCuatrimestresRecorridos;
+
+    //objetos
     private Alumnos alumnos;
 
+    //Constructor
     public PlanDeEstudioE(Carreras carrera, Alumnos alumnos) {
         super(carrera);
         this.alumnos=alumnos;
     }
 
-    @Override
-    public boolean aproboCorrelativas(Materias materias) {
-        boolean aprobo1 = true, aprobo2 = true;
-        aprobo1=aproboLaCursadaDeLasCorrelativas(materias, aprobo1);
-        if (aprobo1) {
-            aprobo2=buscoMateria(materias,aprobo2);
-        }
-        System.out.println(aprobo1 + ", " + aprobo2);
-        return (aprobo1 && aprobo2);
-    }
-
-    @Override
-    public void setCarrera(Carreras carrera) {
-        this.carrera=carrera;
-    }
-
-    @Override
-    public void setAlumno(Alumnos alumno) {
-        this.alumnos = alumno;
-    }
-
-    @Override
-    public String toString() {
-        return "Plan de estudio ¨E¨";
-    }
-
-    @Override
-    public String getDescripion() {
-        return "El plan de estudio 'E', tiene que tener aprobado los finales de las correlativas y los finales de todas" +
-                " las materias de 3 cuatrimestres previos para poder inscribirse.";
-    }
 
     public boolean aproboLaCursadaDeLasCorrelativas (Materias materias, boolean aprobo1){
         if (materias.tieneCorrelativa){
@@ -48,7 +23,6 @@ public class PlanDeEstudioE extends PlanDeEstudio{
         }
         return aprobo1;
     }
-
     public boolean buscoMateria (Materias materias, boolean aprobo2){
         if (cantidadCuatrimestresRecorridos != cuatriPrevios) {
             cantidadCuatrimestresRecorridos = 0;
@@ -86,5 +60,38 @@ public class PlanDeEstudioE extends PlanDeEstudio{
             }
         }
         return aprobo2;
+    }
+
+    //Metodos get
+    @Override
+    public String getDescripion() {
+        return "El plan de estudio 'E', tiene que tener aprobado los finales de las correlativas y los finales de todas" +
+                " las materias de 3 cuatrimestres previos para poder inscribirse.";
+    }
+
+    //Metodos set
+    @Override
+    public void setCarrera(Carreras carrera) {
+        this.carrera=carrera;
+    }
+    @Override
+    public void setAlumno(Alumnos alumno) {
+        this.alumnos = alumno;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Plan de estudio ¨E¨";
+    }
+    @Override
+    public boolean aproboCorrelativas(Materias materias) {
+        boolean aprobo1 = true, aprobo2 = true;
+        aprobo1=aproboLaCursadaDeLasCorrelativas(materias, aprobo1);
+        if (aprobo1) {
+            aprobo2=buscoMateria(materias,aprobo2);
+        }
+        System.out.println(aprobo1 + ", " + aprobo2);
+        return (aprobo1 && aprobo2);
     }
 }
