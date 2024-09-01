@@ -22,6 +22,7 @@ public class BuscoAlumnos extends JFrame {
     private JButton buscarButton;
     private JButton buscoAlumnosButton;
     private JButton darDeBajaMateriasButton;
+    private JButton editarAlumnoButton;
     private boolean paginaPrincipal=false, altaDeAlumnos=false, altaDeCarreras=false, modificoCarreras=false,
             altaPlanDeEstudio=false, cargoDeNotas=false, consultarSiEstaGraduado=false, inscripcionAMaterias=false,
             inscripcionACarreras=false, BbuscoAlumnos=false;
