@@ -24,7 +24,7 @@ public class BuscoAlumnos extends JFrame {
     private JButton darDeBajaMateriasButton;
     private JButton editarAlumnoButton;
     private boolean paginaPrincipal=false, altaDeAlumnos=false, altaDeCarreras=false, modificoCarreras=false,
-            altaPlanDeEstudio=false, cargoDeNotas=false, consultarSiEstaGraduado=false, inscripcionAMaterias=false,
+            altaPlanDeEstudio=false, inscripcionAMaterias=false,
             inscripcionACarreras=false, BbuscoAlumnos=false;
     private AlumnosRegistrados registroAlumnos;
     private Alumnos usuario = null;
@@ -32,6 +32,7 @@ public class BuscoAlumnos extends JFrame {
     private AlmacenCarreras almacenCarreras = null;
     private CountDownLatch latch;
 
+    //Constructor
     public BuscoAlumnos(AlumnosRegistrados registroAlumnos, AlmacenCarreras almacenCarreras, CountDownLatch latch) {
         this.registroAlumnos = registroAlumnos;
         this.almacenCarreras = almacenCarreras;
@@ -343,47 +344,11 @@ public class BuscoAlumnos extends JFrame {
         });
     }
 
-    private Alumnos getAlumno(){
-        int dni = Integer.parseInt(textFieldDNI.getText());
-        return registroAlumnos.buscoPorDNI(dni);
+    //Metodos void
+    public void limpioTodo(){
+        modelDatosAlumno.clear();
+        listDatosAlumno.setModel(modelDatosAlumno);
     }
-
-    public boolean getPaginaPrincipa(){
-        return paginaPrincipal;
-    }
-
-    public boolean getAltaDeAlumnos(){
-        return altaDeAlumnos;
-    }
-
-    public boolean getAltaDeCarreras(){
-        return altaDeCarreras;
-    }
-
-    public boolean getModificoCarreras(){
-        return modificoCarreras;
-    }
-
-    public boolean getInscripcionACarreras(){
-        return inscripcionACarreras;
-    }
-
-    public boolean getInscripcionAMaterias(){
-        return inscripcionAMaterias;
-    }
-
-    public boolean getCargoDeNotas(){
-        return cargoDeNotas;
-    }
-
-    public boolean getAltaDePlanDeEstudio(){
-        return altaPlanDeEstudio;
-    }
-
-    public boolean getConsultoSiEstaGraduado(){
-        return consultarSiEstaGraduado;
-    }
-
     private void cargoDatosAlumnos(){
         boolean siHabiaMaterias=false;
         modelDatosAlumno.clear();
@@ -412,36 +377,48 @@ public class BuscoAlumnos extends JFrame {
             }
         }
         if(!siHabiaMaterias)
-             modelDatosAlumno.addElement("No esta inscripto a ninguna materia.");
+            modelDatosAlumno.addElement("No esta inscripto a ninguna materia.");
         listDatosAlumno.setModel(modelDatosAlumno);
     }
 
+    //Metodos get
+    private Alumnos getAlumno(){
+        int dni = Integer.parseInt(textFieldDNI.getText());
+        return registroAlumnos.buscoPorDNI(dni);
+    }
+    public boolean getPaginaPrincipa(){
+        return paginaPrincipal;
+    }
+    public boolean getAltaDeAlumnos(){
+        return altaDeAlumnos;
+    }
+    public boolean getAltaDeCarreras(){
+        return altaDeCarreras;
+    }
+    public boolean getModificoCarreras(){
+        return modificoCarreras;
+    }
+    public boolean getAltaDePlanDeEstudio(){
+        return altaPlanDeEstudio;
+    }
+
+    //Metodos set
     public void setAltaDeAlumnos(boolean v) {
         this.altaDeAlumnos = v;
     }
-
     public void setAltaDeCarreras(boolean v) {
         this.altaDeCarreras = v;
     }
-
     public void setAltaPlanDeEstudio(boolean v) {
         this.altaPlanDeEstudio = v;
     }
-
     public void setBuscoAlumnos(boolean v) {
         this.BbuscoAlumnos = v;
     }
-
     public void setPaginaPrincipal(boolean v){
         this.paginaPrincipal=v;
     }
-
     public void setModificoCarreras(boolean v){
         this.modificoCarreras=v;
-    }
-
-    public void limpioTodo(){
-        modelDatosAlumno.clear();
-        listDatosAlumno.setModel(modelDatosAlumno);
     }
 }
