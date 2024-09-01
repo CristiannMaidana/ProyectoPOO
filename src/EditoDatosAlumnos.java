@@ -67,6 +67,8 @@ public class EditoDatosAlumnos extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                reseteoPagina();
+                dispose();
             }
         });
     }
