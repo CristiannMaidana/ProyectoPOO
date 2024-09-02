@@ -167,6 +167,49 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
         private static void creoAlumno(){
             Alumnos alumnos = new Alumnos("Cristian", "prueba", 1, "sdfsf");
             alumnosRegistrados.add(alumnos);
+
+            //Alumno inscripto carreraA
+            alumnos = new Alumnos("Alumno", "carreraA", 2, "sdfsf");
+            alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarreraA"));
+            alumnosRegistrados.add(alumnos);
+
+            //Alumno inscripto carreraB
+            alumnos = new Alumnos("Alumno", "carreraB", 3, "sdfsf");
+            alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarreraB"));
+            alumnosRegistrados.add(alumnos);
+
+            //Alumno inscripto carreraC
+            alumnos = new Alumnos("Alumno", "carreraC", 4, "sdfsf");
+            alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarreraC"));
+            alumnos.getCarrera().getPlanDeEstudio().setAlumno(alumnos);
+            alumnosRegistrados.add(alumnos);
+
+            //Alumno inscripto carreraD
+            alumnos = new Alumnos("Alumno", "carreraD", 5, "sdfsf");
+            alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarreraD"));
+            alumnos.getCarrera().getPlanDeEstudio().setAlumno(alumnos);
+            alumnosRegistrados.add(alumnos);
+
+            //Alumno inscripto carreraE
+            alumnos = new Alumnos("Alumno", "carreraE", 5, "sdfsf");
+            alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarreraE"));
+            alumnos.getCarrera().getPlanDeEstudio().setAlumno(alumnos);
+            alumnosRegistrados.add(alumnos);
+
+            //Alumno inscripto CarrerasCon3Alumnos
+            alumnos = new Alumnos("Alumno", "uno", 6, "sdfsf");
+            alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarrerasCon3Alumnos"));
+            alumnosRegistrados.add(alumnos);
+
+            //Alumno inscripto CarrerasCon3Alumnos
+            alumnos = new Alumnos("Alumno", "dos", 7, "sdfsf");
+            alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarrerasCon3Alumnos"));
+            alumnosRegistrados.add(alumnos);
+
+            //Alumno inscripto CarrerasCon3Alumnos
+            alumnos = new Alumnos("Alumno", "tres", 8, "sdfsf");
+            alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarrerasCon3Alumnos"));
+            alumnosRegistrados.add(alumnos);
         }
         private static void creoAlumnoNuevo(AltaDeAlumnos al) {
             Alumnos alumnoX = new Alumnos(al.getNombre(), al.getApellido() ,al.getDni(),al.getContrasenna());
