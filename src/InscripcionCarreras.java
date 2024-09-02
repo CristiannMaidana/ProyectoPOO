@@ -27,6 +27,7 @@ public class InscripcionCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 latch.countDown();
+                carreraElegida="";
                 dispose();
             }
         });
@@ -61,10 +62,10 @@ public class InscripcionCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 latch.countDown();
+                carreraElegida="";
                 dispose();
             }
         });
-
     }
 
     //Metodos void
