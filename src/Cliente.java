@@ -165,7 +165,7 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
             almacenCarreras.add(carreras);
         }
         private static void creoAlumno(){
-            Alumnos alumnos = new Alumnos("Cristian", "prueba", 1, "sdfsf");
+            Alumnos alumnos = new Alumnos("Alumno", "solo", 1, "sdfsf");
             alumnosRegistrados.add(alumnos);
 
             //Alumno inscripto carreraA
@@ -191,24 +191,28 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
             alumnosRegistrados.add(alumnos);
 
             //Alumno inscripto carreraE
-            alumnos = new Alumnos("Alumno", "carreraE", 5, "sdfsf");
+            alumnos = new Alumnos("Alumno", "carreraE", 6, "sdfsf");
             alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarreraE"));
             alumnos.getCarrera().getPlanDeEstudio().setAlumno(alumnos);
             alumnosRegistrados.add(alumnos);
 
             //Alumno inscripto CarrerasCon3Alumnos
-            alumnos = new Alumnos("Alumno", "uno", 6, "sdfsf");
+            alumnos = new Alumnos("Alumno", "uno", 7, "sdfsf");
             alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarrerasCon3Alumnos"));
             alumnosRegistrados.add(alumnos);
 
             //Alumno inscripto CarrerasCon3Alumnos
-            alumnos = new Alumnos("Alumno", "dos", 7, "sdfsf");
+            alumnos = new Alumnos("Alumno", "dos", 8, "sdfsf");
             alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarrerasCon3Alumnos"));
             alumnosRegistrados.add(alumnos);
 
             //Alumno inscripto CarrerasCon3Alumnos
-            alumnos = new Alumnos("Alumno", "tres", 8, "sdfsf");
+            alumnos = new Alumnos("Alumno", "tres", 9, "sdfsf");
             alumnos.setCarrera(almacenCarreras.getCarreraPorNombre("CarrerasCon3Alumnos"));
+            alumnosRegistrados.add(alumnos);
+
+            //Alumno edito datos
+            alumnos = new Alumnos("Alumno", "editar", 10, "sdfsf");
             alumnosRegistrados.add(alumnos);
         }
         private static void creoAlumnoNuevo(AltaDeAlumnos al) {
