@@ -13,8 +13,8 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
 
 
         public static void main(String[] args) throws InterruptedException {
-            creoCarrera();
-            creoAlumno();
+            creoCarrera(); //Cargo en memoria carreras
+            creoAlumno(); //Cargo en memoria alumnos
             do {
                 if (paginaPrincipal == null || verificoPaginaPrincipal(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras)) {
                     reseteo(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras);
