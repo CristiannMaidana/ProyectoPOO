@@ -99,12 +99,68 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
         private static void inicializoSemaforo(){
             latch = new CountDownLatch(1);                   //Inicializo el semaforo de nuevo
         }
-        private static void creoCarrera(){
-            Carreras carreras = new Carreras("CarreraA", 4,6);
+        private static void creoCarrera() {
+            //Carrera con plan de estudio A
+            Carreras carreras = new Carreras("CarreraA", 5, 6);
             carreras.setPlanDeEstudio(new PlanDeEstudioA(null));
             carreras.getPlanDeEstudio().setCarrera(carreras);
             carreras.setMateriasOptativas(5);
             carreras.setMateriasObligatoria(3);
+            carreras.generoMaterias();
+            almacenCarreras.add(carreras);
+
+            //Carrera con plan de estudio B
+            carreras = new Carreras("CarreraB", 5,6);
+            carreras.setPlanDeEstudio(new PlanDeEstudioB(null));
+            carreras.getPlanDeEstudio().setCarrera(carreras);
+            carreras.setMateriasOptativas(6);
+            carreras.setMateriasObligatoria(2);
+            carreras.generoMaterias();
+            almacenCarreras.add(carreras);
+
+            //Carrera con plan de estudio C
+            carreras = new Carreras("CarreraC", 5,6);
+            carreras.setPlanDeEstudio(new PlanDeEstudioC(null,null));
+            carreras.getPlanDeEstudio().setCarrera(carreras);
+            //carreras.getPlanDeEstudio().setAlumno();
+            carreras.setMateriasOptativas(3);
+            carreras.setMateriasObligatoria(6);
+            carreras.generoMaterias();
+            almacenCarreras.add(carreras);
+
+            //Carrera con plan de estudio D
+            carreras = new Carreras("CarreraD", 5,6);
+            carreras.setPlanDeEstudio(new PlanDeEstudioD(null,null));
+            carreras.getPlanDeEstudio().setCarrera(carreras);
+            //carreras.getPlanDeEstudio().setAlumno();
+            carreras.setMateriasOptativas(7);
+            carreras.setMateriasObligatoria(8);
+            carreras.generoMaterias();
+            almacenCarreras.add(carreras);
+
+            //Carrera con plan de estudio E
+            carreras = new Carreras("CarreraE", 5,6);
+            carreras.setPlanDeEstudio(new PlanDeEstudioE(null,null));
+            carreras.getPlanDeEstudio().setCarrera(carreras);
+            //carreras.getPlanDeEstudio().setAlumno();
+            carreras.setMateriasOptativas(2);
+            carreras.setMateriasObligatoria(5);
+            carreras.generoMaterias();
+            almacenCarreras.add(carreras);
+
+            //Carrera sin plan de estudio
+            carreras = new Carreras("CarreraSINPLAN", 5,6);
+            carreras.setMateriasObligatoria(6);
+            carreras.setMateriasOptativas(1);
+            carreras.generoMaterias();
+            almacenCarreras.add(carreras);
+
+            //Carrera con 3 alumnos
+            carreras = new Carreras("CarrerasCon3Alumnos", 5,6);
+            carreras.setPlanDeEstudio(new PlanDeEstudioA(null));
+            carreras.getPlanDeEstudio().setCarrera(carreras);
+            carreras.setMateriasObligatoria(3);
+            carreras.setMateriasOptativas(6);
             carreras.generoMaterias();
             almacenCarreras.add(carreras);
         }
