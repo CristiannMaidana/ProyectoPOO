@@ -87,6 +87,7 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
                     reseteo(paginaPrincipal, altaDeAlumnos, altaDeCarreras, altaDePlanDeEstudio, buscoAlumnos, modificoCarreras);
                     inicializoSemaforo();
                     modificoCarreras = new ModificoCarreras(almacenCarreras);
+                    modificoCarreras.setAlumnosRegistrados(alumnosRegistrados);
                     modificoCarreras.setLatch(latch);
                     modificoCarreras.setVisible(true);
                     modificoCarreras.setLocationRelativeTo(null);
