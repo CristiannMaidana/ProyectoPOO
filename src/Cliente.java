@@ -35,7 +35,8 @@ private static AlmacenCarreras almacenCarreras = new AlmacenCarreras(null);
                     altaDeAlumnos.setLocationRelativeTo(null);      //Coloco la ventana en el medio de la pantalla
 
                     latch.await();                                  //espera a que termine de usar el semaforo
-                    creoAlumnoNuevo(altaDeAlumnos);                 //Le manda el form para que cree el alumno
+                    if (altaDeAlumnos.getCreoNuevoAlumno())
+                        creoAlumnoNuevo(altaDeAlumnos);                 //Le manda el form para que cree el alumno
 
                     while (altaDeAlumnos.getCreoNuevoAlumno()) {
                         inicializoSemaforo();
