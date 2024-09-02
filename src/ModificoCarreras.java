@@ -22,6 +22,7 @@ public class ModificoCarreras extends JFrame {
     private boolean paginaPrincipal=false, altaDeAlumnos = false, buscoAlumnos = false, altaDeCarreras = false,
             altaPlanDeEstudio = false, BmodificoCarreras=false, modificarUnaMateria=false, borroCarrera =false;
     private AlmacenCarreras almacenCarreras;
+    private AlumnosRegistrados alumnosRegistrados;
     private String nombreCarreraElegida="";
     private Carreras carreraElegida;
     private CountDownLatch latch;
@@ -180,18 +181,34 @@ public class ModificoCarreras extends JFrame {
                     }
                     else {
                         String carreraAEliminar = textFieldCambiaMateriaCarrera.getText();
-                        int respuesta = JOptionPane.showConfirmDialog(null, "¿Quiere eliminar la carrera: " +
-                                carreraAEliminar + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-                        if (respuesta == JOptionPane.YES_OPTION) {
-                            for (int i=0; i<almacenCarreras.getCantidadCarreras(); i++){
-                                if(almacenCarreras.getCarrera(i).getNombre().equals(carreraAEliminar)){
-                                    almacenCarreras.borrarCarrera(i);
+                        boolean alumnosCursando = false;
+                        //Deberia buscar un metodo mas optimo de busqueda o agregar un boolean a donde corresponda y menos consultas de invocacion
+                        for (int i=0; i<alumnosRegistrados.getSize(); i++){
+                            if (alumnosRegistrados.getAlumno(i).getCarrera() != null)
+                                if (alumnosRegistrados.getAlumno(i).getCarrera().getNombre().equals(carreraAEliminar)){
+                                    alumnosCursando = true;
                                     break;
                                 }
+                        }
+                        if (alumnosCursando){
+                            JOptionPane.showMessageDialog(null, "No puede elimnar la carrera: "+
+                                    carreraAEliminar+ " porque teiene alumnos inscriptos", "Aviso",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else{
+                            int respuesta = JOptionPane.showConfirmDialog(null, "¿Quiere eliminar la carrera: " +
+                                    carreraAEliminar + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+                            if (respuesta == JOptionPane.YES_OPTION) {
+                                for (int i = 0; i < almacenCarreras.getCantidadCarreras(); i++) {
+                                    if (almacenCarreras.getCarrera(i).getNombre().equals(carreraAEliminar)) {
+                                        almacenCarreras.borrarCarrera(i);
+                                        break;
+                                    }
+                                }
+                                JOptionPane.showMessageDialog(null, "Se borro la carrera: " +
+                                        carreraAEliminar + " correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                                reseteoTodoDos();
                             }
-                            JOptionPane.showMessageDialog(null, "Se borro la carrera: "+
-                                    carreraAEliminar+" correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                            reseteoTodoDos();
                         }
                     }
                 }
@@ -339,5 +356,8 @@ public class ModificoCarreras extends JFrame {
     }
     public void setLatch(CountDownLatch latch){
         this.latch = latch;
+    }
+    public void setAlumnosRegistrados(AlumnosRegistrados alumnosRegistrados){
+        this.alumnosRegistrados = alumnosRegistrados;
     }
 }
