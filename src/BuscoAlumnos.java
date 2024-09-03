@@ -331,13 +331,12 @@ public class BuscoAlumnos extends JFrame {
                                 cargoDatosAlumnos();
                             }
                             else if (editoDatosAlumnos.getBorrarAlumno()){
-                                registroAlumnos.remove(registroAlumnos.buscoPorDNI(usuario.getLegajo()));
+                                registroAlumnos.remove(editoDatosAlumnos.getAlumnoAEliminar());
                                 limpioTodo();
                             }
                             else cargoDatosAlumnos();
                         }
                     };
-
                     worker.execute(); // Iniciar el SwingWorker
                 }
             }
