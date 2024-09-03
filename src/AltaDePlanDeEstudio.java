@@ -54,9 +54,12 @@ public class AltaDePlanDeEstudio extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 planDeEstudio = (String) comboBoxPlanDeEstudio.getSelectedItem();
-                if (!planDeEstudio.equals("Plan de Estudio") && !planDeEstudio.isEmpty()) {
+                if (!planDeEstudio.equals("Plan de Estudio:") && !planDeEstudio.isEmpty()) {
                     cargoCarreras();
                     cargoDescripcionPlanDeEstudio();
+                }
+                else {
+                    limpiarTodo();
                 }
             }
         });
@@ -165,7 +168,6 @@ public class AltaDePlanDeEstudio extends JFrame {
                 if (validoPlanDeEstudio.equals("Plan de Estudio:")) {
                     JOptionPane.showMessageDialog(null, "No hay nada que cancelar.",
                             "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                    limpiarTodo();
                 }
                 else {
                     int respuesta = JOptionPane.showConfirmDialog(null, "¿Cancelar el alta del" +
