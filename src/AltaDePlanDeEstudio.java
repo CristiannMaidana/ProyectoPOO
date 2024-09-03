@@ -165,6 +165,7 @@ public class AltaDePlanDeEstudio extends JFrame {
                 if (validoPlanDeEstudio.equals("Plan de Estudio:")) {
                     JOptionPane.showMessageDialog(null, "No hay nada que cancelar.",
                             "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    limpiarTodo();
                 }
                 else {
                     int respuesta = JOptionPane.showConfirmDialog(null, "¿Cancelar el alta del" +
