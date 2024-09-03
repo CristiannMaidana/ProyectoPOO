@@ -39,7 +39,7 @@ public class EditoDatosAlumnos extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (datosCargados() && hayCambios()) {
-                    if (cambiarLegajoTextField.getText().matches("\\d+")) {
+                    if (cambiarLegajoTextField.getText().matches("\\d+") || cambiarLegajoTextField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Se guardaron los cambios.", "Aviso",
                                 JOptionPane.INFORMATION_MESSAGE);
                         guardarCambios();
