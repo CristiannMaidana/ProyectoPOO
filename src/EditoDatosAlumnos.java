@@ -13,7 +13,6 @@ public class EditoDatosAlumnos extends JFrame {
     private JButton cancelarButton;
     private JTextField cambiarApellidoTextField;
     private JCheckBox checkBox1;
-    private JTextField cambiarUsuarioTextField;
     private Alumnos usuario;
     private boolean hayCambiosDatos, borrarAlumno;
     private int alumnoAEliminar;
@@ -126,6 +125,9 @@ public class EditoDatosAlumnos extends JFrame {
     }
     public boolean getBorrarAlumno(){
         return borrarAlumno;
+    }
+    public int getAlumnoAEliminar(){
+        return alumnoAEliminar;
     }
 
 
