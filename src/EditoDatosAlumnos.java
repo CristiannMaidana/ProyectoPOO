@@ -24,7 +24,7 @@ public class EditoDatosAlumnos extends JFrame {
         this.usuario = alumno;
         setContentPane(editarDatosAlumnos);
         setUndecorated(true);
-        setSize(500,280);
+        setSize(650,330);
         checkBox1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
