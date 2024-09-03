@@ -14,12 +14,8 @@ public class AlumnosRegistrados {
     public void add(Alumnos alumno){
         alumnosRegistrados.add(alumno);
     }
-    public void remove(Alumnos alumno){
-        for (int i=0; i<alumnosRegistrados.size(); i++){
-            if (alumnosRegistrados.get(i) == alumno){
-                alumnosRegistrados.remove(i);
-            }
-        }
+    public void remove(int legajo){
+        alumnosRegistrados.removeIf(alumno -> alumno.getLegajo() == legajo);
     }
 
     //Metodos gets
