@@ -11,7 +11,7 @@ public class Materias {
         examenFinal=false;
         promocion=false;
         tieneCorrelativa=false;
-        optativa=false;
+        optativa=true;
         obligatoria=false;
     }
 
