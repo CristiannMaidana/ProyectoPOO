@@ -220,22 +220,9 @@
                       <text value=" Inscripcion a materias"/>
                     </properties>
                   </component>
-                  <component id="815c4" class="javax.swing.JButton" binding="cargoDeNotasButton" default-binding="true">
-                    <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <background color="-12790785"/>
-                      <enabled value="true"/>
-                      <font name="Arial" size="16"/>
-                      <foreground color="-854792"/>
-                      <icon value="imagenes/buscoAlumnos/cargoNotas.png"/>
-                      <text value="            Cargo de notas"/>
-                    </properties>
-                  </component>
                   <component id="b0ef4" class="javax.swing.JButton" binding="historialAcademicoButton">
                     <constraints>
-                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-12790785"/>
@@ -248,7 +235,7 @@
                   </component>
                   <component id="759bb" class="javax.swing.JButton" binding="darDeBajaMateriasButton" default-binding="true">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-12790785"/>
@@ -258,9 +245,22 @@
                       <text value="  Dar de baja materias"/>
                     </properties>
                   </component>
+                  <component id="815c4" class="javax.swing.JButton" binding="cargoDeNotasButton" default-binding="true">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-12790785"/>
+                      <enabled value="true"/>
+                      <font name="Arial" size="16"/>
+                      <foreground color="-854792"/>
+                      <icon value="imagenes/buscoAlumnos/cargoNotas.png"/>
+                      <text value="            Cargo de notas"/>
+                    </properties>
+                  </component>
                   <component id="8ad7a" class="javax.swing.JButton" binding="editarAlumnoButton" default-binding="true">
                     <constraints>
-                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-12790785"/>
