@@ -20,9 +20,9 @@ public class PlanDeEstudioC extends PlanDeEstudio{
         return aprobo1;
     }
     public boolean buscoMateria (Materias materias, boolean aprobo2){
-        int annioDeCArrera = alumnos.getCarrera().getAnniosCarrera();
+        int annioDeCArrera = alumnos.getCarrera().getAnniosCarrera(), cuatriDeCarrera = alumnos.getCarrera().getCuatriCarrera();
         for (byte i = 0; i < annioDeCArrera; i++) {
-            for (byte j = 0; j < 6; j += 3) {
+            for (byte j = 0; j < cuatriDeCarrera; j += 3) {
                 // Verificamos si hay espacio suficiente para formar un conjunto de 3 elementos
                 if (j + 2 < 6) {
                     // Verificamos si los 3 elementos están en posiciones adyacentes
