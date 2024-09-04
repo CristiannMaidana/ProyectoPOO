@@ -86,18 +86,18 @@ public class Carreras {
         boolean aprobado=true;
         for (Materias[] fila : carrera) {
             for (Materias materia : fila) {
-                if (materia.obligatoria) if (!materia.cursadaAprobada) {
+                if (materia.obligatoria) if (!materia.examenFinal) {
                     aprobado = false;
                     break;
                 }
-                if (materia.optativa) if (materia.cursadaAprobada) {
+                if (materia.optativa) if (materia.examenFinal) {
                     cantMateriaOptativaAprobadas++;
                 }
             }
             if (!aprobado)//solo para cortar el bucle
                 break;
         }
-        if (aprobado) if (cantMateriaOptativaAprobadas < getCantMateriasOptativas()){
+        if (aprobado) if (cantMateriaOptativaAprobadas >= getCantMateriasOptativas()){
             aprobado = false;
         }
         return aprobado;
@@ -127,7 +127,7 @@ public class Carreras {
         for (byte annios = 0; annios<annio; annios++){
             for (byte cuatris = 0; cuatris<cuatri; cuatris++){
                 if (carrera[annios][cuatris].obligatoria)
-                    if (!carrera[annios][cuatris].cursadaAprobada)
+                    if (!carrera[annios][cuatris].examenFinal)
                         materiasObligatorias.add(carrera[annios][cuatris]);
             }
         }
@@ -140,7 +140,7 @@ public class Carreras {
         for (byte annios = 0; annios<annio; annios++){
             for (byte cuatris = 0; cuatris<cuatri; cuatris++){
                 if (carrera[annios][cuatris].optativa)
-                    if (!carrera[annios][cuatris].cursadaAprobada)
+                    if (!carrera[annios][cuatris].examenFinal)
                         materiasOptativas.add(carrera[annios][cuatris]);
             }
         }
@@ -163,23 +163,19 @@ public class Carreras {
 
 
     public void generoMaterias (){
-        Random random1 = new Random();
-        Random random2 = new Random();
+        Random random = new Random();
         int annio = getAnniosCarrera();
         int cuatri = getCuatriCarrera();
-        int cantidadPositivasOptativas=0, cantidadPositivasObligatorias=0;
+        int cantidadPositivasObligatorias=0;
         for (byte annios = 0; annios<annio; annios++){
             for (byte cuatris = 0; cuatris<cuatri; cuatris++){
                 if (annios>0){
                     String nombre = "materia" + annios + cuatris;
                     Materias materia = new Materias(nombre);
-                    if(random1.nextBoolean() && cantidadPositivasOptativas < mOptativas){
-                        cantidadPositivasOptativas++;
-                        materia.setOptativa(true);
-                    }
-                    if(random2.nextBoolean() && cantidadPositivasObligatorias < mObligatorias){
+                    if(random.nextBoolean() && cantidadPositivasObligatorias < mObligatorias){
                         cantidadPositivasObligatorias++;
                         materia.setObligatoria(true);
+                        materia.setOptativa(false);
                     }
                     carrera[annios][cuatris] = materia;
                     carrera[annios][cuatris].setCorrelativa(carrera[annios-1][cuatris]);
