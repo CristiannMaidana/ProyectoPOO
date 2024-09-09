@@ -281,6 +281,8 @@ public class ModificoCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 cargoMateriasOptativas();
+                JOptionPane.showMessageDialog(null, "Se cargaron correctamente todas las " +
+                        "materias OPTATIVAS.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         filtrarObligatoriasButton.addMouseListener(new MouseAdapter() {
@@ -288,6 +290,8 @@ public class ModificoCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 cargoMateriasObligatorias();
+                JOptionPane.showMessageDialog(null, "Se cargaron correctamente todas las " +
+                        "materias OBLIGATORIAS.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         filtrarMateriasButton.addMouseListener(new MouseAdapter() {
@@ -295,6 +299,8 @@ public class ModificoCarreras extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 cargoMaterias();
+                JOptionPane.showMessageDialog(null, "Se cargaron correctamente todas las " +
+                        "materias.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
