@@ -300,14 +300,14 @@ public class ModificoCarreras extends JFrame {
     }
 
     //Metodos void
-    public void cargoCarreras(){
+    private void cargoCarreras(){
         comboBoxCarreras.removeAllItems();
         comboBoxCarreras.addItem("Elija una carrera:");
         for(int i=0; i<almacenCarreras.getCantidadCarreras(); i++){
             comboBoxCarreras.addItem(almacenCarreras.getCarrera(i).getNombre());
         }
     }
-    public void cargoMaterias(){
+    private void cargoMaterias(){
         DefaultListModel modelo = new DefaultListModel();
         for (int i=0; i<carreraElegida.getAnniosCarrera(); i++){
             for(int j=0; j<carreraElegida.getCuatriCarrera(); j++){
@@ -316,11 +316,11 @@ public class ModificoCarreras extends JFrame {
         }
         listMaterias.setModel(modelo);
     }
-    public void reseteoModificarMaterias(){
+    private void reseteoModificarMaterias(){
         textFieldCambiaMateriaCarrera.setText("");
         cargoMaterias();
     }
-    public void reseteoTodo(){
+    private void reseteoTodo(){
         DefaultListModel modelo = new DefaultListModel();
         comboBoxCarreras.setSelectedIndex(0);
         textFieldCambiaMateriaCarrera.setText("");
@@ -329,7 +329,7 @@ public class ModificoCarreras extends JFrame {
         aceptarButton.setText("Aceptar");
         cancelarButton.setText("Cancelar");
     }
-    public void reseteoTodoDos(){
+    private void reseteoTodoDos(){
         cargoCarreras();
         cargoCarreraslist();
         textFieldCambiaMateriaCarrera.setText("");
@@ -344,7 +344,7 @@ public class ModificoCarreras extends JFrame {
         }
         listMaterias.setModel(modelo);
     }
-    public void cargoMateriasOptativas(){
+    private void cargoMateriasOptativas(){
         DefaultListModel modelo = new DefaultListModel();
         for (int i=0; i<carreraElegida.getAnniosCarrera(); i++){
             for(int j=0; j<carreraElegida.getCuatriCarrera(); j++){
@@ -355,7 +355,7 @@ public class ModificoCarreras extends JFrame {
         }
         listMaterias.setModel(modelo);
     }
-    public void cargoMateriasObligatorias(){
+    private void cargoMateriasObligatorias(){
         DefaultListModel modelo = new DefaultListModel();
         for (int i=0; i<carreraElegida.getAnniosCarrera(); i++){
             for(int j=0; j<carreraElegida.getCuatriCarrera(); j++){
