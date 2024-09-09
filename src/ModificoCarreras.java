@@ -19,6 +19,9 @@ public class ModificoCarreras extends JFrame {
     private JList listMaterias;
     private JCheckBox checkBox1;
     private JLabel seleccioneUnaMateiraLabel;
+    private JButton filtrarOpatitvasButton;
+    private JButton filtrarObligatoriasButton;
+    private JButton filtrarMateriasButton;
     private boolean paginaPrincipal=false, altaDeAlumnos = false, buscoAlumnos = false, altaDeCarreras = false,
             altaPlanDeEstudio = false, BmodificoCarreras=false, modificarUnaMateria=false, borroCarrera =false;
     private AlmacenCarreras almacenCarreras;
@@ -30,6 +33,9 @@ public class ModificoCarreras extends JFrame {
     //Constructor
     public ModificoCarreras(AlmacenCarreras almacenCarreras){
         this.almacenCarreras = almacenCarreras;
+        filtrarObligatoriasButton.setVisible(false);
+        filtrarOpatitvasButton.setVisible(false);
+        filtrarMateriasButton.setVisible(false);
         setUndecorated(true);
         setContentPane(modificoCarreras);
         setSize(1300,500);
@@ -134,6 +140,9 @@ public class ModificoCarreras extends JFrame {
                     seleccioneUnaMateiraLabel.setText("Seleccione una materia:");
                     aceptarButton.setText("Hacer obligatoria");
                     cancelarButton.setText("Hacer optativa");
+                    filtrarObligatoriasButton.setVisible(true);
+                    filtrarOpatitvasButton.setVisible(true);
+                    filtrarMateriasButton.setVisible(true);
                 }
             }
         });
@@ -265,6 +274,24 @@ public class ModificoCarreras extends JFrame {
                     JOptionPane.showMessageDialog(null, "La carrera seleccionada es: "+
                                     nombreCarrera +".", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 }
+            }
+        });
+        filtrarOpatitvasButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
+        filtrarObligatoriasButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
+        filtrarMateriasButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
             }
         });
     }
