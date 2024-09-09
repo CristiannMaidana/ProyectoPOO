@@ -280,18 +280,21 @@ public class ModificoCarreras extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                cargoMateriasOptativas();
             }
         });
         filtrarObligatoriasButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                cargoMateriasObligatorias();
             }
         });
         filtrarMateriasButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                cargoMaterias();
             }
         });
     }
@@ -338,6 +341,28 @@ public class ModificoCarreras extends JFrame {
         DefaultListModel modelo = new DefaultListModel();
         for(int i=0; i<almacenCarreras.getCantidadCarreras(); i++){
             modelo.addElement(almacenCarreras.getCarrera(i).getNombre());
+        }
+        listMaterias.setModel(modelo);
+    }
+    public void cargoMateriasOptativas(){
+        DefaultListModel modelo = new DefaultListModel();
+        for (int i=0; i<carreraElegida.getAnniosCarrera(); i++){
+            for(int j=0; j<carreraElegida.getCuatriCarrera(); j++){
+                if (carreraElegida.getMateriasPorAnnioYMateria(i,j).getOptativa()){
+                    modelo.addElement(carreraElegida.getMateriasPorAnnioYMateria(i,j).getNombreDeMateria());
+                }
+            }
+        }
+        listMaterias.setModel(modelo);
+    }
+    public void cargoMateriasObligatorias(){
+        DefaultListModel modelo = new DefaultListModel();
+        for (int i=0; i<carreraElegida.getAnniosCarrera(); i++){
+            for(int j=0; j<carreraElegida.getCuatriCarrera(); j++){
+                if (carreraElegida.getMateriasPorAnnioYMateria(i,j).getObligatoria()){
+                    modelo.addElement(carreraElegida.getMateriasPorAnnioYMateria(i,j).getNombreDeMateria());
+                }
+            }
         }
         listMaterias.setModel(modelo);
     }
