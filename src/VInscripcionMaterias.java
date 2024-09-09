@@ -174,10 +174,13 @@ public class VInscripcionMaterias extends JFrame {
             }
         }
         else if (cuatri == 2){
-            for (int i=3; i<6;i++){
-                if (!alumno.getCarrera().getMateriasPorAnnioYMateria(annio,i).getCursadaAprobada() && !alumno.getCarrera().getMateriasPorAnnioYMateria(annio,i).parcial)
-                    model.addElement(alumno.getCarrera().getMateriasPorAnnioYMateria(annio,i).getNombreDeMateria());
-            }
+            if (alumno.getCarrera().getCuatriCarrera()>3)
+                for (int i=3; i<6;i++){
+                    if (!alumno.getCarrera().getMateriasPorAnnioYMateria(annio,i).getCursadaAprobada() && !alumno.getCarrera().getMateriasPorAnnioYMateria(annio,i).parcial)
+                        model.addElement(alumno.getCarrera().getMateriasPorAnnioYMateria(annio,i).getNombreDeMateria());
+                }
+            else JOptionPane.showMessageDialog(null, "La carrera no cuenta con segundo" +
+                    " cuatrimestre.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
         listMateriasNuevas.setModel(model);
     }
