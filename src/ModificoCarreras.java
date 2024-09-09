@@ -150,6 +150,11 @@ public class ModificoCarreras extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (filtrarMateriasButton.isVisible() ){
+                    filtrarObligatoriasButton.setVisible(false);
+                    filtrarOpatitvasButton.setVisible(false);
+                    filtrarMateriasButton.setVisible(false);
+                }
                 DefaultListModel modelo = new DefaultListModel();
                 listMaterias.setModel(modelo);
                 textFieldCambiaMateriaCarrera.setText("");
